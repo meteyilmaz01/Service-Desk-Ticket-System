@@ -1,0 +1,209 @@
+.admin-container {
+  display: flex;
+  height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f7f6;
+}
+
+.sidebar {
+  width: 250px;
+  background-color: #0d47a1;
+  color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-header {
+  padding: 20px;
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar-menu li {
+  padding: 15px 20px;
+  cursor: pointer;
+  transition: background 0.3s;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.sidebar-menu li:hover, .sidebar-menu li.active {
+  background-color: #1976d2;
+  border-left: 4px solid #fff;
+}
+
+.content {
+  flex: 1;
+  padding: 30px;
+  overflow-y: auto;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.users-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+.users-table th, .users-table td {
+  padding: 15px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.users-table th {
+  background-color: #f8f9fa;
+  font-weight: 600;
+  color: #333;
+}
+
+.status-active {
+  background-color: #e6f4ea;
+  color: #1e8e3e;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.status-inactive {
+  background-color: #fce8e6;
+  color: #d93025;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.action-btn {
+  border: none;
+  padding: 6px 12px;
+  margin-right: 5px;
+  border-radius: 4px;
+  cursor: pointer;
+  color: white;
+  font-size: 12px;
+}
+
+.add-btn { background-color: #1e8e3e; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; }
+.toggle-btn { background-color: #fbbc04; color: #333; }
+.edit-btn { background-color: #1976d2; }
+.delete-btn { background-color: #d93025; }
+
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  padding: 30px;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.modal-header h3 { margin: 0; color: #333; }
+
+.close-btn {
+  background: none; border: none; font-size: 20px; cursor: pointer; color: #888;
+}
+
+.form-group { margin-bottom: 15px; }
+
+.form-group label {
+  display: block; margin-bottom: 5px; font-weight: 500; color: #555; font-size: 14px;
+}
+
+.form-group input, .form-group select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+
+  color: #333;
+  background-color: #fff;
+  outline: none;
+}
+
+.form-group input:focus, .form-group select:focus {
+  border-color: #1976d2;
+}
+
+.submit-btn {
+  width: 100%; padding: 12px; background-color: #1976d2; color: white;
+  border: none; border-radius: 4px; cursor: pointer; font-weight: bold; margin-top: 10px;
+}
+
+.submit-btn:hover { background-color: #1565c0; }
+
+.table-container {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+  overflow-x: auto;
+}
+
+.ticket-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.ticket-table th, .ticket-table td {
+  padding: 15px;
+  text-align: left;
+  border-bottom: 1px solid #f0f0f0;
+  color: #444;
+}
+
+.ticket-table th {
+  background-color: #f8f9fa;
+  font-weight: 600;
+  color: #222;
+}
+
+.badge {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  display: inline-block;
+}
+
+.status-1 { background-color: #e3f2fd; color: #1976d2; }
+.status-2 { background-color: #fff3e0; color: #f57c00; }
+.status-3 { background-color: #e8f5e9; color: #388e3c; }
+.status-default { background-color: #f1f3f4; color: #5f6368; }
+
+.priority-high { color: #d93025; font-weight: bold; }
+.priority-normal { color: #fbbc04; font-weight: bold; }
+.priority-low { color: #1e8e3e; font-weight: bold; }

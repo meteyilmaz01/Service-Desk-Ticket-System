@@ -1,0 +1,602 @@
+export const translations = {
+  TR: {
+    common: {
+      login: 'Giriş Yap',
+      register: 'Kayıt Ol',
+      logout: 'Çıkış Yap',
+      email: 'E-posta',
+      password: 'Şifre',
+      name: 'Ad',
+      surname: 'Soyad',
+      submit: 'Gönder',
+      back: 'Geri',
+      loading: 'Yükleniyor...',
+      error: 'Bir hata oluştu.',
+      success: 'İşlem başarılı.',
+      id: 'ID',
+      nameSurname: 'Ad Soyad',
+      role: 'Rol',
+      status: 'Durum',
+      actions: 'İşlemler',
+      status_active: 'Aktif',
+      status_passive: 'Pasif',
+      role_admin: 'Yönetici',
+      role_agent: 'Destek Yetkilisi',
+      role_requester: 'Talep Sahibi',
+    },
+    public: {
+      welcome: 'Destek Merkezine Hoş Geldiniz',
+      hero_sub: 'Taleplerinizi oluşturun, takip edin ve hızlıca çözüme ulaşın.',
+      cta_button: 'Destek Talebi Oluştur',
+      stats: {
+        resolved: 'Bu Ay Çözülen',
+        avg_time: 'Ortalama Çözüm Süresi (saat)',
+        active_dept: 'Aktif Departman',
+        active_agent: 'Aktif Ajan',
+      },
+      system_status: 'Tüm Sistemler Çalışıyor',
+    },
+    login: {
+      title: 'Hesabınıza Giriş Yapın',
+      sub: 'Devam etmek için lütfen bilgilerinizi girin.',
+      register_title: 'Yeni Hesap Oluştur',
+      register_sub: 'Birkaç adımda ücretsiz kayıt olun.',
+      hero_title: 'Destek sisteminiz',
+      hero_sub_color: 'tek panelde.',
+      hero_description: 'Taleplerinizi oluşturun, takip edin ve hızlıca çözüme ulaşın. Ekipler arası iletişimi kolaylaştırın.',
+      features: [
+        { icon: '⚡', text: 'Anlık talep takibi ve durum güncellemeleri' },
+        { icon: '🚀', text: 'Hızlı Talep Yönetimi' },
+        { icon: '📊', text: 'Gelişmiş Analitik Raporlar' },
+        { icon: '💬', text: 'Gerçek Zamanlı İletişim' },
+        { icon: '🔒', text: 'Güvenli Veri Altyapısı' }
+      ],
+      success_msg: '✅ Giriş başarılı, yönlendiriliyorsunuz...',
+      error_msg: '❌ E-posta veya şifre hatalı.',
+      reg_success: '✅ Kayıt başarılı! Giriş yapabilirsiniz.',
+      reg_error: 'Kayıt başarısız.',
+      forgot_password: 'Şifremi unuttum. (Yapım aşamasında)',
+      already_have_account: 'Zaten hesabınız var mı?'
+    },
+    admin: {
+      sidebar: {
+        title: 'Service Desk',
+        panel: 'Admin Paneli',
+        summary: 'Genel Özet',
+        users: 'Kullanıcı İşlemleri',
+        departments: 'Departman İşlemleri',
+        tickets: 'Destek Talepleri',
+        logout: 'Çıkış Yap'
+      },
+      headers: {
+        userMgmt: 'Kullanıcı Yönetimi',
+        deptMgmt: 'Departman İşlemleri',
+        ticketMgmt: 'Destek Talepleri',
+        summary: 'Yönetici Özeti'
+      },
+      stats: {
+        users: 'Kullanıcılar',
+        depts: 'Departmanlar',
+        agents: 'Ajanlar',
+        openTickets: 'Açık Talepler',
+        avgTime: 'Ort. Çözüm',
+        totalTickets: 'Toplam Talep',
+        pendingTickets: 'Bekleyen Talepler',
+        todayTickets: 'Bugünkü Talepler'
+      },
+      actions: {
+        search: 'Ara',
+        clear: 'Temizle',
+        newUser: '+ Yeni Kullanıcı',
+        newAgent: '+ Yeni Ajan',
+        newDept: '+ Yeni Departman',
+        edit: 'Düzenle',
+        delete: 'Sil',
+        status: 'Durum',
+        refresh: 'Yenile',
+        assign: 'Ajan Ata',
+        reassign: 'Yeniden Ata',
+        all: 'Tümü',
+        unassigned: 'Atanmamış',
+        assigned: 'Atanmış',
+        save: 'Kaydet',
+        close: 'Talebi Kapat - Closed',
+        details: 'Detay',
+        messages: 'Mesajlar'
+      },
+      placeholders: {
+        searchUser: 'ID ile kullanıcı ara...',
+        noUsers: 'Kullanıcı bulunamadı.',
+        agentList: 'Support Agent Listesi',
+        noAgents: 'Henüz ajan kaydı yok.',
+        deptList: 'Departmanlar',
+        manageDept: 'Yönetmek için tıkla',
+        noTickets: 'Gösterilecek talep yok.',
+        noDescription: 'Açıklama girilmemiş.',
+        title: 'Başlık',
+        priority: 'Öncelik',
+        status: 'Durum',
+        msgStatus: 'Mesaj Durumu',
+        dept: 'Departman',
+        assignedAgent: 'Atanan Ajan',
+        deptName: 'Departman Adı',
+        description: 'Açıklama',
+        role: 'Rol',
+        status_confirm_close: 'Bu talep çözüme kavuşturulmuş. Onaylayarak kapatabilirsiniz.',
+        new_password_hint: 'Yeni Şifre (Değiştirmeyecekseniz boş)',
+        same_dept: 'Aynı Departman',
+        other_agents: 'Diğer Ajanlar',
+        select_agent: 'Bir ajan seçin',
+        saving: 'Kaydediliyor...',
+        dept_dist: 'Departman Dağılımı',
+        priority_levels: 'Öncelik Seviyeleri',
+        weekly_trend: 'Haftalık Talep Trendi',
+        recent_activities: 'Son Aktiviteler',
+        busy_agents: 'En Yoğun Ajanlar',
+        date: 'Tarih',
+        no_activity: 'Henüz işlem yok.',
+        assigned_to: 'numaralı yetkili ilgileniyor',
+        timeline: 'Talep Süreci',
+        support_chat: 'Destek Konuşması',
+        chat_hint: 'Enter ile gönder · Shift+Enter ile yeni satır · Her 10 saniyede otomatik güncellenir',
+        reassign: 'Devret',
+        start: 'İşleme Al',
+        resolve: 'Çözüme Ulaştır',
+        summary: 'Özet',
+        all: 'Tümü',
+        mine: 'Bana Atananlar',
+        you: 'Siz'
+      }
+    },
+    requester: {
+      nav: {
+        welcome: 'Hoş geldin,',
+        logout: 'Çıkış'
+      },
+      home: {
+        greeting: 'Merhaba, {name} 👋',
+        sub: 'Size nasıl yardımcı olabiliriz?',
+        stats: {
+          total: 'Toplam Talepler',
+          active: 'Aktif Talepler',
+          resolved: 'Çözülen Talepler'
+        },
+        cards: {
+          myTickets: 'Taleplerim',
+          myTicketsDesc: 'Mevcut ve geçmiş tüm taleplerinizi görüntüleyin',
+          newTicket: 'Yeni Talep',
+          newTicketDesc: 'Yeni bir destek talebi oluşturun',
+          continue: 'Devam Et →'
+        }
+      },
+      create: {
+        back: '← Ana Sayfaya Dön',
+        title: '➕ Yeni Destek Talebi',
+        sub: 'Sorununuzu detaylı açıklayın, en kısa sürede dönüş yapalım.',
+        success: '✅ Talebiniz başarıyla oluşturuldu! Yönlendiriliyorsunuz...',
+        deptLabel: 'İlgili Departman (İsteğe Bağlı)',
+        deptPlaceholder: '— Departman Seçin —',
+        subjectLabel: 'Konu Başlığı *',
+        subjectPlaceholder: 'Sorununuzu kısaca özetleyin...',
+        descLabel: 'Detaylı Açıklama *',
+        descPlaceholder: 'Sorununuzu detaylı olarak açıklayın...',
+        submitting: '⏳ Gönderiliyor...',
+        submit: '📤 Talebi Gönder'
+      },
+      list: {
+        title: '📂 Taleplerim',
+        refresh: '🔄 Yenile',
+        loading: 'Talepleriniz yükleniyor...',
+        noTickets: 'Henüz talebiniz yok',
+        noTicketsSub: 'Yeni bir destek talebi oluşturun.',
+        createBtn: '➕ Talep Oluştur'
+      },
+      detail: {
+        back: '← Taleplerime Dön',
+        loading: 'Detaylar yükleniyor...',
+        id: 'Talep #',
+        description: 'Açıklama',
+        noDescription: 'Açıklama girilmemiş.',
+        dept: '🏢 Departman',
+        priority: '⚡ Öncelik',
+        agent: '🧑‍💼 Atanan Yetkili',
+        agentAssigned: 'numaralı yetkili ilgileniyor',
+        agentNotAssigned: '⏳ Henüz atanmadı',
+        status: '📊 Durum',
+        timeline: 'Talep Süreci',
+        closeBtn: '🔒 Talebi Kapat',
+        closing: '⏳ Kapatılıyor...',
+        closedMsg: '⚫ Bu talep kapatılmıştır.',
+        assigned_agent: 'Atanan Yetkili',
+        support_chat: 'Destek Konuşması',
+        closed_info: 'Bu talep kapatılmıştır. Yeni bir talep oluşturabilirsiniz.',
+        requester: 'Talep Eden'
+      },
+      chat: {
+        title: 'Destek Konuşması',
+        count: 'mesaj',
+        noMessages: 'Henüz mesaj yok',
+        refresh: '🔄 Yenile',
+        loading: '⏳ Mesajlar yükleniyor...',
+        senderMe: 'Siz',
+        placeholder: 'Mesajınızı yazın... (Enter ile gönderin)',
+        hint: 'Enter ile gönder · Shift+Enter ile yeni satır',
+        send: '📤 Gönder',
+        sending: '⏳'
+      }
+    },
+    agent: {
+      sidebar: {
+        title: 'Service Desk',
+        panel: '🧑‍💼 Ajan Paneli',
+        welcome: 'Hoş geldin,',
+        summary: 'Ticket Özeti',
+        filter: 'Filtrele',
+        refresh: '🔄 Yenile',
+        logout: '🚪 Çıkış Yap'
+      },
+      headers: {
+        assignedTickets: 'Bana Atanan Destek Talepleri',
+        countLabel: '{count} talep gösteriliyor'
+      },
+      list: {
+        loading: 'Yükleniyor...',
+        noTickets: 'Bekleyen talep yok.',
+        error: 'Destek talepleri yüklenemedi.'
+      },
+      detail: {
+        transfer: '🔀 Devret',
+        description: 'Açıklama',
+        noDescription: 'Açıklama girilmemiş.',
+        id: '🆔 Talep ID',
+        requester: '👤 Talep Eden',
+        priority: '⚡ Öncelik',
+        status: '📊 Mevcut Statü',
+        startBtn: '▶️ İşleme Al → InProgress',
+        starting: '⏳ Alınıyor...',
+        closeBtn: '🔒 Talebi Kapat',
+        closing: '⏳ Kapatılıyor...',
+        closedMsg: '⚫ Bu talep kapatılmıştır.'
+      },
+      transfer: {
+        title: '🔀 Ticket\'ı Devret',
+        searchPlaceholder: 'Ajan adı ile ara...',
+        noAgents: 'Eşleşen ajan bulunamadı.',
+        success: '✅ Devir isteği başarıyla gönderildi!',
+        hint: 'Seçtiğiniz ajana devir isteği gönderilecek.'
+      },
+      notifications: {
+        title: '📬 Gelen Devir İstekleri',
+        accept: '✅ Kabul Et',
+        reject: '❌ Reddet',
+        accepting: '⏳ Kabul ediliyor...',
+        rejecting: '⏳ Reddediliyor...'
+      }
+    },
+    status: {
+      open: 'Açık',
+      assigned: 'Atandı',
+      inprogress: 'İşlemde',
+      resolved: 'Çözüldü',
+      closed: 'Kapatıldı',
+      unknown: 'Belirsiz'
+    },
+    priority: {
+      urgent: 'Acil',
+      critical: 'Kritik',
+      high: 'Yüksek',
+      normal: 'Normal',
+      low: 'Düşük',
+      verylow: 'Çok Düşük',
+      unspecified: 'Belirtilmedi'
+    },
+    convStatus: {
+      title: 'Konuşma Durumu',
+      noMessages: 'Mesaj Yok',
+      waitingAgent: 'Ajan Bekleniyor',
+      waitingUser: 'Kullanıcı Bekleniyor'
+    },
+    timeline: {
+      open: 'Açık',
+      assigned: 'Atandı',
+      inprogress: 'İşlemde',
+      waiting_user: 'Siz Bekleniyorsunuz',
+      waiting_agent: 'Ajan Bekleniyor',
+      resolved: 'Çözüldü',
+      closed: 'Kapatıldı'
+    }
+  },
+  EN: {
+    common: {
+      login: 'Login',
+      register: 'Register',
+      logout: 'Logout',
+      email: 'Email',
+      password: 'Password',
+      name: 'Name',
+      surname: 'Surname',
+      submit: 'Submit',
+      back: 'Back',
+      loading: 'Loading...',
+      error: 'An error occurred.',
+      success: 'Operation successful.',
+      id: 'ID',
+      nameSurname: 'Name Surname',
+      role: 'Role',
+      status: 'Status',
+      actions: 'Actions',
+      status_active: 'Active',
+      status_passive: 'Passive',
+      role_admin: 'Admin',
+      role_agent: 'Support Agent',
+      role_requester: 'Requester',
+    },
+    public: {
+      welcome: 'Welcome to the Support Center',
+      hero_sub: 'Create and track your support tickets efficiently.',
+      cta_button: 'Create Support Ticket',
+      stats: {
+        resolved: 'Resolved This Month',
+        avg_time: 'Avg. Resolution Time (hrs)',
+        active_dept: 'Active Departments',
+        active_agent: 'Active Agents',
+      },
+      system_status: 'All Systems Operational',
+    },
+    login: {
+      title: 'Login to Your Account',
+      sub: 'Please enter your credentials to continue.',
+      register_title: 'Create New Account',
+      register_sub: 'Register for free in just a few steps.',
+      hero_title: 'Your support system',
+      hero_sub_color: 'in one panel.',
+      hero_description: 'Create, track, and resolve your tickets quickly. Simplify team communication.',
+      features: [
+        { icon: '⚡', text: 'Real-time ticket tracking and status updates' },
+        { icon: '🏢', text: 'Department-based organization and assignment' },
+        { icon: '🔒', text: 'Role-based secure access control' },
+      ],
+      success_msg: '✅ Login successful, redirecting...',
+      error_msg: '❌ Incorrect email or password.',
+      reg_success: '✅ Registration successful! You can now log in.',
+      reg_error: 'Error occurred during registration.',
+    },
+    admin: {
+      sidebar: {
+        title: 'Service Desk',
+        panel: 'Admin Panel',
+        summary: 'General Summary',
+        users: 'User Actions',
+        departments: 'Department Actions',
+        tickets: 'Support Tickets',
+        logout: 'Logout'
+      },
+      headers: {
+        userMgmt: 'User Management',
+        deptMgmt: 'Department Management',
+        ticketMgmt: 'Support Tickets',
+        summary: 'Admin Summary'
+      },
+      stats: {
+        users: 'Users',
+        depts: 'Departments',
+        agents: 'Agents',
+        openTickets: 'Open Tickets',
+        avgTime: 'Avg. Resolution',
+        totalTickets: 'Total Tickets',
+        pendingTickets: 'Pending Tickets',
+        todayTickets: 'Today\'s Tickets'
+      },
+      actions: {
+        search: 'Search',
+        clear: 'Clear',
+        newUser: '+ New User',
+        newAgent: '+ New Agent',
+        newDept: '+ New Department',
+        edit: 'Edit',
+        delete: 'Delete',
+        status: 'Status',
+        refresh: 'Refresh',
+        assign: 'Assign Agent',
+        reassign: 'Reassign Agent',
+        all: 'All',
+        unassigned: 'Unassigned',
+        assigned: 'Assigned',
+        save: 'Save',
+        close: 'Close Ticket',
+        details: 'Details',
+        messages: 'Messages'
+      },
+      placeholders: {
+        searchUser: 'Search user by ID...',
+        noUsers: 'No users found.',
+        agentList: 'Support Agent List',
+        noAgents: 'No agents registered yet.',
+        deptList: 'Departments',
+        manageDept: 'Click to manage',
+        noTickets: 'No tickets to show.',
+        noDescription: 'No description provided.',
+        title: 'Title',
+        priority: 'Priority',
+        status: 'Status',
+        msgStatus: 'Message Status',
+        dept: 'Department',
+        assignedAgent: 'Assigned Agent',
+        deptName: 'Department Name',
+        description: 'Description',
+        role: 'Role',
+        status_confirm_close: 'This ticket has been resolved. You can close it by confirming.',
+        new_password_hint: 'New Password (Leave empty to keep current)',
+        same_dept: 'Same Department',
+        other_agents: 'Other Agents',
+        select_agent: 'Select an agent',
+        saving: 'Saving...',
+        dept_dist: 'Department Distribution',
+        priority_levels: 'Priority Levels',
+        weekly_trend: 'Weekly Ticket Trend',
+        recent_activities: 'Recent Activities',
+        busy_agents: 'Busiest Agents',
+        date: 'Date',
+        no_activity: 'No activity yet.',
+        assigned_to: 'agent is looking into it',
+        timeline: 'Ticket Timeline',
+        support_chat: 'Support Conversation',
+        chat_hint: 'Enter to send · Shift+Enter for new line · Auto-refreshes every 10s',
+        you: 'You'
+      }
+    },
+    requester: {
+      nav: {
+        welcome: 'Welcome,',
+        logout: 'Logout'
+      },
+      home: {
+        greeting: 'Hello, {name} 👋',
+        sub: 'How can we help you today?',
+        stats: {
+          total: 'Total Tickets',
+          active: 'Active Tickets',
+          resolved: 'Resolved Tickets'
+        },
+        cards: {
+          myTickets: 'My Tickets',
+          myTicketsDesc: 'View all your current and past tickets',
+          newTicket: 'New Ticket',
+          newTicketDesc: 'Create a new support request',
+          continue: 'Continue →'
+        }
+      },
+      create: {
+        back: '← Back to Home',
+        title: '➕ New Support Ticket',
+        sub: 'Explain your issue in detail, we\'ll get back to you soon.',
+        success: '✅ Ticket created successfully! Redirecting...',
+        deptLabel: 'Related Department (Optional)',
+        deptPlaceholder: '— Select Department —',
+        subjectLabel: 'Subject Title *',
+        subjectPlaceholder: 'Summarize your problem...',
+        descLabel: 'Detailed Description *',
+        descPlaceholder: 'Explain your problem in detail...',
+        submitting: '⏳ Sending...',
+        submit: '📤 Send Ticket'
+      },
+      list: {
+        title: '📂 My Tickets',
+        refresh: '🔄 Refresh',
+        loading: 'Loading your tickets...',
+        noTickets: 'No tickets yet',
+        noTicketsSub: 'Create a new support request.',
+        createBtn: '➕ Create Ticket'
+      },
+      detail: {
+        back: '← Back to My Tickets',
+        loading: 'Loading details...',
+        id: 'Ticket #',
+        description: 'Description',
+        noDescription: 'No description provided.',
+        dept: '🏢 Department',
+        priority: '⚡ Priority',
+        agent: '🧑‍💼 Assigned Agent',
+        agentAssigned: 'agent is working on it',
+        agentNotAssigned: '⏳ Not assigned yet',
+        status: '📊 Status',
+        timeline: 'Ticket Timeline',
+        closeBtn: '🔒 Close Ticket',
+        closing: '⏳ Closing...',
+        closedMsg: '⚫ This ticket has been closed.'
+      },
+      chat: {
+        title: 'Support Conversation',
+        count: 'messages',
+        noMessages: 'No messages yet',
+        refresh: '🔄 Refresh',
+        loading: '⏳ Loading messages...',
+        senderMe: 'You',
+        placeholder: 'Type your message... (Enter to send)',
+        hint: 'Enter to send · Shift+Enter for new line',
+        send: '📤 Send',
+        sending: '⏳'
+      }
+    },
+    agent: {
+      sidebar: {
+        title: 'Service Desk',
+        panel: '🧑‍💼 Agent Panel',
+        welcome: 'Welcome,',
+        summary: 'Ticket Summary',
+        filter: 'Filter',
+        refresh: '🔄 Refresh',
+        logout: '🚪 Logout'
+      },
+      headers: {
+        assignedTickets: 'Tickets Assigned to Me',
+        countLabel: '{count} tickets showing'
+      },
+      list: {
+        loading: 'Loading...',
+        noTickets: 'No pending tickets.',
+        error: 'Support tickets could not be loaded.'
+      },
+      detail: {
+        transfer: '🔀 Transfer',
+        description: 'Description',
+        noDescription: 'No description provided.',
+        id: '🆔 Ticket ID',
+        requester: '👤 Requester',
+        priority: '⚡ Priority',
+        status: '📊 Current Status',
+        startBtn: '▶️ Start Work → InProgress',
+        starting: '⏳ Starting...',
+        closeBtn: '🔒 Close Ticket',
+        closing: '⏳ Closing...',
+        closedMsg: '⚫ This ticket has been closed.'
+      },
+      transfer: {
+        title: '🔀 Transfer Ticket',
+        searchPlaceholder: 'Search by agent name...',
+        noAgents: 'No matching agents found.',
+        success: '✅ Transfer request sent successfully!',
+        hint: 'A transfer request will be sent to the selected agent.'
+      },
+      notifications: {
+        title: '📬 Incoming Transfer Requests',
+        accept: '✅ Accept',
+        reject: '❌ Reject',
+        accepting: '⏳ Accepting...',
+        rejecting: '⏳ Rejecting...'
+      }
+    },
+    status: {
+      open: 'Open',
+      assigned: 'Assigned',
+      inprogress: 'InProgress',
+      resolved: 'Resolved',
+      closed: 'Closed',
+      unknown: 'Unknown'
+    },
+    priority: {
+      urgent: 'Urgent',
+      critical: 'Critical',
+      high: 'High',
+      normal: 'Normal',
+      low: 'Low',
+      verylow: 'Very Low',
+      unspecified: 'Unspecified'
+    },
+    convStatus: {
+      title: 'Conversation Status',
+      noMessages: 'No Messages',
+      waitingAgent: 'Waiting for Agent',
+      waitingUser: 'Waiting for User'
+    },
+    timeline: {
+      open: 'Open',
+      assigned: 'Assigned',
+      inprogress: 'InProgress',
+      waiting_user: 'Waiting for You',
+      waiting_agent: 'Waiting for Agent',
+      resolved: 'Resolved',
+      closed: 'Closed'
+    }
+  }
+};

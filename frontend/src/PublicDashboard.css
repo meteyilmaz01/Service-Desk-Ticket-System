@@ -1,0 +1,112 @@
+
+
+:root {
+  --primary-color: #3b82f6;
+  --bg-dark: #0f172a;
+  --bg-light: #f8fafc;
+  --card-bg: #fff;
+  --card-border: #e2e8f0;
+  --text-primary: #1e293b;
+  --text-muted: #64748b;
+}
+
+.public-dashboard {
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  color: var(--text-primary);
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.public-dashboard .hero {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.public-dashboard .hero h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+  color: var(--bg-light);
+}
+
+.public-dashboard .hero p {
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+  color: var(--text-muted);
+}
+
+.public-dashboard .cta {
+  background: var(--primary-color);
+  color: #fff;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.public-dashboard .cta:hover {
+  background: #2563eb;
+}
+
+.public-dashboard .stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.public-dashboard .stat-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.public-dashboard .stat-card .icon {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.public-dashboard .stat-card .value {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.public-dashboard .stat-card .label {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.public-dashboard .system-status {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.public-dashboard .status-badge {
+  display: inline-block;
+  background: #10b981;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+}
+
+.public-dashboard.loading,
+.public-dashboard.error {
+  text-align: center;
+  font-size: 1.2rem;
+  color: var(--text-muted);
+  margin-top: 3rem;
+}
+
+@media (max-width: 600px) {
+  .public-dashboard .hero h1 {
+    font-size: 2rem;
+  }
+}

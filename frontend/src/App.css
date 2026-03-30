@@ -1,0 +1,133 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+.login-container {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  background: url('./assets/background-for-login.png') no-repeat center center/cover;
+}
+
+.login-form-area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 800px;
+  height: auto;
+
+  margin-right: auto;
+  margin-left: 5%;
+}
+
+.login-box {
+  position: absolute;
+  top: 50%;
+  left: 10%;
+  transform: translateY(-50%);
+
+  background: transparent;
+  backdrop-filter: none;
+  box-shadow: none;
+  border: none;
+
+  width: 100%;
+
+  max-width: 430px;
+  padding: 0 15px;
+
+  text-align: center;
+  color: #fff;
+}
+
+.login-logo img {
+  width: 100px;
+  margin-bottom: 20px;
+}
+
+h2 {
+  margin-bottom: 30px;
+  font-weight: 500;
+  font-size: 24px;
+}
+
+.input-group {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.input-icon {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 18px;
+}
+
+input {
+  width: 100%;
+  padding: 15px 15px 15px 50px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 30px;
+  color: #fff;
+  font-size: 14px;
+  outline: none;
+  transition: 0.3s;
+}
+
+input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+input:focus {
+  border-color: #7c4dff;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.login-button {
+  width: 100%;
+  padding: 15px;
+  background: linear-gradient(135deg, #7c4dff, #3d5afe);
+  color: white;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: 0.3s;
+  box-shadow: 0 4px 15px rgba(124, 77, 255, 0.4);
+}
+
+.login-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(124, 77, 255, 0.6);
+}
+
+.form-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  font-size: 13px;
+}
+
+.form-footer a {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.form-footer a:hover {
+  color: #fff;
+}
+
