@@ -96,7 +96,7 @@ Logging: Serilog (Middleware ile zenginleştirilmiş loglama)
 
 Kurulum
 <pre> git clone https://github.com/meteyilmaz01/Service-Desk-Ticket-System.git </pre>
-<pre> cd ServiceDesk.Api `
+<pre> cd ServiceDesk.Api </pre>
 
 Veritabanı ayarı
 
