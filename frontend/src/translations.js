@@ -23,6 +23,7 @@ export const translations = {
       role_admin: 'Yönetici',
       role_agent: 'Destek Yetkilisi',
       role_requester: 'Talep Sahibi',
+      tickets: 'Talep',
     },
     public: {
       welcome: 'Destek Merkezine Hoş Geldiniz',
@@ -72,7 +73,10 @@ export const translations = {
         userMgmt: 'Kullanıcı Yönetimi',
         deptMgmt: 'Departman İşlemleri',
         ticketMgmt: 'Destek Talepleri',
-        summary: 'Yönetici Özeti'
+        summary: 'Yönetici Özeti',
+        dept: 'Departman',
+        priority: 'Öncelik',
+        status: 'Durum',
       },
       stats: {
         users: 'Kullanıcılar',
@@ -145,7 +149,22 @@ export const translations = {
         summary: 'Özet',
         all: 'Tümü',
         mine: 'Bana Atananlar',
-        you: 'Siz'
+        you: 'Siz',
+        dept_select: '— Departman Seçin —',
+        requester: 'Talep Sahibi',
+        title: 'Başlık',
+        status: 'Durum',
+        priority: 'Öncelik',
+        date: 'Tarih',
+        dept_dist: 'Departman Dağılımı',
+        priority_levels: 'Öncelik Seviyeleri',
+        weekly_trend: 'Haftalık Talep Trendi',
+        recent_activities: 'Son Aktiviteler',
+        busy_agents: 'En Yoğun Ajanlar',
+      },
+      tabs: {
+        details: 'Detaylar',
+        chat: 'Konuşma',
       }
     },
     requester: {
@@ -195,6 +214,7 @@ export const translations = {
         back: '← Taleplerime Dön',
         loading: 'Detaylar yükleniyor...',
         id: 'Talep #',
+        ticketId: 'Talep ID',
         description: 'Açıklama',
         noDescription: 'Açıklama girilmemiş.',
         dept: '🏢 Departman',
@@ -285,6 +305,7 @@ export const translations = {
       urgent: 'Acil',
       critical: 'Kritik',
       high: 'Yüksek',
+      medium: 'Orta',
       normal: 'Normal',
       low: 'Düşük',
       verylow: 'Çok Düşük',
@@ -330,6 +351,7 @@ export const translations = {
       role_admin: 'Admin',
       role_agent: 'Support Agent',
       role_requester: 'Requester',
+      tickets: 'Tickets',
     },
     public: {
       welcome: 'Welcome to the Support Center',
@@ -405,7 +427,10 @@ export const translations = {
         save: 'Save',
         close: 'Close Ticket',
         details: 'Details',
-        messages: 'Messages'
+        messages: 'Messages',
+        dept: 'Department',
+        priority: 'Priority',
+        status: 'Status',
       },
       placeholders: {
         searchUser: 'Search user by ID...',
@@ -442,7 +467,22 @@ export const translations = {
         timeline: 'Ticket Timeline',
         support_chat: 'Support Conversation',
         chat_hint: 'Enter to send · Shift+Enter for new line · Auto-refreshes every 10s',
-        you: 'You'
+        you: 'You',
+        dept_select: '— Select Department —',
+        requester: 'Requester',
+        title: 'Title',
+        status: 'Status',
+        priority: 'Priority',
+        date: 'Date',
+        dept_dist: 'Department Distribution',
+        priority_levels: 'Priority Levels',
+        weekly_trend: 'Weekly Ticket Trend',
+        recent_activities: 'Recent Activities',
+        busy_agents: 'Busiest Agents',
+      },
+      tabs: {
+        details: 'Details',
+        chat: 'Chat',
       }
     },
     requester: {
@@ -492,6 +532,7 @@ export const translations = {
         back: '← Back to My Tickets',
         loading: 'Loading details...',
         id: 'Ticket #',
+        ticketId: 'Ticket ID',
         description: 'Description',
         noDescription: 'No description provided.',
         dept: '🏢 Department',
@@ -578,6 +619,7 @@ export const translations = {
       urgent: 'Urgent',
       critical: 'Critical',
       high: 'High',
+      medium: 'Medium',
       normal: 'Normal',
       low: 'Low',
       verylow: 'Very Low',
