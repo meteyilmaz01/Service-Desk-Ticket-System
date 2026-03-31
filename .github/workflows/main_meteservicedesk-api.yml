@@ -24,10 +24,10 @@ jobs:
           dotnet-version: '10.x'
 
       - name: Build with dotnet
-        run: dotnet build ServiceDesk.Api/ --configuration Release
+        run: dotnet build backend/ServiceDesk.Api/ --configuration Release
 
       - name: dotnet publish
-        run: dotnet publish ServiceDesk.Api/ -c Release -o ${{env.DOTNET_ROOT}}/myapp
+        run: dotnet publish backend/ServiceDesk.Api/ -c Release -o ${{env.DOTNET_ROOT}}/myapp
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
