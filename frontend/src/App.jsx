@@ -30,7 +30,7 @@ const RequesterRoute = ({ children }) => {
   if (!token) return <Navigate to="/login" replace />;
   try {
     const d = jwtDecode(token);
-    if (d.exp < Date.now()/1000) { localStorage.removeItem('userToken'); return <Navigate to="/login" replace />; }
+    if (d.exp < Date.now() / 1000) { localStorage.removeItem('userToken'); return <Navigate to="/login" replace />; }
     const role = d["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
     if (role === "Admin") return <Navigate to="/admin" replace />;
     if (role === "SupportAgent") return <Navigate to="/agent" replace />;
@@ -43,7 +43,7 @@ const SupportAgentRoute = ({ children }) => {
   if (!token) return <Navigate to="/login" replace />;
   try {
     const d = jwtDecode(token);
-    if (d.exp < Date.now()/1000) { localStorage.removeItem('userToken'); return <Navigate to="/login" replace />; }
+    if (d.exp < Date.now() / 1000) { localStorage.removeItem('userToken'); return <Navigate to="/login" replace />; }
     if (d["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"] !== "SupportAgent")
       return <Navigate to="/login" replace />;
     return children;
@@ -52,13 +52,13 @@ const SupportAgentRoute = ({ children }) => {
 
 function LoginScreen() {
   const { t } = useLanguage();
-  const [mode, setMode]         = useState('login');
-  const [email, setEmail]       = useState('');
+  const [mode, setMode] = useState('login');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [name, setName]         = useState('');
-  const [surname, setSurname]   = useState('');
-  const [message, setMessage]   = useState(null);
-  const [loading, setLoading]   = useState(false);
+  const [name, setName] = useState('');
+  const [surname, setSurname] = useState('');
+  const [message, setMessage] = useState(null);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const resetForm = () => { setEmail(''); setPassword(''); setName(''); setSurname(''); setMessage(null); };
@@ -82,7 +82,7 @@ function LoginScreen() {
           else navigate('/requester');
         }, 800);
       }
-    } catch(err) {
+    } catch (err) {
       setMessage({ text: t('login.error_msg'), type: 'error' });
     } finally { setLoading(false); }
   };
@@ -95,186 +95,120 @@ function LoginScreen() {
       await axios.post(`${API}/api/auth/register`, { name, surname, email, password });
       setMessage({ text: t('login.reg_success'), type: 'success' });
       setTimeout(() => switchMode('login'), 1500);
-    } catch(err) {
+    } catch (err) {
       const msg = err.response?.data?.message || err.response?.data || t('login.reg_error');
       setMessage({ text: msg, type: 'error' });
     } finally { setLoading(false); }
   };
 
-  const inp = (focused) => ({
-    width: '100%', padding: '12px 16px', borderRadius: '10px',
-    border: `1.5px solid ${focused ? '#6366f1' : '#e2e8f0'}`,
-    fontSize: '14px', color: '#1e293b', outline: 'none',
-    backgroundColor: '#f8fafc', boxSizing: 'border-box',
-    transition: 'border-color 0.2s, box-shadow 0.2s',
-    boxShadow: focused ? '0 0 0 3px rgba(99,102,241,0.1)' : 'none',
-    fontFamily: 'inherit',
-  });
-
   const [focused, setFocused] = useState('');
 
   return (
-    <div className="landing-page" style={{
-      minHeight: '100vh', display: 'flex', fontFamily: "'Segoe UI', system-ui, sans-serif",
-      backgroundColor: '#0f172a', position: 'relative', overflow: 'hidden',
-    }}>
-      <div style={{ position: 'absolute', inset: 0, overflow: 'hidden', pointerEvents: 'none' }}>
-        <div style={{ position: 'absolute', top: '-20%', left: '-10%', width: '600px', height: '600px',
-          borderRadius: '50%', backgroundColor: 'rgba(99,102,241,0.08)', filter: 'blur(80px)' }} />
-        <div style={{ position: 'absolute', bottom: '-20%', right: '-10%', width: '700px', height: '700px',
-          borderRadius: '50%', backgroundColor: 'rgba(16,185,129,0.06)', filter: 'blur(80px)' }} />
-        <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)',
-          width: '400px', height: '400px', borderRadius: '50%',
-          backgroundColor: 'rgba(99,102,241,0.04)', filter: 'blur(60px)' }} />
-        <div style={{ position: 'absolute', inset: 0, backgroundImage:
-          'linear-gradient(rgba(99,102,241,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(99,102,241,0.03) 1px, transparent 1px)',
-          backgroundSize: '40px 40px' }} />
+    <div className="min-h-screen bg-[#0f172a] flex flex-col lg:flex-row relative overflow-hidden">
+      {/* Arka plan efektleri */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-1/4 -left-1/4 w-[600px] h-[600px] rounded-full bg-[#6366f1]/10 blur-[80px]" />
+        <div className="absolute -bottom-1/4 -right-1/4 w-[700px] h-[700px] rounded-full bg-emerald-500/10 blur-[80px]" />
       </div>
 
-      <div className="hero-section" style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center',
-        position: 'relative', zIndex: 1 }}>
-        <div style={{ maxWidth: '480px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '56px' }}>
-            <div style={{ width: '40px', height: '40px', borderRadius: '10px',
-              backgroundColor: '#6366f1', display: 'flex', alignItems: 'center',
-              justifyContent: 'center', fontSize: '18px', color: '#fff' }}>
+      {/* SOL HERO */}
+      <div className="flex-1 flex items-center justify-center lg:justify-start px-8 py-12 lg:px-16 relative z-10">
+        <div className="max-w-md w-full">
+          <div className="flex items-center gap-3 mb-12">
+            <div className="w-10 h-10 bg-[#6366f1] rounded-2xl flex items-center justify-center text-2xl text-white">
               <i className="fa-solid fa-ticket-simple"></i>
             </div>
-            <span style={{ fontSize: '18px', fontWeight: '800', color: '#f8fafc', letterSpacing: '-0.3px' }}>{t('common.title')}</span>
+            <span className="text-3xl font-semibold text-white tracking-tight">{t('common.title')}</span>
           </div>
 
-          <h1 className="hero-title" style={{ fontWeight: '800', color: '#f8fafc',
-            lineHeight: '1.15', marginBottom: '20px', letterSpacing: '-1px' }}>
+          <h1 className="text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
             {t('login.hero_title')}<br />
-            <span style={{ color: '#6366f1' }}>{t('login.hero_sub_color')}</span>
+            <span className="text-[#6366f1]">{t('login.hero_sub_color')}</span>
           </h1>
-          <p style={{ fontSize: '16px', color: '#64748b', lineHeight: '1.7', marginBottom: '48px' }}>
+          <p className="text-lg text-slate-400 mb-12">
             {t('login.hero_description')}
           </p>
 
           {t('login.features').map(f => (
-            <div key={f.text} style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '14px' }}>
-              <div style={{ width: '32px', height: '32px', borderRadius: '8px',
-                backgroundColor: 'rgba(99,102,241,0.15)', display: 'flex',
-                alignItems: 'center', justifyContent: 'center', fontSize: '14px', flexShrink: 0, color: '#6366f1' }}>
+            <div key={f.text} className="flex items-center gap-4 mb-6">
+              <div className="w-9 h-9 bg-[#6366f1]/15 rounded-2xl flex items-center justify-center text-[#6366f1] flex-shrink-0">
                 <i className={f.icon}></i>
               </div>
-              <span style={{ fontSize: '14px', color: '#94a3b8' }}>{f.text}</span>
+              <span className="text-slate-300">{f.text}</span>
             </div>
           ))}
         </div>
       </div>
 
-      <div className="login-section" style={{ flex: '0 0 480px', display: 'flex', alignItems: 'center',
-        justifyContent: 'center', position: 'relative', zIndex: 1 }}>
-        <div style={{ width: '100%', backgroundColor: 'rgba(255,255,255,0.03)',
-          borderRadius: '20px', border: '1px solid rgba(255,255,255,0.08)',
-          padding: '40px', backdropFilter: 'blur(20px)',
-          boxShadow: '0 24px 64px rgba(0,0,0,0.4)' }}>
-
-          <div style={{ display: 'flex', backgroundColor: 'rgba(255,255,255,0.05)',
-            borderRadius: '10px', padding: '4px', marginBottom: '32px' }}>
-            {[{key:'login',label:t('common.login')},{key:'register',label:t('common.register')}].map(t => (
-              <button key={t.key} onClick={() => switchMode(t.key)} style={{
-                flex: 1, padding: '10px', borderRadius: '8px', border: 'none',
-                cursor: 'pointer', fontSize: '14px', fontWeight: '600',
-                transition: 'all 0.2s ease',
-                backgroundColor: mode === t.key ? '#6366f1' : 'transparent',
-                color: mode === t.key ? '#fff' : '#64748b',
-              }}>{t.label}</button>
+      {/* SAĞ FORM */}
+      <div className="lg:w-[480px] bg-white/10 backdrop-blur-2xl border border-white/10 rounded-3xl m-4 lg:m-8 p-8 lg:p-10 flex items-center relative z-10">
+        <div className="w-full">
+          <div className="flex bg-white/10 rounded-2xl p-1 mb-8">
+            {[{ key: 'login', label: t('common.login') }, { key: 'register', label: t('common.register') }].map(tab => (
+              <button
+                key={tab.key}
+                onClick={() => switchMode(tab.key)}
+                className={`flex-1 py-3 rounded-xl font-semibold transition-all ${mode === tab.key ? 'bg-[#6366f1] text-white shadow-lg' : 'text-slate-300 hover:text-white'
+                  }`}
+              >
+                {tab.label}
+              </button>
             ))}
           </div>
 
-          <div style={{ marginBottom: '28px' }}>
-            <h2 style={{ margin: '0 0 6px', fontSize: '22px', fontWeight: '700', color: '#f8fafc' }}>
-              {mode === 'login' ? t('login.title') : t('login.register_title')}
-            </h2>
-            <p style={{ margin: 0, fontSize: '13px', color: '#475569' }}>
-              {mode === 'login' ? t('login.sub') : t('login.register_sub')}
-            </p>
-          </div>
+          <h2 className="text-2xl font-bold text-white mb-1">
+            {mode === 'login' ? t('login.title') : t('login.register_title')}
+          </h2>
+          <p className="text-slate-400 text-sm mb-8">
+            {mode === 'login' ? t('login.sub') : t('login.register_sub')}
+          </p>
 
           <form onSubmit={mode === 'login' ? handleLogin : handleRegister}>
             {mode === 'register' && (
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', marginBottom: '14px' }}>
+              <div className="grid grid-cols-2 gap-4 mb-6">
                 <div>
-                  <label style={{ display: 'block', fontSize: '12px', fontWeight: '600',
-                    color: '#94a3b8', marginBottom: '6px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>{t('common.name')}</label>
-                  <input value={name} onChange={e => setName(e.target.value)} required
-                    placeholder={t('common.name')} style={inp(focused==='name')}
+                  <label className="block text-xs font-semibold text-slate-400 mb-2 uppercase tracking-widest">{t('common.name')}</label>
+                  <input value={name} onChange={e => setName(e.target.value)} required placeholder={t('common.name')}
+                    className={`w-full px-5 py-4 rounded-2xl bg-white/10 border text-white placeholder:text-slate-400 focus:outline-none transition-all ${focused === 'name' ? 'border-[#6366f1]' : 'border-white/20'}`}
                     onFocus={() => setFocused('name')} onBlur={() => setFocused('')} />
                 </div>
                 <div>
-                  <label style={{ display: 'block', fontSize: '12px', fontWeight: '600',
-                    color: '#94a3b8', marginBottom: '6px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>{t('common.surname')}</label>
-                  <input value={surname} onChange={e => setSurname(e.target.value)} required
-                    placeholder={t('common.surname')} style={inp(focused==='surname')}
+                  <label className="block text-xs font-semibold text-slate-400 mb-2 uppercase tracking-widest">{t('common.surname')}</label>
+                  <input value={surname} onChange={e => setSurname(e.target.value)} required placeholder={t('common.surname')}
+                    className={`w-full px-5 py-4 rounded-2xl bg-white/10 border text-white placeholder:text-slate-400 focus:outline-none transition-all ${focused === 'surname' ? 'border-[#6366f1]' : 'border-white/20'}`}
                     onFocus={() => setFocused('surname')} onBlur={() => setFocused('')} />
                 </div>
               </div>
             )}
 
-            <div style={{ marginBottom: '14px' }}>
-              <label style={{ display: 'block', fontSize: '12px', fontWeight: '600',
-                color: '#94a3b8', marginBottom: '6px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>{t('common.email')}</label>
-              <input type="email" value={email} onChange={e => setEmail(e.target.value)} required
-                placeholder="info@servicedesk.com" style={inp(focused==='email')}
+            <div className="mb-6">
+              <label className="block text-xs font-semibold text-slate-400 mb-2 uppercase tracking-widest">{t('common.email')}</label>
+              <input type="email" value={email} onChange={e => setEmail(e.target.value)} required placeholder="info@servicedesk.com"
+                className={`w-full px-5 py-4 rounded-2xl bg-white/10 border text-white placeholder:text-slate-400 focus:outline-none transition-all ${focused === 'email' ? 'border-[#6366f1]' : 'border-white/20'}`}
                 onFocus={() => setFocused('email')} onBlur={() => setFocused('')} />
             </div>
 
-            <div style={{ marginBottom: '24px' }}>
-              <label style={{ display: 'block', fontSize: '12px', fontWeight: '600',
-                color: '#94a3b8', marginBottom: '6px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>{t('common.password')}</label>
-              <input type="password" value={password} onChange={e => setPassword(e.target.value)} required
-                placeholder="••••••••" style={inp(focused==='password')}
+            <div className="mb-8">
+              <label className="block text-xs font-semibold text-slate-400 mb-2 uppercase tracking-widest">{t('common.password')}</label>
+              <input type="password" value={password} onChange={e => setPassword(e.target.value)} required placeholder="••••••••"
+                className={`w-full px-5 py-4 rounded-2xl bg-white/10 border text-white placeholder:text-slate-400 focus:outline-none transition-all ${focused === 'password' ? 'border-[#6366f1]' : 'border-white/20'}`}
                 onFocus={() => setFocused('password')} onBlur={() => setFocused('')} />
             </div>
 
             {message && (
-              <div style={{ marginBottom: '16px', padding: '12px 14px', borderRadius: '10px',
-                fontSize: '13px', fontWeight: '600',
-                backgroundColor: message.type === 'success' ? 'rgba(16,185,129,0.1)' : 'rgba(239,68,68,0.1)',
-                color: message.type === 'success' ? '#34d399' : '#f87171',
-                border: `1px solid ${message.type === 'success' ? 'rgba(16,185,129,0.2)' : 'rgba(239,68,68,0.2)'}`,
-              }}>
-                <i className={message.type === 'success' ? 'fa-solid fa-circle-check' : 'fa-solid fa-circle-exclamation'} style={{ marginRight: '8px' }}></i>
+              <div className={`mb-6 px-4 py-3 rounded-2xl text-sm flex items-center gap-2 ${message.type === 'success' ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' : 'bg-red-500/10 text-red-400 border border-red-500/20'
+                }`}>
+                <i className={`fa-solid ${message.type === 'success' ? 'fa-circle-check' : 'fa-circle-exclamation'}`}></i>
                 {message.text}
               </div>
             )}
 
-            <button type="submit" disabled={loading} style={{
-              width: '100%', padding: '13px', borderRadius: '10px', border: 'none',
-              backgroundColor: loading ? '#4338ca' : '#6366f1',
-              color: '#fff', fontSize: '15px', fontWeight: '700',
-              cursor: loading ? 'not-allowed' : 'pointer',
-              transition: 'all 0.2s ease',
-              boxShadow: loading ? 'none' : '0 4px 20px rgba(99,102,241,0.4)',
-              display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px'
-            }}
-              onMouseEnter={e => { if(!loading) e.target.style.backgroundColor='#4f46e5'; }}
-              onMouseLeave={e => { if(!loading) e.target.style.backgroundColor='#6366f1'; }}
-            >
+            <button type="submit" disabled={loading}
+              className="w-full py-4 bg-[#6366f1] hover:bg-[#4f46e5] disabled:bg-[#4338ca] text-white font-bold text-base rounded-2xl transition-all flex items-center justify-center gap-3 shadow-xl shadow-[#6366f1]/40">
               {loading ? <i className="fa-solid fa-circle-notch fa-spin"></i> : <i className={`fa-solid ${mode === 'login' ? 'fa-right-to-bracket' : 'fa-user-plus'}`}></i>}
               {mode === 'login' ? t('common.login') : t('common.register')}
             </button>
           </form>
-
-          <div style={{ textAlign: 'center', marginTop: '20px', fontSize: '13px', color: '#475569' }}>
-            {mode === 'login' ? (
-              <>{t('login.forgot_password')}{' '}
-                <button onClick={() => switchMode('register')} style={{ background: 'none', border: 'none',
-                  color: '#818cf8', fontWeight: '600', cursor: 'pointer', fontSize: '13px' }}>
-                </button>
-              </>
-            ) : (
-              <>{t('login.already_have_account')}{' '}
-                <button onClick={() => switchMode('login')} style={{ background: 'none', border: 'none',
-                  color: '#818cf8', fontWeight: '600', cursor: 'pointer', fontSize: '13px' }}>
-                  {t('common.login')}
-                </button>
-              </>
-            )}
-          </div>
         </div>
       </div>
     </div>

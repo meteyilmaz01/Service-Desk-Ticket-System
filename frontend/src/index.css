@@ -1,27 +1,11 @@
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-html, body, #root {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  background-color: #0f172a;
-}
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
 
-@keyframes fade-in-up {
-  0% {
-    opacity: 0;
-    transform: translateY(12px);
+@layer base {
+  * {
+    font-family: 'Poppins', sans-serif;
   }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.page-transition {
-  animation: fade-in-up 0.35s cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
