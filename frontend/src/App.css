@@ -131,3 +131,16 @@ input:focus {
   color: #fff;
 }
 
+@media (max-width: 768px) {
+  .login-form-area {
+    margin-left: 0;
+    padding: 0 20px;
+  }
+  .login-box {
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: none;
+  }
+}
+

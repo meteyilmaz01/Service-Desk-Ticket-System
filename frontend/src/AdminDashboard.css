@@ -207,3 +207,36 @@
 .priority-high { color: #d93025; font-weight: bold; }
 .priority-normal { color: #fbbc04; font-weight: bold; }
 .priority-low { color: #1e8e3e; font-weight: bold; }
+
+@media (max-width: 768px) {
+  .admin-container {
+    flex-direction: column;
+    height: auto;
+  }
+  .sidebar {
+    width: 100%;
+    height: auto;
+  }
+  .sidebar-menu {
+    display: flex;
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+  }
+  .sidebar-menu li {
+    padding: 10px 15px;
+    border-bottom: none;
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+  }
+  .sidebar-menu li:hover, .sidebar-menu li.active {
+    border-left: none;
+    border-bottom: 3px solid #fff;
+  }
+  .content {
+    padding: 15px;
+  }
+  .modal-content {
+    width: 90%;
+    padding: 20px;
+  }
+}
