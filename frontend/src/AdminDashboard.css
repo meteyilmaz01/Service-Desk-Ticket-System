@@ -1,6 +1,6 @@
 .admin-layout {
   display: flex;
-  height: 100vh;
+  height: 100dvh;
   font-family: 'Inter', 'Segoe UI', sans-serif;
   background-color: #f0f4f8;
   position: fixed;
@@ -16,7 +16,7 @@
   flex-direction: column;
   height: 100vh;
   overflow-y: auto;
-  box-shadow: 4px 0 20px rgba(0,0,0,0.2);
+  box-shadow: 4px 0 20px rgba(0, 0, 0, 0.2);
   z-index: 100;
 }
 
@@ -46,7 +46,7 @@
   padding: 24px;
   border-radius: 12px;
   border: 1px solid #e2e8f0;
-  box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.05);
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   margin-bottom: 24px;
@@ -69,7 +69,7 @@
   border-radius: 16px;
   width: 100%;
   max-width: 500px;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
   max-height: 90vh;
   display: flex;
   flex-direction: column;
@@ -96,10 +96,13 @@
   .admin-layout {
     flex-direction: column !important;
     position: relative !important;
+    min-height: 100dvh !important;
+    /* EKLENDİ - Ekranın en az dolmasını sağlar */
     height: auto !important;
-    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    /* EKLENDİ - Sağa sola kaymayı engeller */
   }
-  
+
   .admin-sidebar {
     width: 100% !important;
     height: auto !important;
@@ -110,50 +113,50 @@
     overflow-x: auto !important;
     overflow-y: hidden !important;
     padding: 0 !important;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
   }
-  
+
   .sidebar-header {
     display: none !important;
   }
-  
+
   /* Select the NAV element if it's there */
   .admin-sidebar nav {
-    display: flex !important;
-    padding: 8px !important;
-    flex-direction: row !important;
-    width: 100% !important;
-    gap: 8px !important;
+    flex-wrap: nowrap !important;
+    /* Butonların yan yana kalmasını zorunlu kılar */
+    overflow-x: auto !important;
+    /* Butonlar sığmazsa kaydırılabilir yapar */
+    -webkit-overflow-scrolling: touch !important;
   }
-  
+
   .admin-sidebar nav button {
     padding: 8px 16px !important;
     margin-bottom: 0 !important;
     white-space: nowrap !important;
     flex-shrink: 0 !important;
   }
-  
-  .admin-sidebar > div:last-child {
+
+  .admin-sidebar>div:last-child {
     display: none !important;
   }
-  
+
   .admin-main {
     height: auto !important;
     overflow: visible !important;
   }
-  
+
   .admin-content {
     padding: 16px !important;
   }
-  
+
   .table-container {
     padding: 12px !important;
     margin-bottom: 20px !important;
     border-radius: 8px !important;
   }
-  
+
   .modal-container {
     width: 95% !important;
     padding: 0 !important;
   }
-}
+}

@@ -1,6 +1,6 @@
-
 .requester-container {
-  min-height: 100vh;
+  min-height: 100dvh;
+  /* 100vh yerine 100dvh yapıldı (Mobil tarayıcılar için) */
   background-color: #f0f4f8;
   font-family: 'Poppins', sans-serif;
 }
@@ -12,7 +12,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
   position: sticky;
   top: 0;
   z-index: 100;
@@ -35,48 +35,6 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
-}
-
-@media (max-width: 768px) {
-  .requester-nav {
-    padding: 0 16px !important;
-    height: auto !important;
-    min-height: 60px !important;
-    flex-wrap: wrap !important;
-    padding: 12px 16px !important;
-  }
-  
-  .requester-nav > div:last-child {
-    width: 100% !important;
-    justify-content: space-between !important;
-    margin-top: 10px !important;
-  }
-  
-  .requester-content {
-    padding: 20px 16px !important;
-  }
-  
-  .stats-grid {
-    grid-template-columns: 1fr !important;
-    gap: 12px !important;
-    margin-bottom: 24px !important;
-  }
-  
-  .actions-grid {
-    grid-template-columns: 1fr !important;
-    gap: 16px !important;
-  }
-  
-  .action-card {
-    width: 100% !important;
-    max-width: 100% !important;
-  }
-
-  .table-container {
-    padding: 12px !important;
-    overflow-x: auto !important;
-    margin-top: 10px !important;
-  }
 }
 
 .nav-brand {
@@ -121,7 +79,9 @@
   transition: 0.3s;
 }
 
-.logout-btn:hover { background-color: #b3140b; }
+.logout-btn:hover {
+  background-color: #b3140b;
+}
 
 .requester-content {
   padding: 60px 20px;
@@ -136,10 +96,13 @@
   margin-top: 40px;
 }
 
+/* KARTLARIN ANA TASARIMI (Buradaki height hatası düzeltildi) */
 .action-card {
   background: white;
   width: 300px;
-  height: 250px;
+  min-height: 250px;
+  /* height yerine min-height yapıldı */
+  height: auto;
   border-radius: 15px;
   display: flex;
   flex-direction: column;
@@ -147,14 +110,14 @@
   align-items: center;
   text-align: center;
   cursor: pointer;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
   transition: transform 0.3s, box-shadow 0.3s;
   border-top: 5px solid #1976d2;
 }
 
 .action-card:hover {
   transform: translateY(-10px);
-  box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
 }
 
 .card-icon {
@@ -172,24 +135,10 @@
   background: white;
   padding: 40px;
   border-radius: 12px;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
   max-width: 600px;
   margin: 0 auto;
 }
-
-.back-btn {
-  background: none;
-  border: none;
-  color: #124191;
-  font-weight: 600;
-  font-size: 15px;
-  cursor: pointer;
-  margin-bottom: 25px;
-  padding: 0;
-  transition: color 0.3s;
-}
-
-.back-btn:hover { color: #2980b9; text-decoration: underline; }
 
 .ticket-form .form-group {
   margin-bottom: 20px;
@@ -203,7 +152,8 @@
   color: #444;
 }
 
-.ticket-form input, .ticket-form textarea {
+.ticket-form input,
+.ticket-form textarea {
   width: 100%;
   padding: 12px;
   border: 1px solid #ccc;
@@ -215,7 +165,8 @@
   transition: border-color 0.3s;
 }
 
-.ticket-form input:focus, .ticket-form textarea:focus {
+.ticket-form input:focus,
+.ticket-form textarea:focus {
   border-color: #1976d2;
   outline: none;
 }
@@ -234,7 +185,9 @@
   margin-top: 10px;
 }
 
-.ticket-form .submit-btn:hover { background-color: #218838; }
+.ticket-form .submit-btn:hover {
+  background-color: #218838;
+}
 
 .back-btn {
   background-color: #e0e0e0;
@@ -249,8 +202,11 @@
   text-decoration: none;
 }
 
-.back-btn:hover { background-color: #d0d0d0; }
+.back-btn:hover {
+  background-color: #d0d0d0;
+}
 
+/* TABLOLAR VE KARTLAR */
 .table-container {
   background: #ffffff;
   padding: 25px;
@@ -281,7 +237,9 @@
   vertical-align: middle;
 }
 
-.ticket-table tr:hover { background-color: #fbfcff; }
+.ticket-table tr:hover {
+  background-color: #fbfcff;
+}
 
 .badge {
   padding: 6px 14px;
@@ -291,10 +249,28 @@
   display: inline-block;
 }
 
-.badge-open { background-color: #e3f2fd; color: #1976d2; border: 1px solid #bbdefb; }
-.badge-progress { background-color: #fff3e0; color: #f57c00; border: 1px solid #ffe0b2; }
-.badge-closed { background-color: #e8f5e9; color: #388e3c; border: 1px solid #c8e6c9; }
-.badge-default { background-color: #f1f3f4; color: #5f6368; }
+.badge-open {
+  background-color: #e3f2fd;
+  color: #1976d2;
+  border: 1px solid #bbdefb;
+}
+
+.badge-progress {
+  background-color: #fff3e0;
+  color: #f57c00;
+  border: 1px solid #ffe0b2;
+}
+
+.badge-closed {
+  background-color: #e8f5e9;
+  color: #388e3c;
+  border: 1px solid #c8e6c9;
+}
+
+.badge-default {
+  background-color: #f1f3f4;
+  color: #5f6368;
+}
 
 .ticket-table tbody tr {
   cursor: pointer;
@@ -345,34 +321,68 @@
   line-height: 1.5;
 }
 
+/* --------------------------------------------------- */
+/* MOBİL GÖRÜNÜM (TÜM MOBİL KODLARI BURADA TOPLANDI) */
+/* --------------------------------------------------- */
 @media (max-width: 768px) {
-  .requester-navbar {
-    flex-direction: column;
-    gap: 15px;
-    padding: 15px 20px;
+  .requester-nav {
+    padding: 12px 16px !important;
+    height: auto !important;
+    min-height: 60px !important;
+    flex-wrap: wrap !important;
   }
+
+  .requester-nav>div:last-child {
+    width: 100% !important;
+    justify-content: space-between !important;
+    margin-top: 10px !important;
+  }
+
+  /* Daha önce iki farklı yerde olan ayarlar birleştirildi */
   .cards-container {
     flex-direction: column;
     align-items: center;
     gap: 20px;
   }
+
+  /* Kartların mobilde tam genişlik alması ve esnemesi sağlandı */
   .action-card {
-    width: 100%;
-    max-width: 320px;
-    height: 200px;
+    width: 100% !important;
+    max-width: none !important;
+    min-height: 200px !important;
+    height: auto !important;
+    padding: 20px;
   }
+
   .requester-content {
-    padding: 30px 15px;
+    padding: 20px 15px !important;
   }
+
+  .stats-grid {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+    margin-bottom: 24px !important;
+  }
+
+  .actions-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+
   .ticket-form-container {
     padding: 20px;
   }
+
   .ticket-detail-card {
     padding: 20px;
   }
+
+  /* Tabloların ekran dışına taşmasını engeller, yatay kaydırma çubuğu ekler */
   .table-container {
-    padding: 15px;
-    overflow-x: auto;
+    padding: 15px !important;
+    overflow-x: auto !important;
     -webkit-overflow-scrolling: touch;
+    width: 100%;
+    display: block;
   }
 }
