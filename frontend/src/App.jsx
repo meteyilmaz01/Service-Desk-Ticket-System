@@ -12,7 +12,7 @@ import AdminSummaryDashboard from './AdminSummaryDashboard';
 import LanguageSwitcher from './LanguageSwitcher';
 import { LanguageProvider, useLanguage } from './LanguageContext';
 
-const API = 'http://localhost:5035';
+const API = import.meta.env.VITE_API_URL;
 
 const ProtectedRoute = ({ children }) => {
   const token = localStorage.getItem('userToken');

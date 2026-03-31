@@ -4,7 +4,7 @@ import { jwtDecode } from 'jwt-decode';
 import axios from 'axios';
 import { useLanguage } from './LanguageContext';
 
-const API = 'http://localhost:5035';
+const API = import.meta.env.VITE_API_URL;
 
 const getStatus = (raw, t) => {
   if (raw == null) return { key: 'unspecified', label: t('status.unspecified'), bg:'#f1f5f9', color:'#64748b' };

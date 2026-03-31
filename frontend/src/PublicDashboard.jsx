@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useLanguage } from './LanguageContext';
 import './PublicDashboard.css';
 
-const API_URL = 'http://localhost:5035/api';
+const API_URL = `${import.meta.env.VITE_API_URL}/api`;
 
 export default function PublicDashboard() {
   const { t } = useLanguage();

@@ -4,7 +4,7 @@ import axios from 'axios';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from 'recharts';
 import { useLanguage } from './LanguageContext';
 
-const API = 'http://localhost:5035';
+const API = import.meta.env.VITE_API_URL;
 
 const STATUS_MAP = { 1: 'open', 2: 'assigned', 3: 'inprogress', 4: 'resolved', 5: 'closed' };
 const PRIORITY_MAP = { 1: 'verylow', 2: 'low', 3: 'normal', 4: 'high', 5: 'critical' };

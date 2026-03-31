@@ -4,6 +4,8 @@ import { jwtDecode } from 'jwt-decode';
 import axios from 'axios';
 import { useLanguage } from './LanguageContext';
 
+const API_URL = `${import.meta.env.VITE_API_URL}/api`;
+
 function getAgentInfoFromToken() {
   try {
     const token = localStorage.getItem('userToken');
@@ -99,7 +101,7 @@ export default function SupportAgentDashboard() {
     setLoadingMsg(true);
     setMsgError(null);
     try {
-      const r = await axios.get(`http://localhost:5035/api/TicketConversation/${ticketId}`, config);
+      const r = await axios.get(`${API_URL}/TicketConversation/${ticketId}`, config);
       const raw = r.data;
       const list = Array.isArray(raw)
         ? raw
@@ -124,7 +126,7 @@ export default function SupportAgentDashboard() {
     if (!newMessage.trim()) return;
     setIsSending(true);
     try {
-      await axios.post(`http://localhost:5035/api/TicketConversation/send`,
+      await axios.post(`${API_URL}/TicketConversation/send`,
         { ticketId, message: newMessage }, config);
       setNewMessage('');
       await fetchMessages(ticketId);
@@ -136,7 +138,7 @@ export default function SupportAgentDashboard() {
     if (!selectedTicket) return;
     setIsClosing(true);
     try {
-      await axios.patch(`http://localhost:5035/api/Ticket/${selectedTicket.id}/close`, {}, config);
+      await axios.patch(`${API_URL}/Ticket/${selectedTicket.id}/close`, {}, config);
       await fetchTickets(selectedTicket.id);
     } catch(e) { console.error(e); alert(t('common.error')); }
     finally { setIsClosing(false); }
@@ -146,7 +148,7 @@ export default function SupportAgentDashboard() {
     if (!agentInfo?.id) { setError(t('common.error')); setIsLoading(false); return; }
     setIsLoading(true); setError(null);
     try {
-      const res = await axios.get(`http://localhost:5035/api/Ticket/get-by-asseigment-id/${agentInfo.id}`, config);
+      const res = await axios.get(`${API_URL}/Ticket/get-by-asseigment-id/${agentInfo.id}`, config);
       const fresh = Array.isArray(res.data) ? res.data : [];
       setTickets(fresh);
       if (keepSelected) {
@@ -162,7 +164,7 @@ export default function SupportAgentDashboard() {
   const fetchAgents = async () => {
     setAgentsLoading(true);
     try {
-      const r = await axios.get('http://localhost:5035/api/AdminServiceAgent/get-all-service-agents', config);
+      const r = await axios.get(`${API_URL}/AdminServiceAgent/get-all-service-agents`, config);
       setAgents(Array.isArray(r.data) ? r.data : []);
     } catch(e) { console.error('Ajanlar yüklenemedi:', e); setAgents([]); }
     finally { setAgentsLoading(false); }
@@ -171,7 +173,7 @@ export default function SupportAgentDashboard() {
   const fetchPendingRequests = async () => {
     if (!agentInfo?.id) return;
     try {
-      const r = await axios.get(`http://localhost:5035/api/Ticket/pending-assignments/${agentInfo.id}`, config);
+      const r = await axios.get(`${API_URL}/Ticket/pending-assignments/${agentInfo.id}`, config);
       const data = Array.isArray(r.data) ? r.data : [];
 
       if (data.length > pendingRequests.length) setToastVisible(true);
@@ -203,7 +205,7 @@ export default function SupportAgentDashboard() {
   const handleStartTicket = async () => {
     setIsStarting(true);
     try {
-      await axios.patch(`http://localhost:5035/api/Ticket/${selectedTicket.id}/next-status`, {}, config);
+      await axios.patch(`${API_URL}/Ticket/${selectedTicket.id}/next-status`, {}, config);
       await fetchTickets(selectedTicket.id);
     } catch (err) { console.error(err); alert(t('common.error')); }
     finally { setIsStarting(false); }
@@ -212,7 +214,7 @@ export default function SupportAgentDashboard() {
   const handleUpdatePriority = async (newPriority) => {
     setIsUpdatingPriority(true);
     try {
-      await axios.patch(`http://localhost:5035/api/Ticket/${selectedTicket.id}/update-priority`, { priority: newPriority }, config);
+      await axios.patch(`${API_URL}/Ticket/${selectedTicket.id}/update-priority`, { priority: newPriority }, config);
       await fetchTickets(selectedTicket.id);
     } catch(err) { console.error(err); alert(t('common.error')); }
     finally { setIsUpdatingPriority(false); }
@@ -221,7 +223,7 @@ export default function SupportAgentDashboard() {
   const handleRequestAssignment = async (targetAgentId, targetAgentName) => {
     setIsRequesting(true); setRequestSuccess(false);
     try {
-      await axios.post('http://localhost:5035/api/Ticket/request-assignment',
+      await axios.post(`${API_URL}/Ticket/request-assignment`,
         { ticketId: selectedTicket.id, targetAgentId }, config);
       setRequestSuccess(true);
       setTimeout(() => { setRequestSuccess(false); setShowAssignModal(false); setAgentSearch(''); }, 2000);
@@ -232,7 +234,7 @@ export default function SupportAgentDashboard() {
   const handleAcceptAssignment = async (ticketId) => {
     setPendingAction(p => ({ ...p, [ticketId]: 'accepting' }));
     try {
-      await axios.post('http://localhost:5035/api/Ticket/accept-assignment',
+      await axios.post(`${API_URL}/Ticket/accept-assignment`,
         { ticketId, agentId: agentInfo.id }, config);
       setPendingRequests(prev => prev.filter(r => r.id !== ticketId));
       await fetchTickets();
@@ -243,7 +245,7 @@ export default function SupportAgentDashboard() {
   const handleRejectAssignment = async (ticketId) => {
     setPendingAction(p => ({ ...p, [ticketId]: 'rejecting' }));
     try {
-      await axios.post('http://localhost:5035/api/Ticket/reject-assignment',
+      await axios.post(`${API_URL}/Ticket/reject-assignment`,
         { ticketId, agentId: agentInfo.id }, config);
       setPendingRequests(prev => prev.filter(r => r.id !== ticketId));
     } catch(e) { console.error(e); alert(`${t('common.error')}: ${e.response?.data?.message || e.message}`); }
@@ -474,7 +476,7 @@ export default function SupportAgentDashboard() {
                         <div style={{ margin: '20px', padding: '14px', backgroundColor: '#fef2f2', border: '1px solid #fecaca', borderRadius: '10px', color: '#dc2626', fontSize: '12px', fontFamily: 'monospace', wordBreak: 'break-all' }}>
                           <strong>{t('common.apiError')}:</strong><br/>{msgError}<br/><br/>
                           <strong>Ticket ID:</strong> {selectedTicket?.id}<br/>
-                          <strong>URL:</strong> http://localhost:5035/api/TicketConversation/{selectedTicket?.id}
+                          <strong>URL:</strong> ${API_URL}/TicketConversation/{selectedTicket?.id}
                         </div>
                       ) : messages.length === 0 ? (
                         <div style={{ textAlign: 'center', color: '#94a3b8', padding: '40px' }}>
