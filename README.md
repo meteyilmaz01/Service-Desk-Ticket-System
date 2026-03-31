@@ -1,21 +1,23 @@
 # Service Desk Ticket System
 
-Service Desk Ticket System, şirket içi veya müşteri kaynaklı destek taleplerini (ticket) oluşturmak, yönetmek, personellere atamak ve uçtan uca çözüme kavuşturmak amacıyla geliştirilmiş kapsamlı bir Yardım Masası platformudur.
+Service Desk Ticket System is a comprehensive Help Desk platform designed to create, manage, assign, and resolve support tickets from both internal teams and customers end-to-end.
 
-Sistemi denemek için:  
+Try the system:
 https://service-desk-ticket-system.vercel.app/
 
 ---
 
-## Kullanıcı Rolleri (RBAC)
+## User Roles (RBAC)
 
-- Requester: Ticket oluşturur ve takip eder  
-- Support Agent: Ticket’ları çözer  
-- Admin: Sistem yönetimini sağlar  
+The system is designed with Role-Based Access Control (RBAC):
+
+- Requester: Creates and tracks tickets  
+- Support Agent: Resolves tickets  
+- Admin: Manages the system  
 
 ---
 
-## Teknolojiler ve Mimari
+## Technologies and Architecture
 
 Backend:
 - .NET (C#) Web API  
@@ -26,131 +28,117 @@ Authentication & Authorization:
 - JWT (JSON Web Token)  
 - Role-Based Authorization  
 
-Veri ve Loglama:
+Data & Logging:
 - Entity Framework Core (Code-First)  
-- Serilog (Middleware ile loglama)  
+- Serilog (middleware-based logging)  
 
 ---
 
-## API Controllers ve Endpoints
+## API Controllers and Endpoints
 
 ### AuthController (/api/Auth)
 
-<pre>
-| Method | Endpoint   | Role      | Açıklama                       |
-|--------|------------|-----------|--------------------------------|
-| POST   | /register  | Anonymous | Yeni kullanıcı kaydı           |
-| POST   | /login     | Anonymous | Giriş yapar ve JWT token döner |
-</pre>
+| Method | Endpoint  | Role      | Description                    |
+|--------|----------|----------|--------------------------------|
+| POST   | /register | Anonymous | Register a new user            |
+| POST   | /login    | Anonymous | Login and return JWT token     |
 
 ---
 
 ### AdminDepartmentController (/api/AdminDepartment)
 
-<pre>
-| Method | Endpoint               | Role             | Açıklama                   |
-|--------|------------------------|------------------|----------------------------|
-| GET    | /all-departments       | Anonymous/Admin  | Tüm departmanları listeler |
-| GET    | /department-by-id/{id} | Admin            | Departman detayını getirir |
-| POST   | /create-department     | Admin            | Yeni departman oluşturur   |
-| POST   | /update-department     | Admin            | Departman günceller        |
-</pre>
+| Method | Endpoint               | Role            | Description                  |
+|--------|------------------------|-----------------|------------------------------|
+| GET    | /all-departments       | Anonymous/Admin | List all departments         |
+| GET    | /department-by-id/{id} | Admin           | Get department details       |
+| POST   | /create-department     | Admin           | Create new department        |
+| POST   | /update-department     | Admin           | Update department            |
 
 ---
 
 ### AdminServiceAgentController (/api/AdminServiceAgent)
 
-<pre>
-| Method | Endpoint                     | Role                | Açıklama                |
-|--------|------------------------------|---------------------|-------------------------|
-| GET    | /get-all-service-agents      | Admin, SupportAgent | Tüm agent’ları listeler |
-| GET    | /get-service-agent/{id}      | Admin               | Agent detayını getirir  |
-| POST   | /create-service-agent        | Admin               | Yeni agent oluşturur    |
-| PUT    | /update-service-agent/{id}   | Admin               | Agent günceller         |
-| DELETE | /delete-service-agent/{id}   | Admin               | Agent siler             |
-</pre>
+| Method | Endpoint                     | Role                | Description               |
+|--------|------------------------------|---------------------|---------------------------|
+| GET    | /get-all-service-agents      | Admin, SupportAgent | List all agents           |
+| GET    | /get-service-agent/{id}      | Admin               | Get agent details         |
+| POST   | /create-service-agent        | Admin               | Create new agent          |
+| PUT    | /update-service-agent/{id}   | Admin               | Update agent              |
+| DELETE | /delete-service-agent/{id}   | Admin               | Delete agent              |
 
 ---
 
 ### AdminUserController (/api/AdminUser)
 
-<pre>
-| Method | Endpoint                 | Role  | Açıklama                   |
+| Method | Endpoint                 | Role  | Description                |
 |--------|--------------------------|-------|----------------------------|
-| GET    | /all-users               | Admin | Tüm kullanıcıları listeler |
-| GET    | /user-by-id/{id}         | Admin | Kullanıcı detayını getirir |
-| POST   | /create-user             | Admin | Yeni kullanıcı ekler       |
-| POST   | /update-user             | Admin | Kullanıcı günceller        |
-| DELETE | /delete-user/{id}        | Admin | Kullanıcı siler            |
-| POST   | /toggle-user-status/{id} | Admin | Aktif/Pasif değiştirir     |
-</pre>
+| GET    | /all-users               | Admin | List all users             |
+| GET    | /user-by-id/{id}         | Admin | Get user details           |
+| POST   | /create-user             | Admin | Create new user            |
+| POST   | /update-user             | Admin | Update user                |
+| DELETE | /delete-user/{id}        | Admin | Delete user                |
+| POST   | /toggle-user-status/{id} | Admin | Activate/Deactivate user   |
 
 ---
 
 ### TicketController (/api/Ticket)
 
-<pre>
-| Method | Endpoint                     | Role                    | Açıklama                 |
-|--------|------------------------------|-------------------------|--------------------------|
-| GET    | /get-all-tickets             | Admin                   | Tüm ticket’lar           |
-| GET    | /get-ticket-by-id/{id}       | Authenticated           | Ticket detay             |
-| GET    | /get-by-assignment-id/{id}   | Admin, SupportAgent     | Atamaya göre ticket      |
-| GET    | /my-tickets                  | Authenticated           | Kullanıcının ticket’ları |
-| POST   | /create-ticket               | Authenticated           | Ticket oluştur           |
-| PATCH  | /{id}/next-status            | Authenticated           | Status ilerlet           |
-| PATCH  | /{id}/update-priority        | Authenticated           | Öncelik güncelle         |
-| PATCH  | /assign-agent                | Admin                   | Agent ata                |
-| POST   | /request-assignment          | SupportAgent            | Ticket talep et          |
-| POST   | /accept-assignment           | SupportAgent            | Atamayı kabul et         |
-| POST   | /reject-assignment           | SupportAgent            | Atamayı reddet           |
-| GET    | /pending-assignments/{id}    | SupportAgent            | Bekleyen atamalar        |
-| PATCH  | /{id}/close                  | Requester, SupportAgent | Ticket kapat             |
-</pre>
+| Method | Endpoint                     | Role                    | Description                |
+|--------|------------------------------|-------------------------|----------------------------|
+| GET    | /get-all-tickets             | Admin                   | Get all tickets            |
+| GET    | /get-ticket-by-id/{id}       | Authenticated           | Get ticket details         |
+| GET    | /get-by-assignment-id/{id}   | Admin, SupportAgent     | Get tickets by assignment  |
+| GET    | /my-tickets                  | Authenticated           | Get user's tickets         |
+| POST   | /create-ticket               | Authenticated           | Create ticket              |
+| PATCH  | /{id}/next-status            | Authenticated           | Move to next status        |
+| PATCH  | /{id}/update-priority        | Authenticated           | Update priority            |
+| PATCH  | /assign-agent                | Admin                   | Assign agent               |
+| POST   | /request-assignment          | SupportAgent            | Request assignment         |
+| POST   | /accept-assignment           | SupportAgent            | Accept assignment          |
+| POST   | /reject-assignment           | SupportAgent            | Reject assignment          |
+| GET    | /pending-assignments/{id}    | SupportAgent            | Get pending assignments    |
+| PATCH  | /{id}/close                  | Requester, SupportAgent | Close ticket               |
 
 ---
 
 ### TicketConversationController (/api/TicketConversation)
 
-<pre>
-| Method | Endpoint    | Role                    | Açıklama      |
-|--------|-------------|-------------------------|---------------|
-| GET    | /{ticketId} | Authenticated           | Mesaj geçmişi |
-| POST   | /send       | Requester, SupportAgent | Mesaj gönder  |
-</pre>
+| Method | Endpoint    | Role                    | Description        |
+|--------|-------------|-------------------------|--------------------|
+| GET    | /{ticketId} | Authenticated           | Get message history|
+| POST   | /send       | Requester, SupportAgent | Send message       |
 
 ---
 
 ### DashboardController (/api/Dashboard)
 
-<pre>
-| Method | Endpoint | Role      | Açıklama            |
-|--------|----------|-----------|---------------------|
-| GET    | /public  | Anonymous | Genel istatistikler |
-| GET    | /admin   | Admin     | Gelişmiş dashboard  |
-</pre>
+| Method | Endpoint | Role      | Description             |
+|--------|----------|-----------|--------------------------|
+| GET    | /public  | Anonymous | Public statistics        |
+| GET    | /admin   | Admin     | Advanced admin dashboard |
 
 ---
 
-## Güvenlik ve Hata Yönetimi
+## Security and Error Handling
 
-- ModelState ile veri doğrulama  
-- JWT ile kimlik doğrulama  
-- Role bazlı yetkilendirme  
-- Claim bazlı kontrol (NameIdentifier, Role)  
-- ILogger + Serilog ile loglama  
-- Exception handling ile hata yönetimi  
+- Model validation with ModelState  
+- JWT-based authentication  
+- Role-based authorization  
+- Claim-based access control (NameIdentifier, Role)  
+- Logging with ILogger and Serilog  
+- Global exception handling  
 
 ---
 
-## Kurulum
+## Installation
 
 <pre>
 git clone https://github.com/meteyilmaz01/Service-Desk-Ticket-System.git
 cd ServiceDesk.Api
 </pre>
 
-Veritabanı ayarı:  
-appsettings.Development.json dosyasındaki connection string’i düzenle  
+Database configuration:  
+Update the connection string in appsettings.Development.json  
 
 <pre>
 dotnet ef database update
@@ -159,11 +147,11 @@ dotnet run
 
 ---
 
-## Özellikler
+## Features
 
-- Rol bazlı yetkilendirme (RBAC)  
-- Ticket lifecycle yönetimi  
-- Agent atama sistemi  
-- Conversation bazlı mesajlaşma  
-- Dashboard ve istatistikler  
-- Güvenli authentication sistemi  
+- Role-based authorization (RBAC)  
+- Ticket lifecycle management  
+- Agent assignment system  
+- Conversation-based messaging  
+- Dashboard and analytics  
+- Secure authentication system  
