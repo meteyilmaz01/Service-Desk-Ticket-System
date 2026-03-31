@@ -144,3 +144,32 @@ input:focus {
   }
 }
 
+.hero-section {
+  padding: 60px;
+}
+.login-section {
+  width: 480px;
+  padding: 40px;
+}
+.hero-title {
+  font-size: 42px;
+}
+
+@media (max-width: 900px) {
+  .landing-page {
+    flex-direction: column !important;
+    overflow-y: auto !important;
+  }
+  .hero-section {
+    padding: 40px 20px !important;
+    flex: none !important;
+  }
+  .login-section {
+    width: 100% !important;
+    padding: 20px 20px 60px 20px !important;
+  }
+  .hero-title {
+    font-size: 32px !important;
+  }
+}
+

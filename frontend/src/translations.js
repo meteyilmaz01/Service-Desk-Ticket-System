@@ -1,6 +1,7 @@
 export const translations = {
   TR: {
     common: {
+      title: 'ServiceDeck',
       login: 'Giriş Yap',
       register: 'Kayıt Ol',
       logout: 'Çıkış Yap',
@@ -329,6 +330,7 @@ export const translations = {
   },
   EN: {
     common: {
+      title: 'ServiceDeck',
       login: 'Login',
       register: 'Register',
       logout: 'Logout',

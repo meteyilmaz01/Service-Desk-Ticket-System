@@ -114,7 +114,7 @@ function LoginScreen() {
   const [focused, setFocused] = useState('');
 
   return (
-    <div style={{
+    <div className="landing-page" style={{
       minHeight: '100vh', display: 'flex', fontFamily: "'Segoe UI', system-ui, sans-serif",
       backgroundColor: '#0f172a', position: 'relative', overflow: 'hidden',
     }}>
@@ -131,8 +131,8 @@ function LoginScreen() {
           backgroundSize: '40px 40px' }} />
       </div>
 
-      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center',
-        padding: '60px', position: 'relative', zIndex: 1 }}>
+      <div className="hero-section" style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center',
+        position: 'relative', zIndex: 1 }}>
         <div style={{ maxWidth: '480px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '56px' }}>
             <div style={{ width: '40px', height: '40px', borderRadius: '10px',
@@ -141,7 +141,7 @@ function LoginScreen() {
             <span style={{ fontSize: '18px', fontWeight: '800', color: '#f8fafc', letterSpacing: '-0.3px' }}>{t('common.title')}</span>
           </div>
 
-          <h1 style={{ fontSize: '42px', fontWeight: '800', color: '#f8fafc',
+          <h1 className="hero-title" style={{ fontWeight: '800', color: '#f8fafc',
             lineHeight: '1.15', marginBottom: '20px', letterSpacing: '-1px' }}>
             {t('login.hero_title')}<br />
             <span style={{ color: '#6366f1' }}>{t('login.hero_sub_color')}</span>
@@ -163,8 +163,8 @@ function LoginScreen() {
         </div>
       </div>
 
-      <div style={{ width: '480px', flexShrink: 0, display: 'flex', alignItems: 'center',
-        justifyContent: 'center', padding: '40px', position: 'relative', zIndex: 1 }}>
+      <div className="login-section" style={{ flexShrink: 0, display: 'flex', alignItems: 'center',
+        justifyContent: 'center', position: 'relative', zIndex: 1 }}>
         <div style={{ width: '100%', backgroundColor: 'rgba(255,255,255,0.03)',
           borderRadius: '20px', border: '1px solid rgba(255,255,255,0.08)',
           padding: '40px', backdropFilter: 'blur(20px)',
