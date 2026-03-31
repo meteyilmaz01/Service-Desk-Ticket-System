@@ -1,4 +1,17 @@
 # Service Desk Ticket System
+<p align="center">
+  <img src="https://img.shields.io/badge/.NET-10.0-purple?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/C%23-239120-green?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/SQL%20Server-CC2927-red?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/EF%20Core-512BD4-purple?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/FluentValidation-5A29E4-blue?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Serilog-000000-black?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/React-61DAFB-blue?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/TypeScript-3178C6-blue?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/HTML5-E34F26-orange?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/CSS3-1572B6-blue?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/JavaScript-F7DF1E-black?style=for-the-badge" />
+</p>
 
 Service Desk Ticket System is a comprehensive Help Desk platform designed to create, manage, assign, and resolve support tickets from both internal teams and customers end-to-end.
 
