@@ -131,7 +131,7 @@ function LoginScreen() {
           backgroundSize: '40px 40px' }} />
       </div>
 
-      <div className="hero-section" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center',
+      <div className="hero-section" style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center',
         position: 'relative', zIndex: 1 }}>
         <div style={{ maxWidth: '480px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '56px' }}>
@@ -165,7 +165,7 @@ function LoginScreen() {
         </div>
       </div>
 
-      <div className="login-section" style={{ display: 'flex', alignItems: 'center',
+      <div className="login-section" style={{ width: '480px', flexShrink: 0, display: 'flex', alignItems: 'center',
         justifyContent: 'center', position: 'relative', zIndex: 1 }}>
         <div style={{ width: '100%', backgroundColor: 'rgba(255,255,255,0.03)',
           borderRadius: '20px', border: '1px solid rgba(255,255,255,0.08)',

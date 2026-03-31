@@ -110,30 +110,16 @@ const GeneralError = ({ errors }) => {
 };
 
 const Modal = ({ title, onClose, children, wide = false }) => (
-  <div style={{
-    position: 'fixed', inset: 0, backgroundColor: 'rgba(15,23,42,0.5)',
-    display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000,
-    backdropFilter: 'blur(2px)', padding: '20px'
-  }}
-    onClick={onClose}>
-    <div style={{
-      backgroundColor: '#fff', borderRadius: '16px', width: '100%',
-      maxWidth: wide ? '700px' : '500px', boxShadow: '0 20px 60px rgba(0,0,0,0.2)',
-      maxHeight: '90vh', display: 'flex', flexDirection: 'column'
-    }}
-      onClick={(e) => e.stopPropagation()}>
-      <div style={{
-        padding: '20px 24px', borderBottom: '1px solid #f1f5f9',
-        display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-        backgroundColor: '#fff', borderRadius: '16px 16px 0 0', flexShrink: 0
-      }}>
+  <div className="modal-overlay" onClick={onClose}>
+    <div className="modal-container" onClick={(e) => e.stopPropagation()}>
+      <div className="modal-header">
         <h3 style={{ margin: 0, fontSize: '16px', fontWeight: '700', color: '#1e293b' }}>{title}</h3>
         <button onClick={onClose} style={{
           background: 'none', border: 'none', fontSize: '22px',
           cursor: 'pointer', color: '#94a3b8', lineHeight: 1, padding: '2px 6px'
         }}>x</button>
       </div>
-      <div style={{ padding: '24px', overflowY: 'auto', flex: 1 }}>{children}</div>
+      <div className="modal-body">{children}</div>
     </div>
   </div>
 );
@@ -384,16 +370,8 @@ export default function AdminDashboard() {
   ];
 
   return (
-    <div style={{
-      display: 'flex', height: '100vh', fontFamily: "'Inter','Segoe UI',sans-serif",
-      backgroundColor: '#f0f4f8', overflow: 'hidden', position: 'fixed', inset: 0
-    }}>
-
-      <div style={{
-        width: '240px', flexShrink: 0, backgroundColor: '#0f172a',
-        display: 'flex', flexDirection: 'column', height: '100vh', overflowY: 'auto',
-        boxShadow: '4px 0 20px rgba(0,0,0,0.2)'
-      }}>
+    <div className="admin-layout">
+      <div className="admin-sidebar">
         <div style={{ padding: '28px 20px 20px', borderBottom: '1px solid #1e293b' }}>
           <div style={{ fontSize: '10px', color: '#475569', textTransform: 'uppercase', letterSpacing: '1.5px', marginBottom: '6px' }}>{t('admin.sidebar.title')}</div>
           <div style={{ fontSize: '18px', fontWeight: '800', color: '#f8fafc', letterSpacing: '-0.3px' }}>{t('admin.sidebar.panel')}</div>
@@ -433,7 +411,7 @@ export default function AdminDashboard() {
         </div>
       </div>
 
-      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden', height: '100vh' }}>
+      <div className="admin-main">
         <div style={{
           backgroundColor: '#fff', padding: '16px 28px', borderBottom: '1px solid #e2e8f0',
           display: 'flex', alignItems: 'center', justifyContent: 'space-between',
@@ -459,7 +437,7 @@ export default function AdminDashboard() {
           </div>
         </div>
 
-        <div key={tab} className="page-transition" style={{ flex: 1, overflowY: 'auto', padding: '24px 28px', minHeight: 0 }}>
+        <div key={tab} className="admin-content" style={{ flex: 1, overflowY: 'auto', padding: '24px' }}>
 
           {tab === 'users' && (
             <div>
@@ -473,7 +451,7 @@ export default function AdminDashboard() {
                 </div>
                 <button onClick={() => openUserModal()} style={S.btn('success')}>{t('admin.actions.newUser')}</button>
               </div>
-              <div style={{ backgroundColor: '#fff', borderRadius: '12px', border: '1px solid #e2e8f0', overflow: 'hidden', boxShadow: '0 1px 6px rgba(0,0,0,0.05)' }}>
+              <div className="table-container" style={{ backgroundColor: '#fff', borderRadius: '12px', border: '1px solid #e2e8f0', overflow: 'hidden', boxShadow: '0 1px 6px rgba(0,0,0,0.05)' }}>
                 <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                   <thead>
                     <tr>{[t('common.id'), t('common.nameSurname'), t('common.email'), t('common.role'), t('common.status'), t('common.actions')].map(h => <th key={h} style={S.th}>{h}</th>)}</tr>
@@ -522,7 +500,7 @@ export default function AdminDashboard() {
                   <h2 style={{ margin: 0, fontSize: '16px', fontWeight: '700', color: '#1e293b' }}>{t('admin.placeholders.agentList')}</h2>
                   <button onClick={() => openAgentModal()} style={S.btn('success')}>{t('admin.actions.newAgent')}</button>
                 </div>
-                <div style={{ backgroundColor: '#fff', borderRadius: '12px', border: '1px solid #e2e8f0', overflow: 'hidden', boxShadow: '0 1px 6px rgba(0,0,0,0.05)' }}>
+                <div className="table-container" style={{ backgroundColor: '#fff', borderRadius: '12px', border: '1px solid #e2e8f0', overflow: 'hidden', boxShadow: '0 1px 6px rgba(0,0,0,0.05)' }}>
                   <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                     <thead>
                       <tr>{[t('common.id'), t('common.nameSurname'), t('common.email'), t('admin.placeholders.deptList'), t('common.actions')].map(h => <th key={h} style={S.th}>{h}</th>)}</tr>
@@ -584,7 +562,7 @@ export default function AdminDashboard() {
                 </div>
                 <button onClick={fetchTickets} style={S.btn('ghost')}>{t('admin.actions.refresh')}</button>
               </div>
-              <div style={{ backgroundColor: '#fff', borderRadius: '12px', border: '1px solid #e2e8f0', overflow: 'hidden', boxShadow: '0 1px 6px rgba(0,0,0,0.05)' }}>
+              <div className="table-container" style={{ backgroundColor: '#fff', borderRadius: '12px', border: '1px solid #e2e8f0', overflow: 'hidden', boxShadow: '0 1px 6px rgba(0,0,0,0.05)' }}>
                 <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                   <thead>
                     <tr>{[t('common.id'), t('admin.placeholders.title'), t('admin.placeholders.priority'), t('admin.placeholders.status'), t('admin.placeholders.msgStatus'), t('admin.placeholders.deptList'), t('admin.placeholders.assignedAgent'), t('common.actions')].map(h => <th key={h} style={S.th}>{h}</th>)}</tr>

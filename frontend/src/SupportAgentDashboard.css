@@ -1,0 +1,129 @@
+/* SupportAgentDashboard.css */
+.admin-layout {
+  display: flex;
+  height: 100vh;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  background-color: #f1f5f9;
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+}
+
+.admin-sidebar {
+  width: 240px;
+  flex-shrink: 0;
+  background-color: #0f172a;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow-y: auto;
+  box-shadow: 4px 0 20px rgba(0,0,0,0.2);
+  z-index: 100;
+}
+
+.admin-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #f1f5f9;
+}
+
+.admin-content {
+  flex: 1;
+  padding: 0;
+  overflow-y: auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: row;
+}
+
+.ticket-list-area {
+  width: 320px;
+  flex-shrink: 0;
+  border-right: 1px solid #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+}
+
+.ticket-detail-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  min-width: 0;
+}
+
+@media (max-width: 768px) {
+  .admin-layout {
+    flex-direction: column !important;
+    position: relative !important;
+    height: auto !important;
+    overflow-y: auto !important;
+  }
+
+  .admin-sidebar {
+    width: 100% !important;
+    height: auto !important;
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 1000 !important;
+    flex-direction: row !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    padding: 0 !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
+  }
+
+  /* Sidebar header hide */
+  .admin-sidebar > div:first-child {
+    display: none !important;
+  }
+
+  .admin-sidebar nav {
+    display: flex !important;
+    flex-direction: row !important;
+    padding: 8px !important;
+    width: 100% !important;
+    gap: 8px !important;
+  }
+
+  .admin-sidebar nav button {
+    padding: 8px 16px !important;
+    margin-bottom: 0 !important;
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+    width: auto !important;
+  }
+
+  .admin-sidebar > div:last-child {
+    display: none !important;
+  }
+
+  .admin-main {
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  .admin-content {
+    flex-direction: column !important;
+    padding: 0 !important;
+  }
+
+  .ticket-list-area {
+    width: 100% !important;
+    height: auto !important;
+    max-height: 400px; /* Limit height on mobile if many tickets */
+    overflow-y: auto !important;
+    border-right: none !important;
+    border-bottom: 2px solid #e2e8f0 !important;
+  }
+
+  .ticket-detail-area {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 500px;
+  }
+}

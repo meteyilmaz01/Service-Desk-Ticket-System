@@ -71,11 +71,8 @@ export default function AdminSummaryDashboard() {
   };
 
   return (
-    <div style={{ display: 'flex', height: '100vh', backgroundColor: '#f1f5f9', overflow: 'hidden' }}>
-      <div style={{
-        width: '240px', flexShrink: 0, backgroundColor: '#0f172a',
-        display: 'flex', flexDirection: 'column', height: '100vh', overflowY: 'auto'
-      }}>
+    <div className="admin-layout">
+      <div className="admin-sidebar">
         <div style={{ padding: '28px 20px', borderBottom: '1px solid #1e293b' }}>
           <div style={{ fontSize: '10px', color: '#475569', textTransform: 'uppercase', letterSpacing: '1.5px', marginBottom: '6px' }}>{t('admin.sidebar.title')}</div>
           <div style={{ fontSize: '18px', fontWeight: '800', color: '#f8fafc' }}>{t('admin.headers.summary')}</div>
@@ -110,7 +107,8 @@ export default function AdminSummaryDashboard() {
         </div>
       </div>
 
-      <div style={{ flex: 1, overflowY: 'auto', padding: '2rem' }}>
+      <div className="admin-main">
+        <div className="admin-content">
         <h1>{t('admin.headers.summary')}</h1>
 
       <div className="dashboard-row">
@@ -246,9 +244,10 @@ export default function AdminSummaryDashboard() {
               ))}
             </tbody>
           </table>
-        </div>
+          </div>
         </div>
       </div>
     </div>
-  );
+  </div>
+);
 }

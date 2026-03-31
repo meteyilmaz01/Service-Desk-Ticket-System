@@ -192,9 +192,7 @@ export default function RequesterDashboard() {
   return (
     <div style={{ minHeight:'100vh', backgroundColor:'#f0f4f8', fontFamily:"'Segoe UI', sans-serif" }}>
 
-      <nav style={{ backgroundColor:'#0f172a', padding:'0 32px', height:'60px',
-        display:'flex', alignItems:'center', justifyContent:'space-between',
-        boxShadow:'0 2px 12px rgba(0,0,0,0.2)', position:'sticky', top:0, zIndex:100 }}>
+      <nav className="requester-nav">
         <div onClick={() => setView('home')} style={{ cursor:'pointer', display:'flex', alignItems:'center', gap:'10px' }}>
           <i className="fa-solid fa-ticket-simple" style={{ fontSize:'20px', color:'#6366f1' }}></i>
           <span style={{ color:'#f8fafc', fontWeight:'800', fontSize:'16px', letterSpacing:'-0.3px' }}>Service Desk</span>
@@ -214,7 +212,7 @@ export default function RequesterDashboard() {
         </div>
       </nav>
 
-      <div style={{ maxWidth:'900px', margin:'0 auto', padding:'32px 20px' }}>
+      <div className="requester-content">
 
         {view === 'home' && (
           <div>
@@ -225,7 +223,7 @@ export default function RequesterDashboard() {
               <p style={{ margin:0, color:'#64748b', fontSize:'14px' }}>{t('requester.home.sub')}</p>
             </div>
 
-            <div style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:'16px', marginBottom:'32px' }}>
+            <div className="stats-grid">
               {[
                 { label: t('requester.home.stats.total'),  value:tickets.length, icon:'fa-solid fa-clipboard-list', color:'#3b82f6', bg:'#eff6ff' },
                 { label: t('requester.home.stats.active'),   value:statsOpen,       icon:'fa-solid fa-clock', color:'#f59e0b', bg:'#fffbeb' },
@@ -246,7 +244,7 @@ export default function RequesterDashboard() {
               ))}
             </div>
 
-            <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'20px' }}>
+            <div className="actions-grid">
               {[
                 { icon:'fa-solid fa-folder-open', title:t('requester.home.cards.myTickets'), desc:t('requester.home.cards.myTicketsDesc'), color:'#3b82f6', view:'my-tickets' },
                 { icon:'fa-solid fa-circle-plus', title:t('requester.home.cards.newTicket'), desc:t('requester.home.cards.newTicketDesc'), color:'#10b981', view:'create' },

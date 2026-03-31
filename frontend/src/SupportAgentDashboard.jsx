@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
 import axios from 'axios';
 import { useLanguage } from './LanguageContext';
+import './SupportAgentDashboard.css';
 
 const API_URL = `${import.meta.env.VITE_API_URL}/api`;
 
@@ -277,9 +278,8 @@ export default function SupportAgentDashboard() {
   );
 
   return (
-    <div style={{ display: 'flex', height: '100vh', maxHeight: '100vh', fontFamily: "'Segoe UI', sans-serif", backgroundColor: '#f0f2f5', overflow: 'hidden', position: 'fixed', top: 0, left: 0, right: 0, bottom: 0 }}>
-
-      <div style={{ width: '260px', flexShrink: 0, backgroundColor: '#1e293b', display: 'flex', flexDirection: 'column', boxShadow: '4px 0 12px rgba(0,0,0,0.15)', height: '100vh', overflowY: 'auto' }}>
+    <div className="admin-layout">
+      <div className="admin-sidebar">
 
         <div style={{ padding: '24px 20px', borderBottom: '1px solid #334155' }}>
           <div style={{ fontSize: '11px', color: '#64748b', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '6px' }}>{t('agent.sidebar.title')}</div>
@@ -334,16 +334,15 @@ export default function SupportAgentDashboard() {
         </div>
       </div>
 
-      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden', height: '100vh' }}>
+      <div className="admin-main">
+        <div className="admin-content">
+          <div className="ticket-list-area">
 
         <div style={{ backgroundColor: '#fff', padding: '16px 28px', borderBottom: '1px solid #e2e8f0', boxShadow: '0 1px 4px rgba(0,0,0,0.06)' }}>
           <h1 style={{ margin: 0, fontSize: '20px', fontWeight: '700', color: '#1e293b' }}>{t('admin.headers.ticketMgmt')}</h1>
           <p style={{ margin: '2px 0 0', fontSize: '13px', color: '#94a3b8' }}>{filteredTickets.length} {t('common.tickets')}</p>
         </div>
 
-        <div style={{ flex: 1, display: 'flex', overflow: 'hidden', minHeight: 0 }}>
-
-          <div style={{ width: selectedTicket ? '380px' : '100%', flexShrink: 0, overflowY: 'auto', padding: '20px', height: '100%' }}>
             {isLoading && <div style={{ textAlign: 'center', padding: '60px 20px', color: '#94a3b8' }}><div style={{ fontSize: '32px', marginBottom: '12px' }}>⏳</div><div>{t('common.loading')}</div></div>}
             {!isLoading && error && <div style={{ backgroundColor: '#fef2f2', border: '1px solid #fecaca', borderRadius: '10px', padding: '20px', textAlign: 'center', color: '#dc2626' }}><div style={{ fontSize: '24px', marginBottom: '8px' }}>⚠️</div><div>{error}</div></div>}
             {!isLoading && !error && filteredTickets.length === 0 && <div style={{ textAlign: 'center', padding: '60px 20px', color: '#94a3b8' }}><div style={{ fontSize: '48px', marginBottom: '16px' }}>🎉</div><div style={{ fontSize: '16px', fontWeight: '600', color: '#64748b' }}>{t('agent.tickets.empty')}</div></div>}
@@ -380,7 +379,7 @@ export default function SupportAgentDashboard() {
             const isResolved   = statusLabel === 'resolved';
             const isClosed     = statusLabel === 'closed';
             return (
-              <div key={selectedTicket.id + activeTab} className="page-transition" style={{ flex: 1, overflowY: 'auto', backgroundColor: '#fff', borderLeft: '1px solid #e2e8f0', display: 'flex', flexDirection: 'column', height: '100%' }}>
+              <div className="ticket-detail-area">
                 <div style={{ padding: '20px 24px', borderBottom: '1px solid #e2e8f0', backgroundColor: '#f8fafc', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                   <div style={{ flex: 1 }}>
                     <div style={{ fontSize: '12px', color: '#94a3b8', fontWeight: '700', marginBottom: '4px' }}>#{selectedTicket.id}</div>
@@ -478,7 +477,7 @@ export default function SupportAgentDashboard() {
                 )}
 
                 {activeTab === 'messages' && (
-                  <div style={{ display: 'flex', flexDirection: 'column', flex: 1, overflow: 'hidden' }}>
+                  <div className="admin-chat-area">
                     <div style={{ flex: 1, overflowY: 'auto', padding: '20px', display: 'flex', flexDirection: 'column', gap: '12px', backgroundColor: '#f8fafc' }}>
                       {isLoadingMsg ? (
                         <div style={{ textAlign: 'center', color: '#94a3b8', padding: '40px', fontSize: '13px' }}><i className="fa-solid fa-circle-notch fa-spin" style={{ marginRight: '8px' }}></i> {t('common.loading')}</div>
