@@ -54,11 +54,13 @@ builder.Services.AddControllers()
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowVercel",
-        builder =>
+        policy =>
         {
-            builder.WithOrigins("https://service-desk-ticket-system.vercel.app") 
-                   .AllowAnyHeader()
-                   .AllowAnyMethod();
+            policy.WithOrigins("https://service-desk-ticket-system.vercel.app")
+                  .AllowAnyHeader()
+                  .AllowAnyMethod()
+                  .SetIsOriginAllowedToAllowWildcardSubdomains() 
+                  .AllowCredentials(); 
         });
 });
 
@@ -105,12 +107,15 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
+app.UseHttpsRedirection();
+
+app.UseRouting();
 
 app.UseCors("AllowVercel");
-app.UseHttpsRedirection();
+
 app.UseAuthentication();
 app.UseAuthorization();
+
 app.UseMiddleware<SerilogUserEnricherMiddleware>();
 app.MapControllers();
-
 app.Run();
