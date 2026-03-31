@@ -196,7 +196,7 @@ export default function RequesterDashboard() {
         display:'flex', alignItems:'center', justifyContent:'space-between',
         boxShadow:'0 2px 12px rgba(0,0,0,0.2)', position:'sticky', top:0, zIndex:100 }}>
         <div onClick={() => setView('home')} style={{ cursor:'pointer', display:'flex', alignItems:'center', gap:'10px' }}>
-          <span style={{ fontSize:'20px' }}>🎫</span>
+          <i className="fa-solid fa-ticket-simple" style={{ fontSize:'20px', color:'#6366f1' }}></i>
           <span style={{ color:'#f8fafc', fontWeight:'800', fontSize:'16px', letterSpacing:'-0.3px' }}>Service Desk</span>
         </div>
         <div style={{ display:'flex', alignItems:'center', gap:'16px' }}>
@@ -207,7 +207,8 @@ export default function RequesterDashboard() {
             <span style={{ color:'#94a3b8', fontSize:'13px' }}>{t('requester.nav.welcome')} <strong style={{ color:'#f1f5f9' }}>{userName}</strong></span>
           </div>
           <button onClick={handleLogout} style={{ padding:'7px 16px', borderRadius:'8px', border:'1px solid #334155',
-            backgroundColor:'transparent', color:'#94a3b8', fontSize:'12px', fontWeight:'600', cursor:'pointer' }}>
+            backgroundColor:'transparent', color:'#94a3b8', fontSize:'12px', fontWeight:'600', cursor:'pointer', display:'flex', alignItems:'center', gap:'8px' }}>
+            <i className="fa-solid fa-right-from-bracket"></i>
             {t('requester.nav.logout')}
           </button>
         </div>
@@ -226,16 +227,16 @@ export default function RequesterDashboard() {
 
             <div style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:'16px', marginBottom:'32px' }}>
               {[
-                { label: t('requester.home.stats.total'),  value:tickets.length, icon:'📋', color:'#3b82f6', bg:'#eff6ff' },
-                { label: t('requester.home.stats.active'),   value:statsOpen,       icon:'⏳', color:'#f59e0b', bg:'#fffbeb' },
-                { label: t('requester.home.stats.resolved'), value:statsResolved,   icon:'✅', color:'#10b981', bg:'#f0fdf4' },
+                { label: t('requester.home.stats.total'),  value:tickets.length, icon:'fa-solid fa-clipboard-list', color:'#3b82f6', bg:'#eff6ff' },
+                { label: t('requester.home.stats.active'),   value:statsOpen,       icon:'fa-solid fa-clock', color:'#f59e0b', bg:'#fffbeb' },
+                { label: t('requester.home.stats.resolved'), value:statsResolved,   icon:'fa-solid fa-circle-check', color:'#10b981', bg:'#f0fdf4' },
               ].map(s => (
                 <div key={s.label} style={{ backgroundColor:'#fff', borderRadius:'14px', padding:'20px',
                   border:'1px solid #e2e8f0', boxShadow:'0 1px 6px rgba(0,0,0,0.05)',
                   display:'flex', alignItems:'center', gap:'16px' }}>
                   <div style={{ width:'48px', height:'48px', borderRadius:'12px', backgroundColor:s.bg,
-                    display:'flex', alignItems:'center', justifyContent:'center', fontSize:'22px', flexShrink:0 }}>
-                    {s.icon}
+                    display:'flex', alignItems:'center', justifyContent:'center', fontSize:'20px', flexShrink:0, color:s.color }}>
+                    <i className={s.icon}></i>
                   </div>
                   <div>
                     <div style={{ fontSize:'24px', fontWeight:'800', color:s.color }}>{s.value}</div>
@@ -247,8 +248,8 @@ export default function RequesterDashboard() {
 
             <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'20px' }}>
               {[
-                { icon:'📂', title:t('requester.home.cards.myTickets'), desc:t('requester.home.cards.myTicketsDesc'), color:'#3b82f6', view:'my-tickets' },
-                { icon:'➕', title:t('requester.home.cards.newTicket'), desc:t('requester.home.cards.newTicketDesc'), color:'#10b981', view:'create' },
+                { icon:'fa-solid fa-folder-open', title:t('requester.home.cards.myTickets'), desc:t('requester.home.cards.myTicketsDesc'), color:'#3b82f6', view:'my-tickets' },
+                { icon:'fa-solid fa-circle-plus', title:t('requester.home.cards.newTicket'), desc:t('requester.home.cards.newTicketDesc'), color:'#10b981', view:'create' },
               ].map(c => (
                 <div key={c.view} onClick={() => setView(c.view)} style={{
                   backgroundColor:'#fff', borderRadius:'16px', padding:'28px 24px',
@@ -257,7 +258,9 @@ export default function RequesterDashboard() {
                 }}
                   onMouseEnter={e => { e.currentTarget.style.transform='translateY(-3px)'; e.currentTarget.style.boxShadow='0 8px 24px rgba(0,0,0,0.1)'; e.currentTarget.style.borderColor=c.color; }}
                   onMouseLeave={e => { e.currentTarget.style.transform='translateY(0)'; e.currentTarget.style.boxShadow='0 1px 6px rgba(0,0,0,0.05)'; e.currentTarget.style.borderColor='#e2e8f0'; }}>
-                  <div style={{ fontSize:'36px', marginBottom:'14px' }}>{c.icon}</div>
+                  <div style={{ fontSize:'32px', marginBottom:'14px', color:c.color }}>
+                    <i className={c.icon}></i>
+                  </div>
                   <div style={{ fontSize:'17px', fontWeight:'700', color:'#1e293b', marginBottom:'6px' }}>{c.title}</div>
                   <div style={{ fontSize:'13px', color:'#94a3b8', lineHeight:'1.5' }}>{c.desc}</div>
                   <div style={{ marginTop:'16px', fontSize:'12px', fontWeight:'700', color:c.color }}>{t('requester.home.cards.continue')}</div>

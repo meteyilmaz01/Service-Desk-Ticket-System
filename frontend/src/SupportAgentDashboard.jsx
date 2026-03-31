@@ -404,8 +404,12 @@ export default function SupportAgentDashboard() {
                 </div>
 
                 <div style={{ display: 'flex', borderBottom: '1px solid #e2e8f0', backgroundColor: '#f8fafc' }}>
-                  {[{ key: 'detail', label: `📋 ${t('admin.tabs.details')}` }, { key: 'messages', label: `💬 ${t('admin.tabs.chat')}${messages.length > 0 ? ` (${messages.length})` : ''}` }].map(tab => (
-                    <button key={tab.key} onClick={() => setActiveTab(tab.key)} style={{ padding: '12px 20px', border: 'none', cursor: 'pointer', fontSize: '13px', fontWeight: '600', backgroundColor: 'transparent', color: activeTab === tab.key ? '#3b82f6' : '#64748b', borderBottom: activeTab === tab.key ? '2px solid #3b82f6' : '2px solid transparent' }}>{tab.label}</button>
+                  {[{ key: 'detail', label: t('admin.tabs.details'), icon: 'fa-solid fa-clipboard-list' }, { key: 'messages', label: t('admin.tabs.chat'), icon: 'fa-solid fa-comment', count: messages.length }].map(tab => (
+                    <button key={tab.key} onClick={() => setActiveTab(tab.key)} style={{ padding: '12px 20px', border: 'none', cursor: 'pointer', fontSize: '13px', fontWeight: '600', backgroundColor: 'transparent', color: activeTab === tab.key ? '#3b82f6' : '#64748b', borderBottom: activeTab === tab.key ? '2px solid #3b82f6' : '2px solid transparent', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <i className={tab.icon}></i>
+                      {tab.label}
+                      {tab.count > 0 && <span>({tab.count})</span>}
+                    </button>
                   ))}
                 </div>
 
@@ -420,18 +424,21 @@ export default function SupportAgentDashboard() {
 
                     <div style={{ padding: '20px 24px', borderBottom: '1px solid #e2e8f0', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
                       {[
-                        { label: `🆔 ${t('requester.tickets.ticketId')} ID`,    value: `#${selectedTicket.id}` },
-                        { label: `👤 ${t('admin.placeholders.requester')}`,  value: selectedTicket.requesterId ? `#${selectedTicket.requesterId}` : '—' },
-                        { label: `⚡ ${t('admin.headers.priority')}`, value: (
+                        { label: t('requester.tickets.ticketId'), icon: 'fa-solid fa-id-card',    value: `#${selectedTicket.id}` },
+                        { label: t('admin.placeholders.requester'), icon: 'fa-solid fa-user',  value: selectedTicket.requesterId ? `#${selectedTicket.requesterId}` : '—' },
+                        { label: t('admin.headers.priority'), icon: 'fa-solid fa-bolt', value: (
                           <select value={selectedTicket.priority || ''} onChange={e => handleUpdatePriority(parseInt(e.target.value))} disabled={isUpdatingPriority}
                             style={{ padding: '3px 6px', borderRadius: '5px', border: '1px solid #e2e8f0', fontSize: '12px', color: '#334155', cursor: 'pointer', backgroundColor: '#fff' }}>
                             {[{v:1,l:t('priority.verylow')},{v:2,l:t('priority.low')},{v:3,l:t('priority.medium')},{v:4,l:t('priority.high')},{v:5,l:t('priority.critical')}].map(o => <option key={o.v} value={o.v}>{o.l}</option>)}
                           </select>
                         )},
-                        { label: `📊 ${t('admin.headers.status')}`, value: t(statusLabel) },
+                        { label: t('admin.headers.status'), icon: 'fa-solid fa-chart-simple', value: t(statusLabel) },
                       ].map(item => (
                         <div key={item.label} style={{ backgroundColor: '#f8fafc', padding: '10px 12px', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
-                          <div style={{ fontSize: '10px', fontWeight: '700', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '4px' }}>{item.label}</div>
+                          <div style={{ fontSize: '10px', fontWeight: '700', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '4px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                            <i className={item.icon} style={{ color: '#6366f1' }}></i>
+                            {item.label}
+                          </div>
                           <div style={{ fontSize: '13px', fontWeight: '600', color: '#334155' }}>{item.value}</div>
                         </div>
                       ))}
@@ -441,28 +448,31 @@ export default function SupportAgentDashboard() {
                       {(isOpen || isAssigned) && (
                         <div style={{ marginBottom: '16px' }}>
                           <button onClick={handleStartTicket} disabled={isStarting}
-                            style={{ padding: '7px 16px', borderRadius: '6px', border: 'none', backgroundColor: isStarting ? '#94a3b8' : '#f59e0b', color: '#fff', fontWeight: '700', fontSize: '12px', cursor: isStarting ? 'not-allowed' : 'pointer' }}>
-                            {isStarting ? t('common.loading') : `▶️ ${t('admin.placeholders.start')} → InProgress`}
+                            style={{ padding: '8px 20px', borderRadius: '6px', border: 'none', backgroundColor: isStarting ? '#94a3b8' : '#f59e0b', color: '#fff', fontWeight: '700', fontSize: '12px', cursor: isStarting ? 'not-allowed' : 'pointer', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                            {isStarting ? <i className="fa-solid fa-circle-notch fa-spin"></i> : <i className="fa-solid fa-play"></i>}
+                            {isStarting ? t('common.loading') : `${t('admin.placeholders.start')} → InProgress`}
                           </button>
                         </div>
                       )}
                       {isInProgress && (
                         <div style={{ marginBottom: '16px' }}>
                           <button onClick={() => { if(window.confirm(t('confirm.resolve'))) handleStartTicket(); }} disabled={isStarting}
-                            style={{ padding: '7px 16px', borderRadius: '6px', border: 'none', backgroundColor: isStarting ? '#94a3b8' : '#10b981', color: '#fff', fontWeight: '700', fontSize: '12px', cursor: isStarting ? 'not-allowed' : 'pointer' }}>
-                            {isStarting ? t('common.loading') : `✅ ${t('admin.placeholders.resolve')} → Resolved`}
+                            style={{ padding: '8px 20px', borderRadius: '6px', border: 'none', backgroundColor: isStarting ? '#94a3b8' : '#10b981', color: '#fff', fontWeight: '700', fontSize: '12px', cursor: isStarting ? 'not-allowed' : 'pointer', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                            {isStarting ? <i className="fa-solid fa-circle-notch fa-spin"></i> : <i className="fa-solid fa-circle-check"></i>}
+                            {isStarting ? t('common.loading') : `${t('admin.placeholders.resolve')} → Resolved`}
                           </button>
                         </div>
                       )}
                       {isResolved && (
                         <div style={{ marginBottom: '16px' }}>
                           <button onClick={handleCloseTicket} disabled={isClosing}
-                            style={{ padding: '7px 16px', borderRadius: '6px', border: 'none', backgroundColor: isClosing ? '#94a3b8' : '#ef4444', color: '#fff', fontWeight: '700', fontSize: '12px', cursor: isClosing ? 'not-allowed' : 'pointer' }}>
-                            {isClosing ? t('common.loading') : `🔒 ${t('admin.actions.close')}`}
+                            style={{ padding: '8px 20px', borderRadius: '6px', border: 'none', backgroundColor: isClosing ? '#94a3b8' : '#ef4444', color: '#fff', fontWeight: '700', fontSize: '12px', cursor: isClosing ? 'not-allowed' : 'pointer', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                            {isClosing ? <i className="fa-solid fa-circle-notch fa-spin"></i> : <i className="fa-solid fa-lock"></i>}
+                            {isClosing ? t('common.loading') : t('admin.actions.close')}
                           </button>
                         </div>
                       )}
-                      {isClosed && <div style={{ backgroundColor: '#f1f5f9', border: '1px solid #cbd5e1', borderRadius: '8px', padding: '14px', color: '#64748b', fontSize: '13px', textAlign: 'center' }}>🔒 {t('requester.detail.closed_info')}</div>}
+                      {isClosed && <div style={{ backgroundColor: '#f1f5f9', border: '1px solid #cbd5e1', borderRadius: '8px', padding: '14px', color: '#64748b', fontSize: '13px', textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}><i className="fa-solid fa-lock"></i> {t('requester.detail.closed_info')}</div>}
                     </div>
                   </>
                 )}
@@ -471,7 +481,7 @@ export default function SupportAgentDashboard() {
                   <div style={{ display: 'flex', flexDirection: 'column', flex: 1, overflow: 'hidden' }}>
                     <div style={{ flex: 1, overflowY: 'auto', padding: '20px', display: 'flex', flexDirection: 'column', gap: '12px', backgroundColor: '#f8fafc' }}>
                       {isLoadingMsg ? (
-                        <div style={{ textAlign: 'center', color: '#94a3b8', padding: '40px', fontSize: '13px' }}>⏳ {t('common.loading')}</div>
+                        <div style={{ textAlign: 'center', color: '#94a3b8', padding: '40px', fontSize: '13px' }}><i className="fa-solid fa-circle-notch fa-spin" style={{ marginRight: '8px' }}></i> {t('common.loading')}</div>
                       ) : msgError ? (
                         <div style={{ margin: '20px', padding: '14px', backgroundColor: '#fef2f2', border: '1px solid #fecaca', borderRadius: '10px', color: '#dc2626', fontSize: '12px', fontFamily: 'monospace', wordBreak: 'break-all' }}>
                           <strong>{t('common.apiError')}:</strong><br/>{msgError}<br/><br/>
@@ -480,7 +490,7 @@ export default function SupportAgentDashboard() {
                         </div>
                       ) : messages.length === 0 ? (
                         <div style={{ textAlign: 'center', color: '#94a3b8', padding: '40px' }}>
-                          <div style={{ fontSize: '32px', marginBottom: '10px' }}>💬</div>
+                          <div style={{ fontSize: '32px', marginBottom: '10px' }}><i className="fa-solid fa-comment-slash"></i></div>
                           <div style={{ fontSize: '13px', fontWeight: '600' }}>{t('agent.chat.noMessages')}</div>
                         </div>
                       ) : (
@@ -520,7 +530,7 @@ export default function SupportAgentDashboard() {
                             rows={2} style={{ flex: 1, padding: '10px 14px', borderRadius: '10px', border: '1px solid #e2e8f0', fontSize: '13px', color: '#1e293b', outline: 'none', resize: 'none', fontFamily: "'Segoe UI', sans-serif" }} />
                           <button onClick={() => sendMessage(selectedTicket.id)} disabled={isSending || !newMessage.trim()}
                             style={{ padding: '10px 20px', borderRadius: '10px', border: 'none', backgroundColor: isSending || !newMessage.trim() ? '#e2e8f0' : '#3b82f6', color: isSending || !newMessage.trim() ? '#94a3b8' : '#fff', fontWeight: '700', fontSize: '13px', cursor: isSending || !newMessage.trim() ? 'not-allowed' : 'pointer' }}>
-                            {isSending ? '⏳' : t('common.send')}
+                            {isSending ? <i className="fa-solid fa-circle-notch fa-spin"></i> : <i className="fa-solid fa-paper-plane"></i>}
                           </button>
                         </div>
                       )}

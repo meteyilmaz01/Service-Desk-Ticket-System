@@ -31,10 +31,10 @@ export default function PublicDashboard() {
   const { resolvedThisMonth, averageResolutionHours, activeDepartmentCount, activeAgentCount, systemStatus } = data;
 
   const cards = [
-    { label: t('public.stats.resolved'), value: resolvedThisMonth, icon: '✅' },
-    { label: t('public.stats.avg_time'), value: Math.abs(averageResolutionHours).toFixed(1), icon: '⏱️' },
-    { label: t('public.stats.active_dept'), value: activeDepartmentCount, icon: '🏢' },
-    { label: t('public.stats.active_agent'), value: activeAgentCount, icon: '👤' },
+    { label: t('public.stats.resolved'), value: resolvedThisMonth, icon: 'fa-solid fa-circle-check' },
+    { label: t('public.stats.avg_time'), value: Math.abs(averageResolutionHours).toFixed(1), icon: 'fa-solid fa-stopwatch' },
+    { label: t('public.stats.active_dept'), value: activeDepartmentCount, icon: 'fa-solid fa-building' },
+    { label: t('public.stats.active_agent'), value: activeAgentCount, icon: 'fa-solid fa-user' },
   ];
 
   return (
@@ -48,7 +48,7 @@ export default function PublicDashboard() {
       <section className="stats">
         {cards.map((c, i) => (
           <div key={i} className="stat-card">
-            <div className="icon">{c.icon}</div>
+            <div className="icon"><i className={c.icon}></i></div>
             <div className="value">{c.value}</div>
             <div className="label">{c.label}</div>
           </div>

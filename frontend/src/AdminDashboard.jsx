@@ -400,10 +400,10 @@ export default function AdminDashboard() {
         </div>
         <nav style={{ padding: '16px 12px', flex: 1 }}>
           {[
-            { key: 'dashboard', icon: '📊', label: t('admin.sidebar.summary') },
-            { key: 'users', icon: '👤', label: t('admin.sidebar.users') },
-            { key: 'departments', icon: '🏢', label: t('admin.sidebar.departments') },
-            { key: 'tickets', icon: '🎫', label: t('admin.sidebar.tickets') },
+            { key: 'dashboard', icon: 'fa-solid fa-chart-simple', label: t('admin.sidebar.summary') },
+            { key: 'users', icon: 'fa-solid fa-user', label: t('admin.sidebar.users') },
+            { key: 'departments', icon: 'fa-solid fa-building', label: t('admin.sidebar.departments') },
+            { key: 'tickets', icon: 'fa-solid fa-ticket-simple', label: t('admin.sidebar.tickets') },
           ].map(item => (
             <button key={item.key} onClick={() => {
               if (item.key === 'dashboard') navigate('/admin-dashboard');
@@ -416,6 +416,7 @@ export default function AdminDashboard() {
               color: tab === item.key ? '#fff' : '#94a3b8',
               transition: 'all 0.15s ease',
             }}>
+              <i className={item.icon}></i>
               {item.label}
             </button>
           ))}
@@ -423,8 +424,10 @@ export default function AdminDashboard() {
         <div style={{ padding: '16px 12px', borderTop: '1px solid #1e293b' }}>
           <button onClick={handleLogout} style={{
             width: '100%', padding: '10px', borderRadius: '8px', border: 'none',
-            backgroundColor: '#dc2626', color: '#fff', fontWeight: '700', fontSize: '13px', cursor: 'pointer'
+            backgroundColor: '#dc2626', color: '#fff', fontWeight: '700', fontSize: '13px', cursor: 'pointer',
+            display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px'
           }}>
+            <i className="fa-solid fa-right-from-bracket"></i>
             {t('admin.sidebar.logout')}
           </button>
         </div>

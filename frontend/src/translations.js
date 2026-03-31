@@ -47,15 +47,15 @@ export const translations = {
       hero_sub_color: 'tek panelde.',
       hero_description: 'Taleplerinizi oluşturun, takip edin ve hızlıca çözüme ulaşın. Ekipler arası iletişimi kolaylaştırın.',
       features: [
-        { icon: '⚡', text: 'Anlık talep takibi ve durum güncellemeleri' },
-        { icon: '🚀', text: 'Hızlı Talep Yönetimi' },
-        { icon: '📊', text: 'Gelişmiş Analitik Raporlar' },
-        { icon: '💬', text: 'Gerçek Zamanlı İletişim' },
-        { icon: '🔒', text: 'Güvenli Veri Altyapısı' }
+        { icon: 'fa-solid fa-bolt', text: 'Anlık talep takibi ve durum güncellemeleri' },
+        { icon: 'fa-solid fa-rocket', text: 'Hızlı Talep Yönetimi' },
+        { icon: 'fa-solid fa-chart-simple', text: 'Gelişmiş Analitik Raporlar' },
+        { icon: 'fa-solid fa-comment', text: 'Gerçek Zamanlı İletişim' },
+        { icon: 'fa-solid fa-lock', text: 'Güvenli Veri Altyapısı' }
       ],
-      success_msg: '✅ Giriş başarılı, yönlendiriliyorsunuz...',
-      error_msg: '❌ E-posta veya şifre hatalı.',
-      reg_success: '✅ Kayıt başarılı! Giriş yapabilirsiniz.',
+      success_msg: 'Giriş başarılı, yönlendiriliyorsunuz...',
+      error_msg: 'E-posta veya şifre hatalı.',
+      reg_success: 'Kayıt başarılı! Giriş yapabilirsiniz.',
       reg_error: 'Kayıt başarısız.',
       forgot_password: 'Şifremi unuttum. (Yapım aşamasında)',
       already_have_account: 'Zaten hesabınız var mı?'
@@ -376,13 +376,15 @@ export const translations = {
       hero_sub_color: 'in one panel.',
       hero_description: 'Create, track, and resolve your tickets quickly. Simplify team communication.',
       features: [
-        { icon: '⚡', text: 'Real-time ticket tracking and status updates' },
-        { icon: '🏢', text: 'Department-based organization and assignment' },
-        { icon: '🔒', text: 'Role-based secure access control' },
+        { icon: 'fa-solid fa-bolt', text: 'Instant ticket tracking and status updates' },
+        { icon: 'fa-solid fa-rocket', text: 'Fast Ticket Management' },
+        { icon: 'fa-solid fa-chart-simple', text: 'Advanced Analytical Reports' },
+        { icon: 'fa-solid fa-comment', text: 'Real-time Communication' },
+        { icon: 'fa-solid fa-lock', text: 'Secure Data Infrastructure' }
       ],
-      success_msg: '✅ Login successful, redirecting...',
-      error_msg: '❌ Incorrect email or password.',
-      reg_success: '✅ Registration successful! You can now log in.',
+      success_msg: 'Login successful, redirecting...',
+      error_msg: 'Invalid email or password.',
+      reg_success: 'Registration successful! You can now log in.',
       reg_error: 'Error occurred during registration.',
     },
     admin: {

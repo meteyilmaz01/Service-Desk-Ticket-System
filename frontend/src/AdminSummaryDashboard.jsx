@@ -82,8 +82,8 @@ export default function AdminSummaryDashboard() {
         </div>
         <nav style={{ padding: '16px 12px', flex: 1 }}>
           {[
-            { key: 'dashboard', icon: '📊', label: t('admin.sidebar.summary'), active: true },
-            { key: 'admin', icon: '⚙️', label: t('admin.sidebar.panel') },
+            { key: 'dashboard', icon: 'fa-solid fa-chart-simple', label: t('admin.sidebar.summary'), active: true },
+            { key: 'admin', icon: 'fa-solid fa-gear', label: t('admin.sidebar.panel') },
           ].map(item => (
             <button key={item.key} onClick={() => { if (item.key === 'admin') window.location.href='/admin'; }} style={{
               width: '100%', display: 'flex', alignItems: 'center', gap: '10px',
@@ -93,15 +93,18 @@ export default function AdminSummaryDashboard() {
               color: item.active ? '#fff' : '#94a3b8',
               transition: 'all 0.15s ease',
             }}>
-              <span>{item.icon}</span> {item.label}
+              <i className={item.icon}></i>
+              {item.label}
             </button>
           ))}
         </nav>
         <div style={{ padding: '16px 12px', borderTop: '1px solid #1e293b' }}>
           <button onClick={() => { localStorage.removeItem('userToken'); window.location.href='/'; }} style={{
             width: '100%', padding: '10px', borderRadius: '8px', border: 'none',
-            backgroundColor: '#dc2626', color: '#fff', fontWeight: '700', fontSize: '13px', cursor: 'pointer'
+            backgroundColor: '#dc2626', color: '#fff', fontWeight: '700', fontSize: '13px', cursor: 'pointer',
+            display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px'
           }}>
+            <i className="fa-solid fa-right-from-bracket"></i>
             {t('admin.sidebar.logout')}
           </button>
         </div>

@@ -97,7 +97,7 @@ function LoginScreen() {
       setTimeout(() => switchMode('login'), 1500);
     } catch(err) {
       const msg = err.response?.data?.message || err.response?.data || t('login.reg_error');
-      setMessage({ text: '❌ ' + msg, type: 'error' });
+      setMessage({ text: msg, type: 'error' });
     } finally { setLoading(false); }
   };
 
@@ -131,13 +131,15 @@ function LoginScreen() {
           backgroundSize: '40px 40px' }} />
       </div>
 
-      <div className="hero-section" style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center',
+      <div className="hero-section" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center',
         position: 'relative', zIndex: 1 }}>
         <div style={{ maxWidth: '480px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '56px' }}>
             <div style={{ width: '40px', height: '40px', borderRadius: '10px',
               backgroundColor: '#6366f1', display: 'flex', alignItems: 'center',
-              justifyContent: 'center', fontSize: '20px' }}>🎫</div>
+              justifyContent: 'center', fontSize: '18px', color: '#fff' }}>
+              <i className="fa-solid fa-ticket-simple"></i>
+            </div>
             <span style={{ fontSize: '18px', fontWeight: '800', color: '#f8fafc', letterSpacing: '-0.3px' }}>{t('common.title')}</span>
           </div>
 
@@ -154,8 +156,8 @@ function LoginScreen() {
             <div key={f.text} style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '14px' }}>
               <div style={{ width: '32px', height: '32px', borderRadius: '8px',
                 backgroundColor: 'rgba(99,102,241,0.15)', display: 'flex',
-                alignItems: 'center', justifyContent: 'center', fontSize: '14px', flexShrink: 0 }}>
-                {f.icon}
+                alignItems: 'center', justifyContent: 'center', fontSize: '14px', flexShrink: 0, color: '#6366f1' }}>
+                <i className={f.icon}></i>
               </div>
               <span style={{ fontSize: '14px', color: '#94a3b8' }}>{f.text}</span>
             </div>
@@ -163,7 +165,7 @@ function LoginScreen() {
         </div>
       </div>
 
-      <div className="login-section" style={{ flexShrink: 0, display: 'flex', alignItems: 'center',
+      <div className="login-section" style={{ display: 'flex', alignItems: 'center',
         justifyContent: 'center', position: 'relative', zIndex: 1 }}>
         <div style={{ width: '100%', backgroundColor: 'rgba(255,255,255,0.03)',
           borderRadius: '20px', border: '1px solid rgba(255,255,255,0.08)',
@@ -235,6 +237,7 @@ function LoginScreen() {
                 color: message.type === 'success' ? '#34d399' : '#f87171',
                 border: `1px solid ${message.type === 'success' ? 'rgba(16,185,129,0.2)' : 'rgba(239,68,68,0.2)'}`,
               }}>
+                <i className={message.type === 'success' ? 'fa-solid fa-circle-check' : 'fa-solid fa-circle-exclamation'} style={{ marginRight: '8px' }}></i>
                 {message.text}
               </div>
             )}
@@ -246,11 +249,13 @@ function LoginScreen() {
               cursor: loading ? 'not-allowed' : 'pointer',
               transition: 'all 0.2s ease',
               boxShadow: loading ? 'none' : '0 4px 20px rgba(99,102,241,0.4)',
+              display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px'
             }}
               onMouseEnter={e => { if(!loading) e.target.style.backgroundColor='#4f46e5'; }}
               onMouseLeave={e => { if(!loading) e.target.style.backgroundColor='#6366f1'; }}
             >
-              {loading ? `⏳ ${t('common.loading')}` : (mode === 'login' ? `→ ${t('common.login')}` : `→ ${t('common.register')}`)}
+              {loading ? <i className="fa-solid fa-circle-notch fa-spin"></i> : <i className={`fa-solid ${mode === 'login' ? 'fa-right-to-bracket' : 'fa-user-plus'}`}></i>}
+              {mode === 'login' ? t('common.login') : t('common.register')}
             </button>
           </form>
 
