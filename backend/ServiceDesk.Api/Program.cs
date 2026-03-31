@@ -53,12 +53,12 @@ builder.Services.AddControllers()
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAll",
-        policy =>
+    options.AddPolicy("AllowVercel",
+        builder =>
         {
-            policy.AllowAnyOrigin()
-                  .AllowAnyMethod()
-                  .AllowAnyHeader();
+            builder.WithOrigins("https://service-desk-ticket-system.vercel.app") 
+                   .AllowAnyHeader()
+                   .AllowAnyMethod();
         });
 });
 
@@ -106,7 +106,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 var app = builder.Build();
 
-app.UseCors("AllowAll");
+app.UseCors("AllowVercel");
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
