@@ -95,18 +95,18 @@ Logging: Serilog (Middleware ile zenginleştirilmiş loglama)
 
 
 Kurulum
-git clone https://github.com/meteyilmaz01/Service-Desk-Ticket-System.git
-cd ServiceDesk.Api
+` git clone https://github.com/meteyilmaz01/Service-Desk-Ticket-System.git `
+` cd ServiceDesk.Api `
 
 Veritabanı ayarı
 
 appsettings.Development.json dosyasındaki connection string’i kendi ortamına göre düzenle.
 
 Migration
-dotnet ef database update
+` dotnet ef database update `
 
 Uygulamayı çalıştır
-dotnet run
+` dotnet run `
 
 Özellikler
  Rol bazlı yetkilendirme (RBAC)
