@@ -120,13 +120,13 @@
     display: none !important;
   }
 
-  /* Select the NAV element if it's there */
   .admin-sidebar nav {
+    display: flex !important;
+    flex-direction: row !important;
     flex-wrap: nowrap !important;
-    /* Butonların yan yana kalmasını zorunlu kılar */
     overflow-x: auto !important;
-    /* Butonlar sığmazsa kaydırılabilir yapar */
     -webkit-overflow-scrolling: touch !important;
+    flex: 1 !important;
   }
 
   .admin-sidebar nav button {
@@ -158,5 +158,32 @@
   .modal-container {
     width: 95% !important;
     padding: 0 !important;
+  }
+
+  .admin-header-flex {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 12px !important;
+    display: flex !important;
+  }
+
+  .admin-header-flex > div {
+    width: 100% !important;
+    justify-content: space-between !important;
+    display: flex !important;
+  }
+
+  .stats-row-flex {
+    flex-direction: column !important;
+    gap: 8px !important;
+    display: flex !important;
+    width: 100% !important;
+    align-items: stretch !important;
+  }
+
+  .stats-row-flex > div {
+    width: 100% !important;
+    margin: 0 !important;
+    text-align: left !important;
   }
 }

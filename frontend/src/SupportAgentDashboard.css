@@ -1,7 +1,6 @@
-/* SupportAgentDashboard.css */
 .admin-layout {
   display: flex;
-  height: 100vh;
+  height: 100dvh;
   font-family: 'Inter', 'Segoe UI', sans-serif;
   background-color: #f1f5f9;
   position: fixed;
@@ -61,6 +60,7 @@
     flex-direction: column !important;
     position: relative !important;
     height: auto !important;
+    min-height: 100dvh !important;
     overflow-y: auto !important;
   }
 

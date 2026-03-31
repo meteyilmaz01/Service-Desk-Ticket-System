@@ -412,19 +412,15 @@ export default function AdminDashboard() {
       </div>
 
       <div className="admin-main">
-        <div style={{
-          backgroundColor: '#fff', padding: '16px 28px', borderBottom: '1px solid #e2e8f0',
-          display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-          boxShadow: '0 1px 4px rgba(0,0,0,0.06)', flexShrink: 0
-        }}>
-          <h1 style={{ margin: 0, fontSize: '20px', fontWeight: '700', color: '#1e293b' }}>
+        <div className="admin-header-flex" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '28px', padding: '0 4px' }}>
+          <h1 style={{ margin: 0, fontSize: '24px', fontWeight: '800', color: '#1e293b' }}>
             {{
               users: t('admin.headers.userMgmt'),
               departments: t('admin.headers.deptMgmt'),
               tickets: t('admin.headers.ticketMgmt'),
             }[tab]}
           </h1>
-          <div style={{ display: 'flex', gap: '12px', marginRight: '80px' }}>
+          <div className="stats-row-flex" style={{ display: 'flex', gap: '12px' }}>
             {stats.map(s => (
               <div key={s.label} style={{
                 textAlign: 'center', padding: '6px 14px', borderRadius: '8px',
@@ -440,9 +436,9 @@ export default function AdminDashboard() {
         <div key={tab} className="admin-content" style={{ flex: 1, overflowY: 'auto', padding: '24px' }}>
 
           {tab === 'users' && (
-            <div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-                <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+            <div style={{ flex: 1 }}>
+              <div className="admin-header-flex" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+                <div style={{ display: 'flex', gap: '8px', flex: 1, alignItems: 'center' }}>
                   <input value={searchId} onChange={e => setSearchId(e.target.value)}
                     onKeyDown={e => e.key === 'Enter' && searchUser()}
                     placeholder={t('admin.placeholders.searchUser')} style={{ ...S.input(), width: '220px' }} />
@@ -496,7 +492,7 @@ export default function AdminDashboard() {
           {tab === 'departments' && (
             <div style={{ display: 'flex', gap: '24px', alignItems: 'flex-start' }}>
               <div style={{ flex: 1 }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+                <div className="admin-header-flex" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
                   <h2 style={{ margin: 0, fontSize: '16px', fontWeight: '700', color: '#1e293b' }}>{t('admin.placeholders.agentList')}</h2>
                   <button onClick={() => openAgentModal()} style={S.btn('success')}>{t('admin.actions.newAgent')}</button>
                 </div>
@@ -544,8 +540,8 @@ export default function AdminDashboard() {
 
           {tab === 'tickets' && (
             <div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-                <div style={{ display: 'flex', gap: '8px' }}>
+              <div className="admin-header-flex" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+                <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
                   {[
                     { key: 'all', label: `${t('admin.actions.all')} (${tickets.length})` },
                     { key: 'unassigned', label: `${t('admin.actions.unassigned')} (${tickets.filter(t => !(t.assignedToId ?? t.assignedAgentId)).length})` },

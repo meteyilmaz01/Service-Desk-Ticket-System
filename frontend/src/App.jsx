@@ -165,7 +165,7 @@ function LoginScreen() {
         </div>
       </div>
 
-      <div className="login-section" style={{ width: '480px', flexShrink: 0, display: 'flex', alignItems: 'center',
+      <div className="login-section" style={{ flex: '0 0 480px', display: 'flex', alignItems: 'center',
         justifyContent: 'center', position: 'relative', zIndex: 1 }}>
         <div style={{ width: '100%', backgroundColor: 'rgba(255,255,255,0.03)',
           borderRadius: '20px', border: '1px solid rgba(255,255,255,0.08)',

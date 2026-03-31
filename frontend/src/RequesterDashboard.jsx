@@ -229,9 +229,7 @@ export default function RequesterDashboard() {
                 { label: t('requester.home.stats.active'),   value:statsOpen,       icon:'fa-solid fa-clock', color:'#f59e0b', bg:'#fffbeb' },
                 { label: t('requester.home.stats.resolved'), value:statsResolved,   icon:'fa-solid fa-circle-check', color:'#10b981', bg:'#f0fdf4' },
               ].map(s => (
-                <div key={s.label} style={{ backgroundColor:'#fff', borderRadius:'14px', padding:'20px',
-                  border:'1px solid #e2e8f0', boxShadow:'0 1px 6px rgba(0,0,0,0.05)',
-                  display:'flex', alignItems:'center', gap:'16px' }}>
+                <div key={s.label} className="stats-card">
                   <div style={{ width:'48px', height:'48px', borderRadius:'12px', backgroundColor:s.bg,
                     display:'flex', alignItems:'center', justifyContent:'center', fontSize:'20px', flexShrink:0, color:s.color }}>
                     <i className={s.icon}></i>

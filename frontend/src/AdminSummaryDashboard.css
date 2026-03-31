@@ -1,6 +1,6 @@
 .admin-layout {
   display: flex;
-  height: 100vh;
+  height: 100dvh;
   font-family: 'Inter', 'Segoe UI', sans-serif;
   background-color: #f1f5f9;
   position: fixed;
@@ -101,6 +101,7 @@
     flex-direction: column !important;
     position: relative !important;
     height: auto !important;
+    min-height: 100dvh !important;
     overflow-y: auto !important;
   }
 
@@ -141,8 +142,10 @@
   }
 
   .admin-main {
+    flex: 1 !important;
     height: auto !important;
     overflow: visible !important;
+    width: 100% !important;
   }
 
   .admin-content {
@@ -156,7 +159,14 @@
 
   .dashboard-row {
     flex-direction: column !important;
-    gap: 1rem !important;
+    gap: 1.5rem !important;
+    margin-bottom: 2rem !important;
+    display: flex !important;
+  }
+
+  .stat-item {
+    width: 100% !important;
+    flex: none !important;
     margin-bottom: 1rem !important;
   }
 
