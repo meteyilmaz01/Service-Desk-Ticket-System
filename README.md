@@ -1,7 +1,7 @@
 # Service Desk Ticket System
 <p align="center">
-  <img src="https://img.shields.io/badge/.NET-10.0-purple?style=for-the-badge" />
-  <img src="https://img.shields.io/badge/C%-green?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/.NET-purple?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/C%23-green?style=for-the-badge" />
   <img src="https://img.shields.io/badge/SQL%20Server-red?style=for-the-badge" />
   <img src="https://img.shields.io/badge/EF%20Core-purple?style=for-the-badge" />
   <img src="https://img.shields.io/badge/FluentValidation-blue?style=for-the-badge" />
