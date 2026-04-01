@@ -390,7 +390,7 @@ export default function AdminDashboard() {
           <div style={{ fontSize: '10px', color: '#475569', textTransform: 'uppercase', letterSpacing: '1.5px', marginBottom: '6px' }}>{t('admin.sidebar.title')}</div>
           <div style={{ fontSize: '18px', fontWeight: '800', color: '#f8fafc', letterSpacing: '-0.3px' }}>{t('admin.sidebar.panel')}</div>
         </div>
-        <nav style={{ padding: '16px 12px', flex: 1 }}>
+        <nav style={{ padding: '16px 12px', flex: 1, display: 'flex', flexDirection: 'column' }}>
           {[
             { key: 'dashboard', icon: 'fa-solid fa-chart-simple', label: t('admin.sidebar.summary') },
             { key: 'users', icon: 'fa-solid fa-user', label: t('admin.sidebar.users') },
@@ -402,224 +402,244 @@ export default function AdminDashboard() {
               else setTab(item.key);
             }} style={{
               width: '100%', display: 'flex', alignItems: 'center', gap: '10px',
-              padding: '10px 14px', borderRadius: '8px', border: 'none', cursor: 'pointer',
+              padding: '12px 14px', borderRadius: '8px', border: 'none', cursor: 'pointer',
               marginBottom: '4px', textAlign: 'left', fontSize: '13px', fontWeight: '600',
               backgroundColor: tab === item.key ? '#3b82f6' : 'transparent',
               color: tab === item.key ? '#fff' : '#94a3b8',
               transition: 'all 0.15s ease',
             }}>
-              <i className={item.icon}></i>
-              {item.label}
+              <i className={item.icon} style={{ width: '18px', textAlign: 'center' }}></i>
+              <span>{item.label}</span>
             </button>
           ))}
         </nav>
-        <div style={{ padding: '16px 12px', borderTop: '1px solid #1e293b' }}>
+        <div className="logout-btn-wrap" style={{ padding: '16px 12px', borderTop: '1px solid #1e293b' }}>
           <button onClick={handleLogout} style={{
             width: '100%', padding: '10px', borderRadius: '8px', border: 'none',
             backgroundColor: '#dc2626', color: '#fff', fontWeight: '700', fontSize: '13px', cursor: 'pointer',
             display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px'
           }}>
             <i className="fa-solid fa-right-from-bracket"></i>
-            {t('admin.sidebar.logout')}
+            <span className="logout-text">{t('admin.sidebar.logout')}</span>
           </button>
         </div>
       </div>
 
       <div className="admin-main">
-        <div className="admin-header-flex" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '28px', padding: '0 4px' }}>
-          <h1 style={{ margin: 0, fontSize: '24px', fontWeight: '800', color: '#1e293b' }}>
-            {{
-              users: t('admin.headers.userMgmt'),
-              departments: t('admin.headers.deptMgmt'),
-              tickets: t('admin.headers.ticketMgmt'),
-            }[tab]}
-          </h1>
-          <div className="stats-row-flex" style={{ display: 'flex', gap: '12px' }}>
-            {stats.map(s => (
-              <div key={s.label} style={{
-                textAlign: 'center', padding: '6px 14px', borderRadius: '8px',
-                backgroundColor: '#f8fafc', border: '1px solid #e2e8f0'
-              }}>
-                <div style={{ fontSize: '16px', fontWeight: '800', color: s.color }}>{s.value}</div>
-                <div style={{ fontSize: '10px', color: '#94a3b8', fontWeight: '600' }}>{s.label}</div>
-              </div>
-            ))}
+        <div className="admin-content">
+          <div className="admin-view-header">
+            <h1 style={{ margin: 0, fontSize: '24px', fontWeight: '800', color: '#1e293b' }}>
+              {{
+                users: t('admin.headers.userMgmt'),
+                departments: t('admin.headers.deptMgmt'),
+                tickets: t('admin.headers.ticketMgmt'),
+              }[tab]}
+            </h1>
+            <div className="stats-row-flex" style={{ display: 'flex', gap: '12px' }}>
+              {stats.map(s => (
+                <div key={s.label} style={{
+                  textAlign: 'center', padding: '8px 16px', borderRadius: '10px',
+                  backgroundColor: '#fff', border: '1px solid #e2e8f0', boxShadow: '0 1px 2px rgba(0,0,0,0.03)'
+                }}>
+                  <div style={{ fontSize: '18px', fontWeight: '800', color: s.color }}>{s.value}</div>
+                  <div style={{ fontSize: '10px', color: '#64748b', fontWeight: '700', textTransform: 'uppercase' }}>{s.label}</div>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
-
-        <div key={tab} className="admin-content" style={{ flex: 1, overflowY: 'auto', padding: '24px' }}>
 
           {/* USERS TAB */}
           {tab === 'users' && (
-            <div style={{ flex: 1 }}>
-              <div className="admin-header-flex" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-                <div style={{ display: 'flex', gap: '8px', flex: 1, alignItems: 'center' }}>
+            <div className="admin-tab-content">
+              <div className="admin-view-header">
+                <div className="admin-search-wrapper">
                   <input value={searchId} onChange={e => setSearchId(e.target.value)}
                     onKeyDown={e => e.key === 'Enter' && searchUser()}
-                    placeholder={t('admin.placeholders.searchUser')} style={{ ...S.input(), width: '220px' }} />
+                    placeholder={t('admin.placeholders.searchUser')} style={S.input()} />
                   <button onClick={searchUser} style={S.btn('primary', true)}>{t('admin.actions.search')}</button>
                   {isSearching && <button onClick={() => { setSearchId(''); setIsSearching(false); fetchAll(); }} style={S.btn('ghost', true)}>{t('admin.actions.clear')}</button>}
                 </div>
                 <button onClick={() => openUserModal()} style={S.btn('success')}>{t('admin.actions.newUser')}</button>
               </div>
-              <div className="table-container" style={{ backgroundColor: '#fff', borderRadius: '12px', border: '1px solid #e2e8f0', overflow: 'hidden', boxShadow: '0 1px 6px rgba(0,0,0,0.05)' }}>
-                <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-                  <thead>
-                    <tr>{[t('common.id'), t('common.nameSurname'), t('common.email'), t('common.role'), t('common.status'), t('common.actions')].map(h => <th key={h} style={S.th}>{h}</th>)}</tr>
-                  </thead>
-                  <tbody>
-                    {users.map(u => (
-                      <tr key={u.id}
-                        onMouseEnter={e => e.currentTarget.style.backgroundColor = '#fafafa'}
-                        onMouseLeave={e => e.currentTarget.style.backgroundColor = 'transparent'}>
-                        <td style={S.td}><span style={{ fontWeight: '700', color: '#94a3b8' }}>#{u.id}</span></td>
-                        <td style={S.td}><span style={{ fontWeight: '600', color: '#1e293b' }}>{u.name} {u.surname}</span></td>
-                        <td style={S.td}><span style={{ color: '#64748b' }}>{u.email}</span></td>
-                        <td style={S.td}>
-                          <span style={S.badge(
-                            u.role == 1 || u.role === 'Admin' ? { bg: '#fee2e2', color: '#991b1b', border: '#fca5a5' } :
-                              u.role == 2 || u.role === 'SupportAgent' ? { bg: '#ede9fe', color: '#5b21b6', border: '#c4b5fd' } :
-                                { bg: '#dcfce7', color: '#166534', border: '#86efac' })}>
-                            {u.role == 1 || u.role === 'Admin' ? 'Admin' : u.role == 2 || u.role === 'SupportAgent' ? 'Support Agent' : 'Requester'}
-                          </span>
-                        </td>
-                        <td style={S.td}>
-                          <span style={S.badge(u.isActive ? { bg: '#dcfce7', color: '#166534', border: '#86efac' } : { bg: '#fee2e2', color: '#991b1b', border: '#fca5a5' })}>
-                            {u.isActive ? t('common.status_active') : t('common.status_passive')}
-                          </span>
-                        </td>
-                        <td style={S.td}>
-                          <div style={{ display: 'flex', gap: '6px' }}>
-                            <button onClick={() => toggleUser(u.id)} style={S.btn('ghost', true)}>{t('admin.actions.status')}</button>
-                            <button onClick={() => openUserModal(u)} style={S.btn('primary', true)}>{t('admin.actions.edit')}</button>
-                            <button onClick={() => deleteUser(u.id)} style={S.btn('danger', true)}>{t('admin.actions.delete')}</button>
-                          </div>
-                        </td>
-                      </tr>
-                    ))}
-                    {users.length === 0 && <tr><td colSpan="6" style={{ textAlign: 'center', padding: '40px', color: '#94a3b8' }}>{t('admin.placeholders.noUsers')}</td></tr>}
-                  </tbody>
-                </table>
+              <div className="admin-card-container">
+                <div className="table-container">
+                  <table className="admin-table">
+                    <thead>
+                      <tr>{[t('common.id'), t('common.nameSurname'), t('common.email'), t('common.role'), t('common.status'), t('common.actions')].map(h => <th key={h} style={S.th}>{h}</th>)}</tr>
+                    </thead>
+                    <tbody>
+                      {users.map(u => (
+                        <tr key={u.id}
+                          onMouseEnter={e => e.currentTarget.style.backgroundColor = '#f8fafc'}
+                          onMouseLeave={e => e.currentTarget.style.backgroundColor = 'transparent'}>
+                          <td style={S.td}><span style={{ fontWeight: '700', color: '#94a3b8' }}>#{u.id}</span></td>
+                          <td style={S.td}><span style={{ fontWeight: '600', color: '#1e293b' }}>{u.name} {u.surname}</span></td>
+                          <td style={S.td}><span style={{ color: '#64748b' }}>{u.email}</span></td>
+                          <td style={S.td}>
+                            <span style={S.badge(
+                              u.role == 1 || u.role === 'Admin' ? { bg: '#fee2e2', color: '#991b1b', border: '#fca5a5' } :
+                                u.role == 2 || u.role === 'SupportAgent' ? { bg: '#ede9fe', color: '#5b21b6', border: '#c4b5fd' } :
+                                  { bg: '#dcfce7', color: '#166534', border: '#86efac' })}>
+                              {u.role == 1 || u.role === 'Admin' ? 'Admin' : u.role == 2 || u.role === 'SupportAgent' ? 'Support Agent' : 'Requester'}
+                            </span>
+                          </td>
+                          <td style={S.td}>
+                            <span style={S.badge(u.isActive ? { bg: '#dcfce7', color: '#166534', border: '#86efac' } : { bg: '#fee2e2', color: '#991b1b', border: '#fca5a5' })}>
+                              {u.isActive ? t('common.status_active') : t('common.status_passive')}
+                            </span>
+                          </td>
+                          <td style={S.td}>
+                            <div style={{ display: 'flex', gap: '6px' }}>
+                              <button onClick={() => toggleUser(u.id)} style={S.btn('ghost', true)}>{t('admin.actions.status')}</button>
+                              <button onClick={() => openUserModal(u)} style={S.btn('primary', true)}>{t('admin.actions.edit')}</button>
+                              <button onClick={() => deleteUser(u.id)} style={S.btn('danger', true)}>{t('admin.actions.delete')}</button>
+                            </div>
+                          </td>
+                        </tr>
+                      ))}
+                      {users.length === 0 && <tr><td colSpan="6" style={{ textAlign: 'center', padding: '40px', color: '#94a3b8' }}>{t('admin.placeholders.noUsers')}</td></tr>}
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
           )}
 
           {/* DEPARTMENTS TAB */}
           {tab === 'departments' && (
-            <div style={{ display: 'flex', gap: '24px', alignItems: 'flex-start' }}>
-              <div style={{ flex: 1 }}>
-                <div className="admin-header-flex" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-                  <h2 style={{ margin: 0, fontSize: '16px', fontWeight: '700', color: '#1e293b' }}>{t('admin.placeholders.agentList')}</h2>
-                  <button onClick={() => openAgentModal()} style={S.btn('success')}>{t('admin.actions.newAgent')}</button>
+            <div className="dept-view-split">
+              <div className="dept-main-content">
+                <div className="admin-view-header">
+                  <h2 style={{ margin: 0, fontSize: '18px', fontWeight: '700', color: '#1e293b' }}>{t('admin.placeholders.agentList')}</h2>
+                  <div className="admin-header-actions">
+                    <button onClick={() => setDeptMgmt(true)} style={S.btn('ghost', true)}>
+                      <i className="fa-solid fa-layer-group" style={{ marginRight: '6px' }}></i>
+                      {t('admin.placeholders.manageDept')}
+                    </button>
+                    <button onClick={() => openAgentModal()} style={S.btn('success', true)}>
+                      <i className="fa-solid fa-user-plus" style={{ marginRight: '6px' }}></i>
+                      {t('admin.actions.newAgent')}
+                    </button>
+                  </div>
                 </div>
-                <div className="table-container" style={{ backgroundColor: '#fff', borderRadius: '12px', border: '1px solid #e2e8f0', overflow: 'hidden', boxShadow: '0 1px 6px rgba(0,0,0,0.05)' }}>
-                  <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-                    <thead>
-                      <tr>{[t('common.id'), t('common.nameSurname'), t('common.email'), t('admin.placeholders.deptList'), t('common.actions')].map(h => <th key={h} style={S.th}>{h}</th>)}</tr>
-                    </thead>
-                    <tbody>
-                      {agents.map(a => (
-                        <tr key={a.id}
-                          onMouseEnter={e => e.currentTarget.style.backgroundColor = '#fafafa'}
-                          onMouseLeave={e => e.currentTarget.style.backgroundColor = 'transparent'}>
-                          <td style={S.td}><span style={{ fontWeight: '700', color: '#94a3b8' }}>#{a.id}</span></td>
-                          <td style={{ ...S.td, fontWeight: '600', color: '#1e293b' }}>{a.name} {a.surname}</td>
-                          <td style={{ ...S.td, color: '#64748b' }}>{a.email}</td>
-                          <td style={S.td}><span style={S.badge({ bg: '#ede9fe', color: '#5b21b6', border: '#c4b5fd' })}>{a.departmentName || `Dept #${a.departmentId}`}</span></td>
-                          <td style={S.td}>
-                            <div style={{ display: 'flex', gap: '6px' }}>
-                              <button onClick={() => openAgentModal(a)} style={S.btn('primary', true)}>{t('admin.actions.edit')}</button>
-                              <button onClick={() => deleteAgent(a.id)} style={S.btn('danger', true)}>{t('admin.actions.delete')}</button>
-                            </div>
-                          </td>
-                        </tr>
-                      ))}
-                      {agents.length === 0 && <tr><td colSpan="5" style={{ textAlign: 'center', padding: '40px', color: '#94a3b8' }}>{t('admin.placeholders.noAgents')}</td></tr>}
-                    </tbody>
-                  </table>
+                <div className="admin-card-container">
+                  <div className="table-container">
+                    <table className="admin-table">
+                      <thead>
+                        <tr>{[t('common.id'), t('common.nameSurname'), t('common.email'), t('admin.placeholders.deptList'), t('common.actions')].map(h => <th key={h} style={S.th}>{h}</th>)}</tr>
+                      </thead>
+                      <tbody>
+                        {agents.map(a => (
+                          <tr key={a.id}
+                            onMouseEnter={e => e.currentTarget.style.backgroundColor = '#f8fafc'}
+                            onMouseLeave={e => e.currentTarget.style.backgroundColor = 'transparent'}>
+                            <td style={S.td}><span style={{ fontWeight: '700', color: '#94a3b8' }}>#{a.id}</span></td>
+                            <td style={{ ...S.td, fontWeight: '600', color: '#1e293b' }}>{a.name} {a.surname}</td>
+                            <td style={{ ...S.td, color: '#64748b' }}>{a.email}</td>
+                            <td style={S.td}><span style={S.badge({ bg: '#ede9fe', color: '#5b21b6', border: '#c4b5fd' })}>{a.departmentName || `Dept #${a.departmentId}`}</span></td>
+                            <td style={S.td}>
+                              <div style={{ display: 'flex', gap: '6px' }}>
+                                <button onClick={() => openAgentModal(a)} style={S.btn('primary', true)}>{t('admin.actions.edit')}</button>
+                                <button onClick={() => deleteAgent(a.id)} style={S.btn('danger', true)}>{t('admin.actions.delete')}</button>
+                              </div>
+                            </td>
+                          </tr>
+                        ))}
+                        {agents.length === 0 && <tr><td colSpan="5" style={{ textAlign: 'center', padding: '40px', color: '#94a3b8' }}>{t('admin.placeholders.noAgents')}</td></tr>}
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
-              <div style={{ width: '190px', flexShrink: 0 }}>
-                <div style={{ fontSize: '12px', fontWeight: '700', color: '#64748b', marginBottom: '10px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>{t('admin.placeholders.deptList')}</div>
-                <button onClick={() => setDeptMgmt(true)} style={{
-                  width: '100%', padding: '20px 16px', borderRadius: '12px', border: '2px dashed #e2e8f0',
-                  backgroundColor: '#fff', cursor: 'pointer', textAlign: 'center', transition: 'all 0.15s ease'
-                }}
-                  onMouseEnter={e => { e.currentTarget.style.borderColor = '#3b82f6'; e.currentTarget.style.backgroundColor = '#eff6ff'; }}
-                  onMouseLeave={e => { e.currentTarget.style.borderColor = '#e2e8f0'; e.currentTarget.style.backgroundColor = '#fff'; }}>
-                  <div style={{ fontWeight: '700', color: '#1e293b', fontSize: '13px', marginBottom: '4px' }}>{departments.length} {t('admin.placeholders.deptList')}</div>
-                  <div style={{ fontSize: '11px', color: '#94a3b8' }}>{t('admin.placeholders.manageDept')}</div>
-                </button>
+              
+              <div className="dept-side-panel">
+                <div style={{ fontSize: '12px', fontWeight: '700', color: '#64748b', marginBottom: '12px', textTransform: 'uppercase', letterSpacing: '0.8px' }}>{t('admin.placeholders.deptList')} Quick Stats</div>
+                <div style={{
+                  padding: '20px', borderRadius: '16px', backgroundColor: '#fff', border: '1px solid #e2e8f0',
+                  boxShadow: '0 1px 2px rgba(0,0,0,0.03)'
+                }}>
+                  <div style={{ textAlign: 'center' }}>
+                    <div style={{ fontSize: '32px', fontWeight: '800', color: '#3b82f6', marginBottom: '4px' }}>{departments.length}</div>
+                    <div style={{ fontSize: '13px', fontWeight: '600', color: '#475569', marginBottom: '16px' }}>{t('admin.placeholders.deptList')}</div>
+                    <button onClick={() => openDeptModal()} style={{ ...S.btn('primary', true), width: '100%' }}>
+                      <i className="fa-solid fa-plus" style={{ marginRight: '6px' }}></i>
+                      {t('admin.actions.newDept')}
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
           )}
 
           {/* TICKETS TAB */}
           {tab === 'tickets' && (
-            <div>
-              <div className="admin-header-flex" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-                <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+            <div className="admin-tab-content">
+              <div className="admin-view-header">
+                <div className="ticket-filters-row">
                   {[
                     { key: 'all', label: `${t('admin.actions.all')} (${tickets.length})` },
                     { key: 'unassigned', label: `${t('admin.actions.unassigned')} (${tickets.filter(t => !(t.assignedToId ?? t.assignedAgentId)).length})` },
                     { key: 'assigned', label: `${t('admin.actions.assigned')} (${tickets.filter(t => !!(t.assignedToId ?? t.assignedAgentId)).length})` },
                   ].map(f => (
                     <button key={f.key} onClick={() => setTF(f.key)} style={{
-                      padding: '7px 16px', borderRadius: '8px', border: '1px solid',
+                      padding: '8px 16px', borderRadius: '10px', border: '1px solid',
                       borderColor: ticketFilter === f.key ? '#3b82f6' : '#e2e8f0',
                       backgroundColor: ticketFilter === f.key ? '#3b82f6' : '#fff',
                       color: ticketFilter === f.key ? '#fff' : '#64748b',
-                      fontWeight: '600', fontSize: '13px', cursor: 'pointer', transition: 'all 0.15s ease',
+                      fontWeight: '600', fontSize: '13px', cursor: 'pointer', transition: 'all 0.2s ease',
+                      boxShadow: ticketFilter === f.key ? '0 2px 4px rgba(59, 130, 246, 0.2)' : 'none'
                     }}>{f.label}</button>
                   ))}
                 </div>
                 <button onClick={fetchTickets} style={S.btn('ghost')}>{t('admin.actions.refresh')}</button>
               </div>
-              <div className="table-container" style={{ backgroundColor: '#fff', borderRadius: '12px', border: '1px solid #e2e8f0', overflow: 'hidden', boxShadow: '0 1px 6px rgba(0,0,0,0.05)' }}>
-                <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-                  <thead>
-                    <tr>{[t('common.id'), t('admin.placeholders.title'), t('admin.placeholders.priority'), t('admin.placeholders.status'), t('admin.placeholders.msgStatus'), t('admin.placeholders.deptList'), t('admin.placeholders.assignedAgent'), t('common.actions')].map(h => <th key={h} style={S.th}>{h}</th>)}</tr>
-                  </thead>
-                  <tbody>
-                    {filtered.length === 0 && <tr><td colSpan="8" style={{ textAlign: 'center', padding: '40px', color: '#94a3b8' }}>{t('admin.placeholders.noTickets')}</td></tr>}
-                    {filtered.map(ticket => {
-                      const sl = STATUS_MAP[ticket.status] || String(ticket.status);
-                      const pl = PRIORITY_MAP[ticket.priority] || String(ticket.priority);
-                      const ss = statusStyle(sl); const ps = priorityStyle(pl);
-                      const deptId = ticket.departmentID ?? ticket.departmentId;
-                      const dept = departments.find(d => String(d.id) === String(deptId));
-                      const assignedId = ticket.assignedToId ?? ticket.assignedAgentId;
-                      const agent = agents.find(a => String(a.id) === String(assignedId));
-                      return (
-                        <tr key={ticket.id} onClick={() => openDetail(ticket.id)}
-                          style={{ cursor: 'pointer', transition: 'background 0.1s' }}
-                          onMouseEnter={e => e.currentTarget.style.backgroundColor = '#f8fafc'}
-                          onMouseLeave={e => e.currentTarget.style.backgroundColor = 'transparent'}>
-                          <td style={S.td}><span style={{ fontWeight: '700', color: '#94a3b8' }}>#{ticket.id}</span></td>
-                          <td style={{ ...S.td, maxWidth: '200px' }}>
-                            <div style={{ fontWeight: '600', color: '#1e293b', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{ticket.title}</div>
-                            {ticket.description && <div style={{ fontSize: '11px', color: '#94a3b8', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{ticket.description}</div>}
-                          </td>
-                          <td style={S.td}><span style={S.badge(ps)}>{t(`priority.${pl}`)}</span></td>
-                          <td style={S.td}><span style={S.badge(ss)}>{t(`status.${sl}`)}</span></td>
-                          <td style={S.td}><span style={S.badge(conversationStatusStyle(ticket.conversationStatus))}>{t(`convStatus.${CONVERSATION_STATUS_MAP[ticket.conversationStatus] || 'noMessages'}`)}</span></td>
-                          <td style={S.td}>{deptId ? <span style={S.badge({ bg: '#ede9fe', color: '#5b21b6', border: '#c4b5fd' })}>{dept?.name || `#${deptId}`}</span> : <span style={{ color: '#cbd5e1' }}>-</span>}</td>
-                          <td style={S.td}>
-                            {assignedId
-                              ? <span style={{ fontWeight: '600', color: '#166534', fontSize: '13px' }}>{agent ? `${agent.name} ${agent.surname}` : `#${assignedId}`}</span>
-                              : <span style={S.badge({ bg: '#fee2e2', color: '#991b1b', border: '#fca5a5' })}>{t('admin.actions.unassigned')}</span>}
-                          </td>
-                          <td style={S.td}>
-                            <button onClick={e => { e.stopPropagation(); openAssign(ticket); }}
-                              style={S.btn(assignedId ? 'ghost' : 'warning', true)}>
-                              {assignedId ? t('admin.actions.reassign') : t('admin.actions.assign')}
-                            </button>
-                          </td>
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                </table>
+              <div className="admin-card-container">
+                <div className="table-container">
+                  <table className="admin-table">
+                    <thead>
+                      <tr>{[t('common.id'), t('admin.placeholders.title'), t('admin.placeholders.priority'), t('admin.placeholders.status'), t('admin.placeholders.msgStatus'), t('admin.placeholders.deptList'), t('admin.placeholders.assignedAgent'), t('common.actions')].map(h => <th key={h} style={S.th}>{h}</th>)}</tr>
+                    </thead>
+                    <tbody>
+                      {filtered.length === 0 && <tr><td colSpan="8" style={{ textAlign: 'center', padding: '40px', color: '#94a3b8' }}>{t('admin.placeholders.noTickets')}</td></tr>}
+                      {filtered.map(ticket => {
+                        const sl = STATUS_MAP[ticket.status] || String(ticket.status);
+                        const pl = PRIORITY_MAP[ticket.priority] || String(ticket.priority);
+                        const ss = statusStyle(sl); const ps = priorityStyle(pl);
+                        const deptId = ticket.departmentID ?? ticket.departmentId;
+                        const dept = departments.find(d => String(d.id) === String(deptId));
+                        const assignedId = ticket.assignedToId ?? ticket.assignedAgentId;
+                        const agent = agents.find(a => String(a.id) === String(assignedId));
+                        return (
+                          <tr key={ticket.id} onClick={() => openDetail(ticket.id)}
+                            style={{ cursor: 'pointer', transition: 'background 0.1s' }}
+                            onMouseEnter={e => e.currentTarget.style.backgroundColor = '#f8fafc'}
+                            onMouseLeave={e => e.currentTarget.style.backgroundColor = 'transparent'}>
+                            <td style={S.td}><span style={{ fontWeight: '700', color: '#94a3b8' }}>#{ticket.id}</span></td>
+                            <td style={{ ...S.td, maxWidth: '200px' }}>
+                              <div style={{ fontWeight: '600', color: '#1e293b', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{ticket.title}</div>
+                              {ticket.description && <div style={{ fontSize: '11px', color: '#94a3b8', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{ticket.description}</div>}
+                            </td>
+                            <td style={S.td}><span style={S.badge(ps)}>{t(`priority.${pl}`)}</span></td>
+                            <td style={S.td}><span style={S.badge(ss)}>{t(`status.${sl}`)}</span></td>
+                            <td style={S.td}><span style={S.badge(conversationStatusStyle(ticket.conversationStatus))}>{t(`convStatus.${CONVERSATION_STATUS_MAP[ticket.conversationStatus] || 'noMessages'}`)}</span></td>
+                            <td style={S.td}>{deptId ? <span style={S.badge({ bg: '#ede9fe', color: '#5b21b6', border: '#c4b5fd' })}>{dept?.name || `#${deptId}`}</span> : <span style={{ color: '#cbd5e1' }}>-</span>}</td>
+                            <td style={S.td}>
+                              {assignedId
+                                ? <span style={{ fontWeight: '600', color: '#166534', fontSize: '13px' }}>{agent ? `${agent.name} ${agent.surname}` : `#${assignedId}`}</span>
+                                : <span style={S.badge({ bg: '#fee2e2', color: '#991b1b', border: '#fca5a5' })}>{t('admin.actions.unassigned')}</span>}
+                            </td>
+                            <td style={S.td}>
+                              <button onClick={e => { e.stopPropagation(); openAssign(ticket); }}
+                                style={S.btn(assignedId ? 'ghost' : 'warning', true)}>
+                                {assignedId ? t('admin.actions.reassign') : t('admin.actions.assign')}
+                              </button>
+                            </td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
           )}
@@ -802,42 +822,46 @@ export default function AdminDashboard() {
               </select>
               <FieldError errors={agentErrors} field="DepartmentId" />
             </FormGroup>
-            <button onClick={handleAgentSubmit} style={{ ...S.btn('success'), width: '100%', marginTop: '24px' }}>{t('admin.actions.save')}</button>
+            <div style={{ height: '32px' }} />
+            <button onClick={handleAgentSubmit} style={{ ...S.btn('success'), width: '100%' }}>{t('admin.actions.save')}</button>
           </div>
         </RightDrawer>
       )}
 
-      {/* ASSIGN MODAL - RIGHT DRAWER */}
+      {/* ASSIGN DRAWER */}
       {assignModal && selTicket && (
         <RightDrawer title={`${t('admin.actions.assign')} - #${selTicket.id}`}
           onClose={() => { setAssignModal(false); setSelTicket(null); }} open={assignModal}>
-          <div style={{ backgroundColor: '#f8fafc', borderRadius: '8px', padding: '12px', marginBottom: '16px', border: '1px solid #e2e8f0' }}>
-            <div style={{ fontWeight: '700', color: '#1e293b', marginBottom: '4px' }}>{selTicket.title}</div>
-            {selTicket.description && <div style={{ fontSize: '12px', color: '#64748b' }}>{selTicket.description}</div>}
+          <div>
+            <div style={{ backgroundColor: '#f8fafc', borderRadius: '12px', padding: '16px', marginBottom: '20px', border: '1px solid #e2e8f0' }}>
+              <div style={{ fontWeight: '700', color: '#1e293b', marginBottom: '4px', fontSize: '14px' }}>{selTicket.title}</div>
+              {selTicket.description && <div style={{ fontSize: '12px', color: '#64748b', lineHeight: '1.4' }}>{selTicket.description}</div>}
+            </div>
+            <FormGroup label={t('admin.placeholders.assignedAgent')}>
+              <select style={S.input()} value={assignId} onChange={e => setAssignId(e.target.value)}>
+                <option value="" disabled>{t('admin.placeholders.select_agent')}</option>
+                {(() => {
+                  const deptId = selTicket.departmentID ?? selTicket.departmentId;
+                  const same = agents.filter(a => String(a.departmentId) === String(deptId));
+                  const other = agents.filter(a => String(a.departmentId) !== String(deptId));
+                  return (
+                    <>
+                      {same.length > 0 && <optgroup label={t('admin.placeholders.same_dept')}>
+                        {same.map(a => <option key={a.id} value={a.id}>{a.name} {a.surname} - {a.email}</option>)}
+                      </optgroup>}
+                      {other.length > 0 && <optgroup label={t('admin.placeholders.other_agents')}>
+                        {other.map(a => <option key={a.id} value={a.id}>{a.name} {a.surname} - {departments.find(d => d.id === a.departmentId)?.name || `Dept #${a.departmentId}`}</option>)}
+                      </optgroup>}
+                    </>
+                  );
+                })()}
+              </select>
+            </FormGroup>
+            <div style={{ height: '32px' }} />
+            <button onClick={handleAssign} disabled={isAssigning} style={{ ...S.btn('success'), width: '100%', opacity: isAssigning ? 0.7 : 1 }}>
+              {isAssigning ? t('common.loading') : t('admin.actions.assign')}
+            </button>
           </div>
-          <FormGroup label={t('admin.placeholders.assignedAgent')}>
-            <select style={S.input()} value={assignId} onChange={e => setAssignId(e.target.value)}>
-              <option value="" disabled>{t('admin.placeholders.select_agent')}</option>
-              {(() => {
-                const deptId = selTicket.departmentID ?? selTicket.departmentId;
-                const same = agents.filter(a => String(a.departmentId) === String(deptId));
-                const other = agents.filter(a => String(a.departmentId) !== String(deptId));
-                return (
-                  <>
-                    {same.length > 0 && <optgroup label={t('admin.placeholders.same_dept')}>
-                      {same.map(a => <option key={a.id} value={a.id}>{a.name} {a.surname} - {a.email}</option>)}
-                    </optgroup>}
-                    {other.length > 0 && <optgroup label={t('admin.placeholders.other_agents')}>
-                      {other.map(a => <option key={a.id} value={a.id}>{a.name} {a.surname} - {departments.find(d => d.id === a.departmentId)?.name || `Dept #${a.departmentId}`}</option>)}
-                    </optgroup>}
-                  </>
-                );
-              })()}
-            </select>
-          </FormGroup>
-          <button onClick={handleAssign} disabled={isAssigning} style={{ ...S.btn('success'), width: '100%', marginTop: '24px', opacity: isAssigning ? 0.7 : 1 }}>
-            {isAssigning ? t('common.loading') : t('admin.actions.assign')}
-          </button>
         </RightDrawer>
       )}
     </div>
