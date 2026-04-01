@@ -229,22 +229,20 @@ export default function RequesterDashboard() {
               <p style={{ margin: 0, color: '#64748b', fontSize: '14px' }}>{t('requester.home.sub')}</p>
             </div>
 
-            <div className="stats-grid">
+            {/* Stats Grid - Düzeltilmiş hali */}
+            <div className="stats-grid grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
               {[
                 { label: t('requester.home.stats.total'), value: tickets.length, icon: 'fa-solid fa-clipboard-list', color: '#3b82f6', bg: '#eff6ff' },
                 { label: t('requester.home.stats.active'), value: statsOpen, icon: 'fa-solid fa-clock', color: '#f59e0b', bg: '#fffbeb' },
                 { label: t('requester.home.stats.resolved'), value: statsResolved, icon: 'fa-solid fa-circle-check', color: '#10b981', bg: '#f0fdf4' },
-              ].map(s => (
-                <div key={s.label} className="stats-card">
-                  <div style={{
-                    width: '48px', height: '48px', borderRadius: '12px', backgroundColor: s.bg,
-                    display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '20px', flexShrink: 0, color: s.color
-                  }}>
+              ].map((s, i) => (
+                <div key={i} className="stats-card bg-white rounded-3xl p-6 shadow-sm flex items-center gap-5 hover:shadow-md transition-shadow">
+                  <div style={{ width: '52px', height: '52px', borderRadius: '14px', backgroundColor: s.bg, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '26px', color: s.color }}>
                     <i className={s.icon}></i>
                   </div>
                   <div>
-                    <div style={{ fontSize: '24px', fontWeight: '800', color: s.color }}>{s.value}</div>
-                    <div style={{ fontSize: '12px', color: '#94a3b8', fontWeight: '600' }}>{s.label}</div>
+                    <div className="text-4xl font-semibold text-slate-900">{s.value}</div>
+                    <div className="text-sm text-slate-500 font-medium">{s.label}</div>
                   </div>
                 </div>
               ))}
