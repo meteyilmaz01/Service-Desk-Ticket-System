@@ -140,7 +140,7 @@ function LoginScreen() {
         </div>
       </div>
 
-      {/* FORM BÖLÜMÜ - Mobile'da tam ortada ve temiz */}
+      {/* FORM BÖLÜMÜ */}
       <div className="lg:w-[480px] bg-white/10 backdrop-blur-2xl border border-white/10 rounded-3xl m-4 lg:m-8 p-8 lg:p-10 flex items-center relative z-10">
         <div className="w-full">
           <div className="flex bg-white/10 rounded-2xl p-1 mb-8">
@@ -164,7 +164,6 @@ function LoginScreen() {
           </p>
 
           <form onSubmit={mode === 'login' ? handleLogin : handleRegister}>
-            {/* Register alanları, inputlar, mesaj ve buton tamamen aynı */}
             {mode === 'register' && (
               <div className="grid grid-cols-2 gap-4 mb-6">
                 <div>
@@ -213,6 +212,33 @@ function LoginScreen() {
         </div>
       </div>
     </div>
+  );
+}
+
+function AnimatedRoutes() {
+  const location = useLocation();
+  return (
+    <div key={location.pathname} className="page-transition" style={{ width: '100%', height: '100%' }}>
+      <Routes location={location}>
+        <Route path="/" element={<PublicDashboard />} />
+        <Route path="/login" element={<LoginScreen />} />
+        <Route path="/admin" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
+        <Route path="/admin-dashboard" element={<ProtectedRoute><AdminSummaryDashboard /></ProtectedRoute>} />
+        <Route path="/requester" element={<RequesterRoute><RequesterDashboard /></RequesterRoute>} />
+        <Route path="/agent" element={<SupportAgentRoute><SupportAgentDashboard /></SupportAgentRoute>} />
+      </Routes>
+    </div>
+  );
+}
+
+function App() {
+  return (
+    <LanguageProvider>
+      <Router>
+        <LanguageSwitcher />
+        <AnimatedRoutes />
+      </Router>
+    </LanguageProvider>
   );
 }
 
