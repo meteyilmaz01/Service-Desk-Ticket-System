@@ -111,7 +111,7 @@ function LoginScreen() {
         <div className="absolute -bottom-1/4 -right-1/4 w-[700px] h-[700px] rounded-full bg-emerald-500/10 blur-[80px]" />
       </div>
 
-      {/* HERO - Desktop'ta daha kompakt */}
+      {/* HERO */}
       <div className="flex-1 flex items-center justify-center lg:justify-start px-8 py-8 lg:py-0 lg:px-16 relative z-10">
         <div className="max-w-md w-full">
           <div className="flex items-center gap-3 mb-8">
@@ -129,7 +129,6 @@ function LoginScreen() {
             {t('login.hero_description')}
           </p>
 
-          {/* Özellikler - Daha sıkı */}
           <div className="space-y-5">
             {t('login.features').map(f => (
               <div key={f.text} className="flex items-center gap-4">
@@ -143,7 +142,7 @@ function LoginScreen() {
         </div>
       </div>
 
-      {/* FORM - Desktop'ta daha dar ve kompakt */}
+      {/* FORM - Kompakt */}
       <div className="lg:w-[400px] bg-white/10 backdrop-blur-2xl border border-white/10 rounded-3xl m-4 lg:m-8 p-6 lg:p-8 flex items-center relative z-10">
         <div className="w-full">
           <div className="flex bg-white/10 rounded-2xl p-1 mb-8">
@@ -214,6 +213,22 @@ function LoginScreen() {
           </form>
         </div>
       </div>
+    </div>
+  );
+}
+
+function AnimatedRoutes() {
+  const location = useLocation();
+  return (
+    <div key={location.pathname} className="page-transition" style={{ width: '100%', height: '100%' }}>
+      <Routes location={location}>
+        <Route path="/" element={<PublicDashboard />} />
+        <Route path="/login" element={<LoginScreen />} />
+        <Route path="/admin" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
+        <Route path="/admin-dashboard" element={<ProtectedRoute><AdminSummaryDashboard /></ProtectedRoute>} />
+        <Route path="/requester" element={<RequesterRoute><RequesterDashboard /></RequesterRoute>} />
+        <Route path="/agent" element={<SupportAgentRoute><SupportAgentDashboard /></SupportAgentRoute>} />
+      </Routes>
     </div>
   );
 }
