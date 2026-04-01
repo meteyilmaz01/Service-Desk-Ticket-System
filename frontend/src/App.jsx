@@ -104,32 +104,32 @@ function LoginScreen() {
   const [focused, setFocused] = useState('');
 
   return (
-    <div className="h-screen bg-[#0f172a] flex flex-col lg:flex-row relative overflow-hidden">
+    <div className="min-h-screen bg-[#0f172a] flex flex-col lg:flex-row relative overflow-hidden">
       {/* Arka plan efektleri */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-1/4 -left-1/4 w-[600px] h-[600px] rounded-full bg-[#6366f1]/10 blur-[80px]" />
         <div className="absolute -bottom-1/4 -right-1/4 w-[700px] h-[700px] rounded-full bg-emerald-500/10 blur-[80px]" />
       </div>
 
-      {/* HERO */}
-      <div className="flex-1 flex items-center justify-center lg:justify-start px-8 py-8 lg:py-0 lg:px-16 relative z-10">
+      {/* HERO BÖLÜMÜ */}
+      <div className="flex-1 flex items-center justify-center lg:justify-start px-6 py-8 lg:py-0 lg:px-16 relative z-10">
         <div className="max-w-md w-full">
-          <div className="flex items-center gap-3 mb-8">
+          <div className="flex items-center gap-3 mb-6">
             <div className="w-9 h-9 bg-[#6366f1] rounded-2xl flex items-center justify-center text-2xl text-white">
               <i className="fa-solid fa-ticket-simple"></i>
             </div>
             <span className="text-3xl font-semibold text-white tracking-tight">{t('common.title')}</span>
           </div>
 
-          <h1 className="text-4xl lg:text-5xl font-bold text-white leading-tight mb-6">
+          <h1 className="text-4xl lg:text-5xl font-bold text-white leading-tight mb-5">
             {t('login.hero_title')}<br />
             <span className="text-[#6366f1]">{t('login.hero_sub_color')}</span>
           </h1>
-          <p className="text-base lg:text-lg text-slate-400 mb-8">
+          <p className="text-base text-slate-400 mb-8">
             {t('login.hero_description')}
           </p>
 
-          <div className="space-y-5">
+          <div className="space-y-4">
             {t('login.features').map(f => (
               <div key={f.text} className="flex items-center gap-4">
                 <div className="w-8 h-8 bg-[#6366f1]/15 rounded-2xl flex items-center justify-center text-[#6366f1] flex-shrink-0 text-lg">
@@ -142,8 +142,8 @@ function LoginScreen() {
         </div>
       </div>
 
-      {/* FORM - Kompakt */}
-      <div className="lg:w-[400px] bg-white/10 backdrop-blur-2xl border border-white/10 rounded-3xl m-4 lg:m-8 p-6 lg:p-8 flex items-center relative z-10">
+      {/* FORM BÖLÜMÜ */}
+      <div className="lg:w-[400px] bg-white/10 backdrop-blur-2xl border border-white/10 rounded-3xl mx-4 mt-auto mb-6 lg:m-8 p-6 lg:p-8 flex items-center relative z-10">
         <div className="w-full">
           <div className="flex bg-white/10 rounded-2xl p-1 mb-8">
             {[{ key: 'login', label: t('common.login') }, { key: 'register', label: t('common.register') }].map(tab => (
