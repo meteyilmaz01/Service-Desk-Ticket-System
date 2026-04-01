@@ -428,19 +428,18 @@ export default function AdminDashboard() {
       <div className="admin-main">
         <div className="admin-content">
           <div className="admin-view-header">
-            <h1 style={{ margin: 0, fontSize: '24px', fontWeight: '800', color: '#1e293b' }}>
-              {{
-                users: t('admin.headers.userMgmt'),
-                departments: t('admin.headers.deptMgmt'),
-                tickets: t('admin.headers.ticketMgmt'),
-              }[tab]}
-            </h1>
-            <div className="stats-row-flex" style={{ display: 'flex', gap: '12px' }}>
+            <div className="header-top-row">
+              <h1 style={{ margin: 0, fontSize: '24px', fontWeight: '800', color: '#1e293b' }}>
+                {{
+                  users: t('admin.headers.userMgmt'),
+                  departments: t('admin.headers.deptMgmt'),
+                  tickets: t('admin.headers.ticketMgmt'),
+                }[tab]}
+              </h1>
+            </div>
+            <div className="stats-container">
               {stats.map(s => (
-                <div key={s.label} style={{
-                  textAlign: 'center', padding: '8px 16px', borderRadius: '10px',
-                  backgroundColor: '#fff', border: '1px solid #e2e8f0', boxShadow: '0 1px 2px rgba(0,0,0,0.03)'
-                }}>
+                <div key={s.label} className="stat-card">
                   <div style={{ fontSize: '18px', fontWeight: '800', color: s.color }}>{s.value}</div>
                   <div style={{ fontSize: '10px', color: '#64748b', fontWeight: '700', textTransform: 'uppercase' }}>{s.label}</div>
                 </div>
@@ -451,7 +450,7 @@ export default function AdminDashboard() {
           {/* USERS TAB */}
           {tab === 'users' && (
             <div className="admin-tab-content">
-              <div className="admin-view-header">
+              <div className="header-top-row" style={{ marginBottom: '24px' }}>
                 <div className="admin-search-wrapper">
                   <input value={searchId} onChange={e => setSearchId(e.target.value)}
                     onKeyDown={e => e.key === 'Enter' && searchUser()}
@@ -507,19 +506,21 @@ export default function AdminDashboard() {
 
           {/* DEPARTMENTS TAB */}
           {tab === 'departments' && (
-            <div className="dept-view-split">
+            <div className="dept-view-grid">
               <div className="dept-main-content">
                 <div className="admin-view-header">
-                  <h2 style={{ margin: 0, fontSize: '18px', fontWeight: '700', color: '#1e293b' }}>{t('admin.placeholders.agentList')}</h2>
-                  <div className="admin-header-actions">
-                    <button onClick={() => setDeptMgmt(true)} style={S.btn('ghost', true)}>
-                      <i className="fa-solid fa-layer-group" style={{ marginRight: '6px' }}></i>
-                      {t('admin.placeholders.manageDept')}
-                    </button>
-                    <button onClick={() => openAgentModal()} style={S.btn('success', true)}>
-                      <i className="fa-solid fa-user-plus" style={{ marginRight: '6px' }}></i>
-                      {t('admin.actions.newAgent')}
-                    </button>
+                  <div className="header-top-row">
+                    <h2 style={{ margin: 0, fontSize: '18px', fontWeight: '700', color: '#1e293b' }}>{t('admin.placeholders.agentList')}</h2>
+                    <div className="admin-header-actions">
+                      <button onClick={() => setDeptMgmt(true)} style={S.btn('ghost', true)}>
+                        <i className="fa-solid fa-layer-group" style={{ marginRight: '6px' }}></i>
+                        {t('admin.placeholders.manageDept')}
+                      </button>
+                      <button onClick={() => openAgentModal()} style={S.btn('success', true)}>
+                        <i className="fa-solid fa-user-plus" style={{ marginRight: '6px' }}></i>
+                        {t('admin.actions.newAgent')}
+                      </button>
+                    </div>
                   </div>
                 </div>
                 <div className="admin-card-container">
@@ -552,20 +553,15 @@ export default function AdminDashboard() {
                 </div>
               </div>
               
-              <div className="dept-side-panel">
-                <div style={{ fontSize: '12px', fontWeight: '700', color: '#64748b', marginBottom: '12px', textTransform: 'uppercase', letterSpacing: '0.8px' }}>{t('admin.placeholders.deptList')} Quick Stats</div>
-                <div style={{
-                  padding: '20px', borderRadius: '16px', backgroundColor: '#fff', border: '1px solid #e2e8f0',
-                  boxShadow: '0 1px 2px rgba(0,0,0,0.03)'
-                }}>
-                  <div style={{ textAlign: 'center' }}>
-                    <div style={{ fontSize: '32px', fontWeight: '800', color: '#3b82f6', marginBottom: '4px' }}>{departments.length}</div>
-                    <div style={{ fontSize: '13px', fontWeight: '600', color: '#475569', marginBottom: '16px' }}>{t('admin.placeholders.deptList')}</div>
-                    <button onClick={() => openDeptModal()} style={{ ...S.btn('primary', true), width: '100%' }}>
-                      <i className="fa-solid fa-plus" style={{ marginRight: '6px' }}></i>
-                      {t('admin.actions.newDept')}
-                    </button>
-                  </div>
+              <div className="dept-sidebar-actions">
+                <div style={{ fontSize: '12px', fontWeight: '700', color: '#64748b', marginBottom: '12px', textTransform: 'uppercase', letterSpacing: '0.8px' }}>{t('admin.placeholders.deptList')} Quick Actions</div>
+                <div className="admin-card-container" style={{ padding: '24px', textAlign: 'center' }}>
+                  <div style={{ fontSize: '32px', fontWeight: '800', color: '#3b82f6', marginBottom: '4px' }}>{departments.length}</div>
+                  <div style={{ fontSize: '13px', fontWeight: '600', color: '#475569', marginBottom: '20px' }}>Total Departments</div>
+                  <button onClick={() => openDeptModal()} style={{ ...S.btn('primary', true), width: '100%' }}>
+                    <i className="fa-solid fa-plus" style={{ marginRight: '6px' }}></i>
+                    {t('admin.actions.newDept')}
+                  </button>
                 </div>
               </div>
             </div>
@@ -574,7 +570,7 @@ export default function AdminDashboard() {
           {/* TICKETS TAB */}
           {tab === 'tickets' && (
             <div className="admin-tab-content">
-              <div className="admin-view-header">
+              <div className="header-top-row" style={{ marginBottom: '24px' }}>
                 <div className="ticket-filters-row">
                   {[
                     { key: 'all', label: `${t('admin.actions.all')} (${tickets.length})` },
@@ -591,7 +587,9 @@ export default function AdminDashboard() {
                     }}>{f.label}</button>
                   ))}
                 </div>
-                <button onClick={fetchTickets} style={S.btn('ghost')}>{t('admin.actions.refresh')}</button>
+                <div className="admin-header-actions">
+                  <button onClick={fetchTickets} style={S.btn('ghost')}>{t('admin.actions.refresh')}</button>
+                </div>
               </div>
               <div className="admin-card-container">
                 <div className="table-container">
@@ -677,12 +675,13 @@ export default function AdminDashboard() {
         </div>
       </div>
 
-      {/* DETAY MODALI */}
-      {detailModal && (
-        <Modal title={t('admin.actions.details')} onClose={() => { setDetailModal(false); setTD(null); }} wide>
+      {/* DETAY DRAWER */}
+      {detailModal && ticketDetail && (
+        <RightDrawer title={t('admin.actions.details')}
+          onClose={() => { setDetailModal(false); setTD(null); }} open={detailModal}>
           {isFetching ? (
             <div style={{ textAlign: 'center', padding: '40px', color: '#94a3b8' }}>{t('common.loading')}</div>
-          ) : ticketDetail && (() => {
+          ) : (() => {
             const tDetail = ticketDetail;
             const tid = tDetail.id ?? tDetail.Id ?? tDetail.ID;
             const rawStatus = tDetail.status ?? tDetail.Status;
@@ -697,14 +696,68 @@ export default function AdminDashboard() {
             const isResolved = sl === 'Resolved';
 
             return (
-              <div>
-                {/* ... orijinal detay içeriği tamamen aynı kaldı ... */}
-                {/* (Uzunluk nedeniyle burada kısaltmadım, orijinal kodundaki detay içeriğini olduğu gibi bırakıyorum) */}
-                {/* Tam içerik orijinal kodunda olduğu gibi burada da var */}
+              <div className="ticket-detail-view">
+                <div className="admin-card-container" style={{ padding: '20px', marginBottom: '20px', background: '#f8fafc' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '16px' }}>
+                    <div>
+                      <div style={{ fontSize: '12px', color: '#64748b', fontWeight: '700', textTransform: 'uppercase', marginBottom: '4px' }}>Ticket #{tid}</div>
+                      <h3 style={{ margin: 0, fontSize: '20px', fontWeight: '800', color: '#0f172a' }}>{tDetail.title}</h3>
+                    </div>
+                    <span style={S.badge(ss)}>{t(`status.${sl}`)}</span>
+                  </div>
+                  <p style={{ fontSize: '14px', color: '#334155', lineHeight: '1.6', margin: '0 0 16px' }}>{tDetail.description}</p>
+                  
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+                    <div className="detail-info-box">
+                      <label style={S.label}>{t('admin.placeholders.priority')}</label>
+                      <span style={S.badge(ps)}>{t(`priority.${pl}`)}</span>
+                    </div>
+                    <div className="detail-info-box">
+                      <label style={S.label}>{t('admin.placeholders.deptList')}</label>
+                      <span style={{ fontSize: '13px', fontWeight: '600' }}>{dept?.name || '-'}</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="admin-header-actions" style={{ marginBottom: '24px' }}>
+                  <button onClick={() => openAssign(tDetail)} style={S.btn('warning', true)}>{t('admin.actions.assign')}</button>
+                  <button onClick={() => handleCloseTicket(tid)} disabled={isClosing} style={S.btn('success', true)}>
+                    {isClosing ? '...' : t('admin.actions.close')}
+                  </button>
+                </div>
+
+                <div className="admin-card-container">
+                  <div className="modal-header" style={{ padding: '16px 20px', background: '#f8fafc' }}>
+                    <h4 style={{ margin: 0, fontSize: '14px', fontWeight: '700' }}>{t('admin.placeholders.conversation')}</h4>
+                  </div>
+                  <div style={{ padding: '20px', maxHeight: '400px', overflowY: 'auto' }}>
+                    {isLoadingMsg ? <div style={{ textAlign: 'center', padding: '20px' }}>{t('common.loading')}</div> : (
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                        {messages.map((m, i) => (
+                          <div key={i} style={{
+                            alignSelf: m.isSupport ? 'flex-start' : 'flex-end',
+                            maxWidth: '85%',
+                            padding: '12px 16px',
+                            borderRadius: '16px',
+                            backgroundColor: m.isSupport ? '#f1f5f9' : '#3b82f6',
+                            color: m.isSupport ? '#1e293b' : '#fff',
+                            fontSize: '13px'
+                          }}>
+                            <div style={{ fontWeight: '700', fontSize: '11px', marginBottom: '4px', opacity: 0.8 }}>
+                              {m.senderName} • {new Date(m.createdAt).toLocaleString()}
+                            </div>
+                            {m.messageText}
+                          </div>
+                        ))}
+                        {messages.length === 0 && <div style={{ textAlign: 'center', color: '#94a3b8', fontSize: '13px' }}>{t('admin.placeholders.noMessages')}</div>}
+                      </div>
+                    )}
+                  </div>
+                </div>
               </div>
             );
           })()}
-        </Modal>
+        </RightDrawer>
       )}
 
       {/* USER FORM - RIGHT DRAWER */}
