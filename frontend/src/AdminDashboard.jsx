@@ -109,6 +109,7 @@ const GeneralError = ({ errors }) => {
   );
 };
 
+// MERKEZİ MODAL (detail ve deptMgmt için korunuyor)
 const Modal = ({ title, onClose, children, wide = false }) => (
   <div className="modal-overlay" onClick={onClose}>
     <div className="modal-container" onClick={(e) => e.stopPropagation()}>
@@ -120,6 +121,24 @@ const Modal = ({ title, onClose, children, wide = false }) => (
         }}>x</button>
       </div>
       <div className="modal-body">{children}</div>
+    </div>
+  </div>
+);
+
+// YENİ RIGHT DRAWER (kayma problemini çözen yapı)
+const RightDrawer = ({ title, onClose, children, open }) => (
+  <div className={`right-drawer ${open ? 'open' : ''}`}>
+    <div className="right-drawer-header">
+      <h2 style={{ margin: 0, fontSize: '18px', fontWeight: '700' }}>{title}</h2>
+      <button
+        onClick={onClose}
+        style={{ background: 'none', border: 'none', fontSize: '28px', cursor: 'pointer', color: '#64748b', lineHeight: 1 }}
+      >
+        ×
+      </button>
+    </div>
+    <div style={{ padding: '0 8px' }}>
+      {children}
     </div>
   </div>
 );
@@ -211,10 +230,8 @@ export default function AdminDashboard() {
     setDetailModal(true);
     setIsFetching(true);
     setTD(null);
-
     setActiveModalTab('detail');
     setMessages([]);
-
     try {
       const r = await axios.get(`${API}/api/Ticket/get-ticket-by-id/${id}`, cfg());
       setTD(r.data);
@@ -650,6 +667,7 @@ export default function AdminDashboard() {
         </div>
       </div>
 
+      {/* DETAY MODALI (merkezi kalıyor) */}
       {detailModal && (
         <Modal title={t('admin.actions.details')} onClose={() => { setDetailModal(false); setTD(null); }} wide>
           {isFetching ? (
@@ -805,9 +823,13 @@ export default function AdminDashboard() {
         </Modal>
       )}
 
+      {/* KULLANICI FORMU → RIGHT DRAWER */}
       {userModal && (
-        <Modal title={isEditing ? t('admin.actions.edit') : t('admin.actions.newUser')}
-          onClose={() => { setUserModal(false); setUserErrors({}); }}>
+        <RightDrawer
+          title={isEditing ? t('admin.actions.edit') : t('admin.actions.newUser')}
+          onClose={() => { setUserModal(false); setUserErrors({}); }}
+          open={userModal}
+        >
           <div>
             <GeneralError errors={userErrors} />
             <FormGroup label={t('common.name')}>
@@ -842,11 +864,12 @@ export default function AdminDashboard() {
                 </select>
               </FormGroup>
             )}
-            <button onClick={handleUserSubmit} style={{ ...S.btn('success'), width: '100%', marginTop: '4px' }}>{t('admin.actions.save')}</button>
+            <button onClick={handleUserSubmit} style={{ ...S.btn('success'), width: '100%', marginTop: '24px' }}>{t('admin.actions.save')}</button>
           </div>
-        </Modal>
+        </RightDrawer>
       )}
 
+      {/* DEPARTMAN YÖNETİMİ MODALI (merkezi) */}
       {deptMgmt && (
         <Modal title={t('admin.headers.deptMgmt')} onClose={() => setDeptMgmt(false)} wide>
           <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '12px' }}>
@@ -877,9 +900,13 @@ export default function AdminDashboard() {
         </Modal>
       )}
 
+      {/* DEPARTMAN FORMU → RIGHT DRAWER */}
       {deptModal && (
-        <Modal title={isEditing ? t('admin.actions.edit') : t('admin.actions.newDept')}
-          onClose={() => { setDeptModal(false); setDeptErrors({}); }}>
+        <RightDrawer
+          title={isEditing ? t('admin.actions.edit') : t('admin.actions.newDept')}
+          onClose={() => { setDeptModal(false); setDeptErrors({}); }}
+          open={deptModal}
+        >
           <div>
             <GeneralError errors={deptErrors} />
             <FormGroup label={t('admin.placeholders.deptName')}>
@@ -892,14 +919,18 @@ export default function AdminDashboard() {
                 onChange={e => setDeptForm({ ...deptForm, description: e.target.value })} />
               <FieldError errors={deptErrors} field="Description" />
             </FormGroup>
-            <button onClick={handleDeptSubmit} style={{ ...S.btn('success'), width: '100%' }}>{t('admin.actions.save')}</button>
+            <button onClick={handleDeptSubmit} style={{ ...S.btn('success'), width: '100%', marginTop: '24px' }}>{t('admin.actions.save')}</button>
           </div>
-        </Modal>
+        </RightDrawer>
       )}
 
+      {/* AJAN FORMU → RIGHT DRAWER */}
       {agentModal && (
-        <Modal title={isEditing ? t('admin.actions.edit') : t('admin.actions.newAgent')}
-          onClose={() => { setAgentModal(false); setAgentErrors({}); }}>
+        <RightDrawer
+          title={isEditing ? t('admin.actions.edit') : t('admin.actions.newAgent')}
+          onClose={() => { setAgentModal(false); setAgentErrors({}); }}
+          open={agentModal}
+        >
           <div>
             <GeneralError errors={agentErrors} />
             <FormGroup label={t('common.name')}>
@@ -930,13 +961,18 @@ export default function AdminDashboard() {
               </select>
               <FieldError errors={agentErrors} field="DepartmentId" />
             </FormGroup>
-            <button onClick={handleAgentSubmit} style={{ ...S.btn('success'), width: '100%' }}>{t('admin.actions.save')}</button>
+            <button onClick={handleAgentSubmit} style={{ ...S.btn('success'), width: '100%', marginTop: '24px' }}>{t('admin.actions.save')}</button>
           </div>
-        </Modal>
+        </RightDrawer>
       )}
 
+      {/* ATAMA FORMU → RIGHT DRAWER */}
       {assignModal && selTicket && (
-        <Modal title={`${t('admin.actions.assign')} - #${selTicket.id}`} onClose={() => { setAssignModal(false); setSelTicket(null); }}>
+        <RightDrawer
+          title={`${t('admin.actions.assign')} - #${selTicket.id}`}
+          onClose={() => { setAssignModal(false); setSelTicket(null); }}
+          open={assignModal}
+        >
           <div style={{ backgroundColor: '#f8fafc', borderRadius: '8px', padding: '12px', marginBottom: '16px', border: '1px solid #e2e8f0' }}>
             <div style={{ fontWeight: '700', color: '#1e293b', marginBottom: '4px' }}>{selTicket.title}</div>
             {selTicket.description && <div style={{ fontSize: '12px', color: '#64748b' }}>{selTicket.description}</div>}
@@ -955,10 +991,10 @@ export default function AdminDashboard() {
               })()}
             </select>
           </FormGroup>
-          <button onClick={handleAssign} disabled={isAssigning} style={{ ...S.btn('success'), width: '100%', opacity: isAssigning ? 0.7 : 1 }}>
+          <button onClick={handleAssign} disabled={isAssigning} style={{ ...S.btn('success'), width: '100%', marginTop: '24px', opacity: isAssigning ? 0.7 : 1 }}>
             {isAssigning ? t('common.loading') : t('admin.actions.assign')}
           </button>
-        </Modal>
+        </RightDrawer>
       )}
 
     </div>
