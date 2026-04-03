@@ -16,7 +16,8 @@ Service Desk Ticket System is a comprehensive Help Desk platform designed to cre
 
 Try the system:
 https://service-desk-ticket-system.vercel.app/
-**Note:**  The frontend is currently under active development as I continue improving my skills in React.
+
+The frontend is currently under active development as I continue improving my skills in React.
 The application is functional on both mobile and desktop, though there are still some minor bugs and UI inconsistencies.
 These issues will be addressed and resolved in upcoming updates.
 ---
