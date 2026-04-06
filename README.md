@@ -15,7 +15,13 @@
 Service Desk Ticket System is a comprehensive Help Desk platform designed to create, manage, assign, and resolve support tickets from both internal teams and customers end-to-end.
 
 Try the system:
-https://service-desk-ticket-system.vercel.app/
+https://service-desk-ticket-system.vercel.app/login
+
+DEMO:
+      for Admin : admin@test.com  admin123
+      for Support Agent : ahmet@test.com  Ahmet123
+      for Requester : You can create your account.
+
 
 <sub> Note: The frontend is currently under active development as I continue improving my skills in React. The application works on both mobile and desktop, though there are still some minor bugs and UI inconsistencies. These will be fixed in upcoming updates.</sub>
 
