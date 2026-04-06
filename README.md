@@ -17,9 +17,15 @@ Service Desk Ticket System is a comprehensive Help Desk platform designed to cre
 Try the system:
 https://service-desk-ticket-system.vercel.app/login
 
-DEMO:
-for Admin : admin@test.com  admin123  
-for Support Agent : ahmet@test.com  Ahmet123  
+DEMO:  
+for Admin : <pre>admin@test.com    
+admin123
+</pre>
+
+for Support Agent :<pre> ahmet@test.com  
+Ahmet123
+</pre>  
+
 for Requester : You can create your account.  
 
 
@@ -161,7 +167,7 @@ Database configuration:
 Update the connection string in appsettings.Development.json  
 
 <pre>
-dotnet ef database update
+dotnet ef database update  
 dotnet run
 </pre>
 
